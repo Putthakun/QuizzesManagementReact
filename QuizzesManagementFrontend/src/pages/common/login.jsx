@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import '../../styles/common/register.css';
 import coverImage from '../../assets/images/cover.png';
 import { Link } from "react-router-dom";
@@ -53,7 +53,7 @@ function Login() {
                             <input type="password" className="border border-gray-300 rounded-md p-1 w-80 mt-1" />
                             <div className="flex mt-1">
                                 <div>No account ??</div>
-                                <Link className="ml-1 text-blue-500">Crate account</Link>
+                                <Link to="/register" className="ml-1 text-blue-500">Crate account</Link>
                             </div>
                         </div>
                     )}
@@ -66,7 +66,7 @@ function Login() {
                             <input type="password" className="border border-gray-300 rounded-md p-1 w-80 mt-1" />
                             <div className="flex mt-1">
                                 <div>No account ??</div>
-                                <Link className="ml-1 text-blue-500">Crate account</Link>
+                                <Link to="/register" className="ml-1 text-blue-500">Crate account</Link>
                             </div>
                         </div>
                     )}

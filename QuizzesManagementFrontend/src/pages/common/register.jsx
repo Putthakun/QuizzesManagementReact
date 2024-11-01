@@ -1,4 +1,3 @@
-import React from "react";
 import { useState } from "react";
 import '../../styles/common/register.css';
 import coverImage from '../../assets/images/cover.png';
@@ -14,9 +13,9 @@ function Register() {
     };
 
     return (
-        <div class="grid grid-cols-2 drop-shadow-[0_30px_60px_rgba(0,0,0,0.25)] bg-white  rounded-3xl ">
+        <div className="grid grid-cols-2 drop-shadow-[0_30px_60px_rgba(0,0,0,0.25)] bg-white  rounded-3xl ">
 
-            <div class="max-w-lg">
+            <div className="max-w-lg">
                 <img src={coverImage} className="max-w-full h-auto rounded-lg"></img>
             </div>
             <div className="flex flex-col items-center">
@@ -102,7 +101,7 @@ function Register() {
                         />
                         <div className="flex mt-1">
                             <div>Already have an account ?</div>
-                            <Link className="ml-1 text-blue-500">Log in</Link>
+                            <Link to="/login" className="ml-1 text-blue-500">Log in</Link>
                         </div>
                     </div>
                 )}
