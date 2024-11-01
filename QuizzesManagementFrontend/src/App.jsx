@@ -4,7 +4,6 @@ import Register  from './pages/common/register';
 import Login  from './pages/common/login';
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
     <Router>
