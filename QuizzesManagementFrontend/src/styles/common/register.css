@@ -1,4 +1,9 @@
 body {
+    background-color: #ffffff;
+    height: 100vh; /* ใช้ให้ body ครอบคลุมทั้งหน้าจอ */
+    margin: 0; /* ลบ margin ที่มาตรฐานเพื่อให้แน่ใจว่าเต็มจอ */
+}
+.register_login{
     background-color: #E6F1FF;
     display: flex;
     justify-content: center;
