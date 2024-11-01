@@ -126,7 +126,7 @@ function Register() {
                             </>
                         )}
 
-                        <label className="block mt-4">*Firstname:</label>
+                        <label className="block mt-3">*Firstname:</label>
                         <input
                             type="text"
                             value={firstname}
@@ -137,7 +137,7 @@ function Register() {
                             <p className="text-red-500 mt-1">{errorMessage.firstname[0]}</p>
                         )}
 
-                        <label className="block mt-4">*Lastname:</label>
+                        <label className="block mt-3">*Lastname:</label>
                         <input
                             type="text"
                             value={lastname}
@@ -148,7 +148,7 @@ function Register() {
                             <p className="text-red-500 mt-1">{errorMessage.lastname[0]}</p>
                         )}
 
-                        <label className="block mt-4">*Password:</label>
+                        <label className="block mt-3">*Password:</label>
                         <input
                             type="password"
                             value={password}
@@ -159,13 +159,13 @@ function Register() {
                             <p className="text-red-500 mt-1">{errorMessage.password[0]}</p>
                         )}
 
-                        <div className="flex mt-4">
+                        <div className="flex mt-3">
                             <span>Already have an account?</span>
                             <Link to="/login" className="ml-1 text-blue-500">Log in</Link>
                         </div>
                     </div>
 
-                    <div className="mt-8">
+                    <div className="mt-5">
                         <button
                             onClick={handleSubmit}
                             className="bg-blue-500 p-2 w-64 rounded-full text-white font-medium text-md transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
