@@ -71,7 +71,7 @@ function Register() {
                         />
                         <div className="flex mt-1">
                             <div>Already have an account ?</div>
-                            <Link className="ml-1 text-blue-500">Log in</Link>
+                            <Link to="/login" className="ml-1 text-blue-500">Log in</Link>
                         </div>
                     </div>
                 )}
