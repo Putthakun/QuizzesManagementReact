@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Register  from './pages/common/register';
 import Login  from './pages/common/login';
-import Home_student from './pages/student/Home_student';
+import Home_student from './pages/student/home_student';
 import Subject_student from './pages/student/Subject_student';
 
 function App() {
