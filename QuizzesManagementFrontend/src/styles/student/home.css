@@ -1,0 +1,14 @@
+.main_home{
+    display: flex;
+    /* background-color: aqua; */
+    height: 100vh;
+    margin: 0; 
+}
+.main_home_right{
+    width: 85%;
+    /* background-color: red; */
+}
+.main_home_right_top{
+    width: 100%;
+    /* background-color: rgb(202, 110, 255); */
+}

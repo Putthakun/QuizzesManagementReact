@@ -2,12 +2,11 @@ import '../../styles/student/student.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHouse, faSquarePollVertical, faFilePen, faFile, 
-    faFaceSmile, faArrowRightFromBracket, faBell,
-    faCircleUser} from '@fortawesome/free-solid-svg-icons'
+    faFaceSmile, faArrowRightFromBracket
+} from '@fortawesome/free-solid-svg-icons'
 
 export default function Navbar() {
     return (
-    <div className="main">
         <div className="left">
             <div className="left_top">
                 <div className="left_top_top">
@@ -28,26 +27,5 @@ export default function Navbar() {
                 </div>
             </div>
         </div>
-        <div className="right">
-            <div className="right_top">
-                <div className="right_top_free"></div>
-                <div className="right_top_tail">
-                    <div className="right_top_tail_left">
-                        <FontAwesomeIcon icon={faCircleUser} className='icon_user'/>
-                        <div className="right_top_tail_left_right">
-                            <p className="username">Firstname Lastname</p>
-                            <p className="student">Student</p>
-                        </div>
-                    </div>
-                    <div className="right_top_tail_right">
-                        <FontAwesomeIcon icon={faBell} className='icon_menu'/>
-                    </div>
-                </div>
-            </div>
-            <div className="right_main">
-
-            </div>
-        </div>
-    </div>
     )
 }
