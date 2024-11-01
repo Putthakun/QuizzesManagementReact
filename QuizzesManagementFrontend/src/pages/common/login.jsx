@@ -26,9 +26,9 @@ function Login() {
                                 value="student"
                                 checked={role === "student"}
                                 onChange={handleRoleChange}
-                                className="hidden peer" 
+                                className="hidden peer " 
                             />
-                            <span className={`inline-block cursor-pointer rounded-full border-2 p-2 text-center ${role === "student" ? "bg-blue-500 text-white border-blue-500" : "bg-white border-gray-300"} transition-colors duration-300`}>
+                            <span className={`inline-block cursor-pointer rounded-full border-2 p-2 text-center  ${role === "student" ? "bg-blue-500 text-white border-blue-500" : "bg-white border-gray-300"} transition duration-150 ease-in-out`}>
                                 Student
                             </span>
                         </label>
@@ -38,9 +38,9 @@ function Login() {
                                 value="teacher"
                                 checked={role === "teacher"}
                                 onChange={handleRoleChange}
-                                className="hidden peer" 
+                                className="hidden peer transition duration-150 ease-in-out" 
                             />
-                            <span className={`inline-block cursor-pointer rounded-full border-2 p-2 text-center ${role === "teacher" ? "bg-blue-500 text-white border-blue-500" : "bg-white border-gray-300"} transition-colors duration-300`}>
+                            <span className={`inline-block cursor-pointer rounded-full border-2 p-2 text-center  ${role === "teacher" ? "bg-blue-500 text-white border-blue-500" : "bg-white border-gray-300"}  transition duration-150 ease-in-out`}>
                                 Teacher
                             </span>
                         </label>
@@ -52,7 +52,7 @@ function Login() {
                             <label className="block mt-4">*Password:</label>
                             <input type="password" className="border border-gray-300 rounded-md p-1 w-80 mt-1" />
                             <div className="flex mt-1">
-                                <div>No account ??</div>
+                                <div>No account ?</div>
                                 <Link to="/register" className="ml-1 text-blue-500">Crate account</Link>
                             </div>
                         </div>
@@ -65,14 +65,14 @@ function Login() {
                             <label className="block mt-4">*Password:</label>
                             <input type="password" className="border border-gray-300 rounded-md p-1 w-80 mt-1" />
                             <div className="flex mt-1">
-                                <div>No account ??</div>
+                                <div>No account ?</div>
                                 <Link to="/register" className="ml-1 text-blue-500">Crate account</Link>
                             </div>
                         </div>
                     )}
 
                     <div className="mt-8">
-                        <button className="bg-blue-500 p-3 w-64 rounded-2xl text-white font-medium text-md">Register Now!</button>
+                        <button className="bg-blue-500 p-2 w-64 rounded-full text-white font-medium text-md transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">Register Now!</button>
                     </div>
                 </div>
             </div>

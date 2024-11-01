@@ -106,7 +106,7 @@ function Register() {
                     </div>
                 )}
                 <div className="mt-8">
-                    <button className="bg-blue-500 p-3 w-64 rounded-2xl text-white font-medium text-md">Register Now!</button>
+                    <button className="bg-blue-500 p-2 w-64 rounded-full text-white font-medium text-md transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300">Register Now!</button>
                 </div>
             </div>
         </div>
