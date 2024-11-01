@@ -5,7 +5,6 @@ function Navbar_top() {
   return (
     <>
         <div className="right_top">
-            <div className="right_top_free"></div>
             <div className="right_top_tail">
                 <div className="right_top_tail_left">
                     <FontAwesomeIcon icon={faCircleUser} className='icon_user'/>
