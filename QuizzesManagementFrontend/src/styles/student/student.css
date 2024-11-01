@@ -1,0 +1,33 @@
+.main{
+    display: flex;
+    background-color: aqua;
+    height: 100vh;
+    margin: 0; 
+}
+.left{
+    width: 20%;
+    background-color: gray;
+}
+.left_top{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: aquamarine;
+    height: 80px;
+}
+.icon_cs{
+    width: 40px;
+    height: 40px;
+    border-radius: 20%;
+    background-color: #447BF7;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    font-size: 20px;
+}
+.right{
+    width: 85%;
+    background-color: red;
+}
