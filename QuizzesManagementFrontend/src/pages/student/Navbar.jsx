@@ -14,7 +14,7 @@ export default function Navbar() {
                     <Link to='/home_student' className='quiz'>Quizzes Management</Link>
                 </div>
                 <div className="left_top_main">
-                    <Link to='/#' className='mune'><FontAwesomeIcon icon={faHouse} className='icon_menu'/>Home</Link>
+                    <Link to='/home_student' className='mune'><FontAwesomeIcon icon={faHouse} className='icon_menu'/>Home</Link>
                     <Link to='/#' className='mune'><FontAwesomeIcon icon={faSquarePollVertical} className='icon_menu' />Dashboard</Link>
                     <Link to='/#' className='mune'><FontAwesomeIcon icon={faFile} className='icon_menu'/>Create Test Set</Link>
                     <Link to='/#' className='mune'><FontAwesomeIcon icon={faFilePen} className='icon_menu'/>Practice</Link>
