@@ -4,7 +4,9 @@ import Navbar_top_teacher from "../../components/teacher/Navbar_top_teacher";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus
 } from '@fortawesome/free-solid-svg-icons'
-import { useState, useEffect  } from "react";
+import { useState, 
+    // useEffect  
+} from "react";
 import axios from 'axios';
 
 function Home_teacher() {
@@ -186,38 +188,6 @@ function Home_teacher() {
                 </div>
             </div>
             )}
-
-            {/* {modal && (
-                <div className="popup_container">
-                    <div className="popup_container_box">
-                        <div className="popup_box">
-                            <form method="POST">  
-                                <div className="popup_box_top">
-                                    <div className="popup_box_top_left">
-                                        <label className="popup_box_top_left_num">รหัสวิชา :</label>
-                                        <label className="popup_box_top_left_name">ชื่อวิชา :</label>
-                                    </div>
-                                    <div className="popup_box_top_right">
-                                        <div className="popup_box_top_right_input">
-                                            <input type="text" name="code" />
-                                            { {{ form.code }} }
-                                        </div>
-                                        <div className="popup_box_top_right_input">
-                                            <input type="text" name="name" />
-                                            { {{ form.name }} }
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="popup_box_tail">
-                                    <button type="button" className="popup_box_tail_cancel" onClick={toggleModal}>Cancel</button>
-                                    <button type="submit" className="popup_box_tail_save">Save</button>  
-                                </div>
-                            </form>  
-                        </div>
-                        
-                    </div>
-                </div>
-            )} */}
             
         </div>
         
