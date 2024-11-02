@@ -45,6 +45,7 @@
 .quiz{
     color: #447BF7;
     font-weight: bold;
+    font-size: 20px;
 }
 .left_top_main{
     display: flex;
