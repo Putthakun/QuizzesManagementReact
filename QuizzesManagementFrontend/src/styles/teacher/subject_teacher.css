@@ -1,0 +1,103 @@
+.main_right_subject_teacher{
+    height: 100%;
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+}
+.main_right_teacher_box_container_subject{
+    width: 90%;
+    height: auto;
+    /* background-color: red; */
+}
+.main_right_teacher_subject_top{
+    display: flex;
+    /* background-color: aquamarine; */
+    margin-top: 30px;
+}
+.main_right_teacher_subject_top_circle{
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    background-color: #C6DBFF;
+    margin-right: 15px;
+}
+.main_right_teacher_subject_top_name{
+    /* background-color:aqua; */
+    border-bottom: 1px solid #CAD1D8;
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.main_right_teacher_subject_top_name h3{
+    color: #447BF7;
+    font-size: 40px;
+    font-weight: bold;
+}
+.main_right_teacher_subject_box_add{
+    /* background-color: orange; */
+    display: flex;
+    justify-content: center;
+    height: 80px;
+    margin-top: 20px;
+}
+.main_right_teacher_subject_add{
+    background-color: white;
+    border: 1px solid #E4E8EB;
+    width: 70%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 20px;
+    padding: 20px 30px;
+    box-shadow: 0px 5px 15px 0px #00000026;
+}
+.main_right_teacher_subject_add_name{
+    font-size: 18px;
+    color: #00000070;
+}
+.plus_subject{
+    font-size: 25px;
+    color: gray;
+}
+.main_right_box_subject_test_container{
+    margin-top: 20px;
+    /* background-color: palegoldenrod; */
+    height: 100%;
+    display: flex;
+    justify-content: center;
+}
+.main_right_box_subject_test_box{
+    height: 150px;
+    width: 70%;
+    /* background-color: indianred; */
+    border: 1px solid #E4E8EB;
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0px 5px 15px 0px #00000026;
+}
+.main_right_box_subject_test_box h3{
+    color: #000000C9;
+    font-size: 30px;
+}
+.icon_book{
+    position: fixed;
+    left: 38%;
+    font-size: 80px;
+    color: black;
+    /* border: 1px solid #E4E8EB; */
+}
+/* .main_right_box_subject_test_box_icon{
+    width: 150px;
+    background-color: #447BF7;
+    height: 100%;
+}
+.main_right_box_subject_test_box_text{
+    color: #000000C9;
+    font-size: 28px;
+
+    background-color: powderblue;
+} */

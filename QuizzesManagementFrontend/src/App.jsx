@@ -4,6 +4,7 @@ import Login  from './pages/common/login';
 import Home_student from './pages/student/home_student';
 import Subject_student from './pages/student/Subject_student';
 import Home_teacher from './pages/teacher/Home_teacher';
+import Subject_teacher from './pages/teacher/Subject_teacher'
 
 function App() {
 
@@ -15,6 +16,7 @@ function App() {
         <Route path="/home_student" element={<Home_student />} />
         <Route path="/subject_student" element={<Subject_student />} />
         <Route path="/home_teacher" element={<Home_teacher />} />
+        <Route path="/subject_teacher" element={<Subject_teacher />} />
       </Routes>
     </Router>
   );
