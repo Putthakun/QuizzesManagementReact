@@ -4,10 +4,18 @@ import Navbar_top from "../student/Navbar_top";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faBook
 } from '@fortawesome/free-solid-svg-icons'
+import { useState } from "react";
 
 // import { useState } from "react";
 
 function Subject_teacher() {
+
+    const [modal, setModal] = useState(false)
+
+    const toggleModal = () => {
+        setModal(!modal)
+    }
+
     return (
         <div>
             <div className="main_home">
@@ -31,7 +39,7 @@ function Subject_teacher() {
                                     <div className="main_right_teacher_subject_add_name">
                                         <p>เพิ่มข้อสอบในชั้นเรียน</p>
                                     </div>
-                                    <button>
+                                    <button onClick={toggleModal}>
                                         <FontAwesomeIcon icon={faPlus} className="plus_subject" />
                                     </button>
                                 </div>
@@ -49,6 +57,47 @@ function Subject_teacher() {
                     </div>
                 </div>
             </div>
+            {modal && (
+                <div className="popup_container">
+                <div className="popup_container_box">
+                    <div className="popup_box">
+                        <form method="POST">  
+                            {/* {% csrf_token %} */}
+                                <div className="popup_box_top">
+                                    <div className="popup_box_top_left">
+                                        <label className="popup_box_top_left_num">ชื่อข้อสอบ :</label>
+                                        <label className="popup_box_top_left_name">รายละเอียด :</label>
+                                        <label className="popup_box_top_left_name">วันครบกำหนด :</label>
+                                        <label className="popup_box_top_left_name">คะแนน :</label>
+                                    </div>
+                                    <div className="popup_box_top_right">
+                                        <div className="popup_box_top_right_input_num">
+                                            <input type="text" name="code" />
+                                            {/* {{ form.code }} */}
+                                        </div>
+                                        <div className="popup_box_top_right_input_name">
+                                            <input type="text" name="name" />
+                                            {/* {{ form.name }} */}
+                                        </div>
+                                        <div className="popup_box_top_right_input_name">
+                                            <input type="date" name="name" />
+                                            {/* {{ form.name }} */}
+                                        </div>
+                                        <div className="popup_box_top_right_input_name">
+                                            <input type="text" name="name" />
+                                            {/* {{ form.name }} */}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="popup_box_tail">
+                                    <button type="button" className="popup_box_tail_cancel" onClick={toggleModal}>Cancel</button>
+                                    <button type="submit" className="popup_box_tail_save">Save</button>  
+                                </div>
+                        </form>  
+                    </div>
+                </div>
+            </div>
+            )}
         </div>
     )
 }
