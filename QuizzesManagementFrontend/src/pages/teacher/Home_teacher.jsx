@@ -2,143 +2,131 @@ import Navbar from "../student/navbar";
 import '../../styles/teacher/home_teacher.css';
 import Navbar_top from "../student/Navbar_top";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus
+import {
+    faPlus
 } from '@fortawesome/free-solid-svg-icons'
-import { useState, useEffect  } from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 function Home_teacher() {
 
+    const location = useLocation();
+    const { user_type, firstname, lastname } = location.state || {};
     axios.defaults.withCredentials = true;
     const [modal, setModal] = useState(false)
     const [sessionData, setSessionData] = useState(null);
     const [numsubject, setNumsubject] = useState("")
     const [namesubject, setNamesubject] = useState("")
 
-    const getCSRFToken = () => {
-        return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
-    };
     const toggleModal = () => {
         setModal(!modal)
     }
     console.log(numsubject, namesubject)
 
-    useEffect(() => {
-        const checkSession = async () => {
-            try {
-                const response = await axios.get('http://127.0.0.1:8000/api/blog/check_session', { withCredentials: true });
-                console.log(response.data);
-            } catch (error) {
-                console.log("No active session found");
-            }
-        };
-    
-        checkSession();
-    }, []);
     return (
         <div>
             <div className="main_home">
-                <Navbar/>
+                <Navbar />
                 <div className="main_home_right">
                     <div className="main_home_right_top">
-                        <Navbar_top/>
+                    <Navbar_top firstname={firstname} lastname={lastname} user_type={user_type} />
                     </div>
-                    
                     <div className="main_right_home_teacher">
                         <div className="main_right_teacher_box_container">
                             <div className="main_right_teacher_box">
                                 <div className="main_right_teacher_box_head">
-                                    
+
                                 </div>
                                 <div className="main_right_teacher_box_tail">
-                                    
+
                                 </div>
                             </div>
 
                             <div className="main_right_teacher_box">
                                 <div className="main_right_teacher_box_head">
-                                    
+
                                 </div>
                                 <div className="main_right_teacher_box_tail">
-                                    
+
                                 </div>
                             </div>
 
                             <div className="main_right_teacher_box">
                                 <div className="main_right_teacher_box_head">
-                                    
+
                                 </div>
                                 <div className="main_right_teacher_box_tail">
-                                    
+
                                 </div>
                             </div>
 
                             <div className="main_right_teacher_box">
                                 <div className="main_right_teacher_box_head">
-                                    
+
                                 </div>
                                 <div className="main_right_teacher_box_tail">
-                                    
+
                                 </div>
                             </div>
 
                             <div className="main_right_teacher_box">
                                 <div className="main_right_teacher_box_head">
-                                    
+
                                 </div>
                                 <div className="main_right_teacher_box_tail">
-                                    
+
                                 </div>
                             </div>
                             <div className="main_right_teacher_box">
                                 <div className="main_right_teacher_box_head">
-                                    
+
                                 </div>
                                 <div className="main_right_teacher_box_tail">
-                                    
+
                                 </div>
                             </div>
                             <div className="main_right_teacher_box">
                                 <div className="main_right_teacher_box_head">
-                                    
+
                                 </div>
                                 <div className="main_right_teacher_box_tail">
-                                    
+
                                 </div>
                             </div>
                             <div className="main_right_teacher_box">
                                 <div className="main_right_teacher_box_head">
-                                    
+
                                 </div>
                                 <div className="main_right_teacher_box_tail">
-                                    
+
                                 </div>
                             </div>
                             <div className="main_right_teacher_box">
                                 <div className="main_right_teacher_box_head">
-                                    
+
                                 </div>
                                 <div className="main_right_teacher_box_tail">
-                                    
+
                                 </div>
                             </div>
                             <div className="main_right_teacher_box">
                                 <div className="main_right_teacher_box_head">
-                                    
+
                                 </div>
                                 <div className="main_right_teacher_box_tail">
-                                    
+
                                 </div>
                             </div>
                             <div className="main_right_teacher_box">
                                 <div className="main_right_teacher_box_head">
-                                    
+
                                 </div>
                                 <div className="main_right_teacher_box_tail">
-                                    
+
                                 </div>
                             </div>
-                            
+
                         </div>
 
                         <button className="box_add_subject">
@@ -148,13 +136,13 @@ function Home_teacher() {
                 </div>
             </div>
 
-            
+
             {modal && (
                 <div className="popup_container">
-                <div className="popup_container_box">
-                    <div className="popup_box">
-                        <form method="POST">  
-                            {/* {% csrf_token %} */}
+                    <div className="popup_container_box">
+                        <div className="popup_box">
+                            <form method="POST">
+                                {/* {% csrf_token %} */}
                                 <div className="popup_box_top">
                                     <div className="popup_box_top_left">
                                         <label className="popup_box_top_left_num">รหัสวิชา :</label>
@@ -162,7 +150,7 @@ function Home_teacher() {
                                     </div>
                                     <div className="popup_box_top_right">
                                         <div className="popup_box_top_right_input_num">
-                                            <input type="text" name="code" 
+                                            <input type="text" name="code"
                                                 value={numsubject}
                                                 onChange={(e) => setNumsubject(e.target.value)}
                                             />
@@ -179,12 +167,12 @@ function Home_teacher() {
                                 </div>
                                 <div className="popup_box_tail">
                                     <button type="button" className="popup_box_tail_cancel" onClick={toggleModal}>Cancel</button>
-                                    <button type="submit" className="popup_box_tail_save">Save</button>  
+                                    <button type="submit" className="popup_box_tail_save">Save</button>
                                 </div>
-                        </form>  
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
             )}
 
             {/* {modal && (
@@ -218,9 +206,9 @@ function Home_teacher() {
                     </div>
                 </div>
             )} */}
-            
+
         </div>
-        
+
     )
 }
 
