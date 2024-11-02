@@ -1,0 +1,82 @@
+.main_right_home_teacher{
+    height: auto;
+    /* background-color: aqua; */
+    display: flex;
+    justify-content: center;
+    overflow: auto;
+}
+.main_right_teacher_box_container{
+    width: 80%;
+    height: auto;
+    margin-top: 50px;
+    /* background-color: red; */
+    /* display: flex;
+    flex-direction: row; */
+    display: grid;
+    grid-template-columns: auto auto auto;
+    justify-content: space-around;
+    
+    
+}
+@media screen and (min-width: 1600px) {
+    .main_right_home_teacher{
+        height: 100%;
+        /* background-color: aqua; */
+        display: flex;
+        justify-content: center;
+        overflow: auto;
+    }
+    .main_right_teacher_box_container{
+        width: 80%;
+        height: auto;
+        /* background-color: aqua; */
+        /* display: flex;
+        flex-direction: row; */
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        justify-content: space-around;
+        
+    }
+}
+.main_right_teacher_box{
+    width: 225px;
+    height: 225px;
+    /* background-color: orange; */
+    border: 1px solid #CAD1D8;
+    margin-right: 50px;
+    margin-bottom: 20px;
+    border-radius: 20px;
+    overflow: hidden;
+}
+ .main_right_teacher_box_head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E6F1FF;
+    height: 75%;
+ }
+ .main_right_teacher_box_tail{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: aquamarine; */
+    height: 25%;
+ }
+.box_add_subject{
+    width: 80px;
+    height: 80px;
+    position: absolute;
+    top: 80%;
+    right: 1.5%;
+    background-color: #F6F7F8;
+    border-radius: 50%;
+    border: 1px solid #E4E8EB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #3F4D58;
+}
+.box_add_subject i{
+    cursor: pointer;
+    font-size: 24px;
+}
