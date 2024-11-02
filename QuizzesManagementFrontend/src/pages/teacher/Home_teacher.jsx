@@ -9,10 +9,13 @@ import { useState } from "react";
 function Home_teacher() {
 
     const [modal, setModal] = useState(false)
+    const [numsubject, setNumsubject] = useState("")
+    const [namesubject, setNamesubject] = useState("")
 
     const toggleModal = () => {
         setModal(!modal)
     }
+    console.log(numsubject, namesubject)
 
     return (
         <div>
@@ -141,11 +144,17 @@ function Home_teacher() {
                                     </div>
                                     <div className="popup_box_top_right">
                                         <div className="popup_box_top_right_input_num">
-                                            <input type="text" name="code" />
+                                            <input type="text" name="code" 
+                                                value={numsubject}
+                                                onChange={(e) => setNumsubject(e.target.value)}
+                                            />
                                             {/* {{ form.code }} */}
                                         </div>
                                         <div className="popup_box_top_right_input_name">
-                                            <input type="text" name="name" />
+                                            <input type="text" name="name"
+                                                value={namesubject}
+                                                onChange={(e) => setNamesubject(e.target.value)}
+                                            />
                                             {/* {{ form.name }} */}
                                         </div>
                                     </div>
