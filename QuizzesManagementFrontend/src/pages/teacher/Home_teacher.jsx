@@ -4,15 +4,30 @@ import Navbar_top from "../student/Navbar_top";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus
 } from '@fortawesome/free-solid-svg-icons'
-import { useState } from "react";
+import { useState, useEffect  } from "react";
+import axios from 'axios';
 
 function Home_teacher() {
 
     const [modal, setModal] = useState(false)
+    const [userInfo, setUserInfo] = useState(null);
 
     const toggleModal = () => {
         setModal(!modal)
     }
+
+    useEffect(() => {
+        const checkSession = async () => {
+            try {
+                const response = await axios.get('http://127.0.0.1:8000/api/blog/check_session', { withCredentials: true });
+                console.log(response.data);
+            } catch (error) {
+                console.log("No active session found");
+            }
+        };
+    
+        checkSession();
+    }, []);
 
     return (
         <div>

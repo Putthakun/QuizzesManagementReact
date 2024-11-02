@@ -29,7 +29,7 @@ function Login() {
             const response = await axios.post('http://127.0.0.1:8000/api/blog/login/', { user_type: userType, id, password });
             alert(response.data.message); 
             setErrorMessage(''); 
-            navigate(userType === "student" ? '/home_student' : '/login');
+            navigate(userType === "student" ? '/home_student' : '/home_teacher');
         } catch (error) {
             if (error.response) {
                 const errorData = error.response.data.error;
