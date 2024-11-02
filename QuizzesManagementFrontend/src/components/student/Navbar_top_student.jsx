@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBell,faCircleUser } from '@fortawesome/free-solid-svg-icons'
 
-function Navbar_top() {
+function Navbar_top_student() {
   return (
     <>
         <div className="right_top">
@@ -22,4 +22,4 @@ function Navbar_top() {
   )
 }
 
-export default Navbar_top
+export default Navbar_top_student

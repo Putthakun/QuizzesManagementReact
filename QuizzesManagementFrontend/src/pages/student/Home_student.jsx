@@ -1,16 +1,16 @@
-import Navbar from "./navbar";
+import Navbar_student from "../../components/student/Navbar_student";
 import '../../styles/student/home.css';
-import Navbar_top from "./Navbar_top";
+import Navbar_top_student from "../../components/student/Navbar_top_student";
 
 export default function Home_student(){
 
     return (
         <>
         <div className="main_home">
-            <Navbar/>
+            <Navbar_student/>
             <div className="main_home_right">
                 <div className="main_home_right_top">
-                    <Navbar_top/>
+                    <Navbar_top_student/>
                 </div>
                 
                 <div className="main_home_right_main">
