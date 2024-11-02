@@ -1,17 +1,17 @@
 .main_right_test_teacher{
     height: 100%;
-    background-color: aqua;
+    /* background-color: aqua; */
     display: flex;
     justify-content: center;
     overflow: auto;
 }
 .main_right_test_teacher_container{
     margin-top: 20px;
-    background-color:aquamarine;
-    width: 80%;
+    /* background-color:aquamarine; */
+    width: 65%;
 }
 .main_right_test_teacher_top{
-    background-color: paleturquoise;
+    /* background-color: paleturquoise; */
     margin-bottom: 20px;
 }
 .btn_create_test{
@@ -23,20 +23,24 @@
     font-weight: bold;
 }
 .main_right_test_teacher_box{
-    /* border: 1px solid #F3F8FF; */
-    background-color: #C6DBFF;
+    border: 1px solid gray;
+    /* background-color: #C6DBFF; */
     padding: 20px 30px;
+    border-radius: 10px;
 }
 .main_right_test_teacher_box_top{
-    background-color: red;
+    /* background-color: red; */
     display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 15px;
 }
 .main_right_test_teacher_box_top_left{
     display: flex;
     justify-content: flex-start;
     align-items: center;
     font-size: 18px;
-    background-color: pink;
+    /* background-color: pink; */
     width: 200px;
 }
 .main_right_test_teacher_box_top_left .icon_question{
@@ -48,10 +52,10 @@
     display: flex;
     justify-content: space-around;
     font-size: 18px;
-    background-color: rgb(164, 245, 58);
+    /* background-color: rgb(164, 245, 58); */
 }
 .main_right_test_teacher_box_top_right_multi{
-    background-color: beige;
+    /* background-color: beige; */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -63,7 +67,7 @@
     height: 20px;
 }
 .main_right_test_teacher_box_top_right_fill{
-    background-color: rgba(33, 252, 80, 0.74);
+    /* background-color: rgba(33, 252, 80, 0.74); */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,4 +77,89 @@
     font-size: 20px;
     width: 20px;
     height: 20px;
+}
+.main_right_test_teacher_box_question{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* background-color: blueviolet; */
+}
+.main_right_test_teacher_box_question_left{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 60%;
+    /* background-color: rgb(218, 196, 240); */
+}
+.main_right_test_teacher_box_question_left textarea{
+    padding: 20px;
+    /* background-color: #E4E8EB; */
+    border-radius: 10px;
+    width: 100%;
+    border: 1px solid gray;
+    margin-right: 10px;
+}
+.main_right_test_teacher_box_question_right{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /* background-color: rgb(202, 153, 248); */
+}
+.main_right_test_teacher_box_choice_head{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 15px;
+    /* background-color: antiquewhite; */
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+.choice_star{
+   color: red;
+}
+.main_right_test_teacher_box_choice_main{
+    /* background-color: coral; */
+}
+.main_right_test_teacher_box_choice_main_choice{
+    /* background-color: aquamarine; */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.main_right_test_teacher_box_choice_main_choice input{
+    width: 25px;
+    height: 25px;
+    margin-right: 10px;
+}
+.main_right_test_teacher_box_choice_main_choice label{
+    width: 100%;
+    height: 40px; 
+    background-color: #E4E8EB;
+    border-radius: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-right: 10px;
+    padding-left: 15px;
+}
+.main_right_test_teacher_box_choice_main_choice .trash{
+    color: red;
+    font-size: 18px;
+    cursor: pointer;
+}
+.main_right_test_teacher_box_choice_add_choice{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-top: 15px;
+    /* background-color:burlywood; */
+    width: 100%;
+}
+.btn_add_choice{
+    width: 150px;
+    height: 40px;
+    border-radius: 10px;
+    background-color:#447BF7;
+    color: white;
 }

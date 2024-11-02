@@ -2,17 +2,19 @@ import Navbar_top_teacher from "../../components/teacher/Navbar_top_teacher"
 import Navbar_teacher from "../../components/teacher/Navbar_teacher"
 import "../../styles/teacher/create_test_teacher.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleQuestion, faTrash
+import { faCircleQuestion, faTrashCan
 } from '@fortawesome/free-solid-svg-icons'
 import { useEffect, useState } from "react"
 
 function Create_test_teacher() {
 
     const [multiorfill, setMultiorfill] = useState('');
+    const [ans, setAns] = useState('');
 
     useEffect(() => {
         console.log(multiorfill);
-    }, [multiorfill])
+        console.log(ans)
+    }, [multiorfill, ans])
 
     return (
         <div>
@@ -49,42 +51,42 @@ function Create_test_teacher() {
                                 </div>
                                 <div className="main_right_test_teacher_box_question">
                                     <div className="main_right_test_teacher_box_question_left">
-                                        <textarea name="" id="" cols="30" rows="10"></textarea>
+                                        <textarea name="" id=""></textarea>
                                     </div>
                                     <div className="main_right_test_teacher_box_question_right">
                                         <input type="file" id="myFile" name="filename" />
                                     </div>
                                 </div>
                                 <div className="main_right_test_teacher_box_choice_head">
-                                    <p>Choice</p>
+                                    <p>Choice</p><p className="choice_star">*</p>
                                 </div>
                                 <form action="#" method="post" className="main_right_test_teacher_box_choice_main">
                                     <div className="main_right_test_teacher_box_choice_main_choice">
-                                        <input type="radio" />
+                                        <input type="radio" value="40" name="ans" onChange={ (e) => setAns(e.target.value)}/>
                                         <label htmlFor="">40</label>
-                                        <FontAwesomeIcon icon={faTrash} />
+                                        <FontAwesomeIcon icon={faTrashCan} className="trash"/>
                                     </div>
 
                                     <div className="main_right_test_teacher_box_choice_main_choice">
-                                        <input type="radio" />
+                                        <input type="radio" value="41" name="ans" onChange={ (e) => setAns(e.target.value)}/>
                                         <label htmlFor="">41</label>
-                                        <FontAwesomeIcon icon={faTrash} />
+                                        <FontAwesomeIcon icon={faTrashCan} className="trash"/>
                                     </div>
 
                                     <div className="main_right_test_teacher_box_choice_main_choice">
-                                        <input type="radio" />
+                                        <input type="radio" value="42" name="ans" onChange={ (e) => setAns(e.target.value)}/>
                                         <label htmlFor="">42</label>
-                                        <FontAwesomeIcon icon={faTrash} />
+                                        <FontAwesomeIcon icon={faTrashCan} className="trash"/>
                                     </div>
 
                                     <div className="main_right_test_teacher_box_choice_main_choice">
-                                        <input type="radio" />
+                                        <input type="radio" value="43" name="ans" onChange={ (e) => setAns(e.target.value)}/>
                                         <label htmlFor="">43</label>
-                                        <FontAwesomeIcon icon={faTrash} />
+                                        <FontAwesomeIcon icon={faTrashCan} className="trash" />
                                     </div>
                                 </form>
                                 <div className="main_right_test_teacher_box_choice_add_choice">
-                                    <button>
+                                    <button className="btn_add_choice">
                                         <p>+ Add choice</p>
                                     </button>
                                 </div>
