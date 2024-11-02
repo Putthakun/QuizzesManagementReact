@@ -9,11 +9,15 @@ import axios from 'axios';
 
 function Home_teacher() {
 
+    axios.defaults.withCredentials = true;
     const [modal, setModal] = useState(false)
-    const [userInfo, setUserInfo] = useState(null);
+    const [sessionData, setSessionData] = useState(null);
     const [numsubject, setNumsubject] = useState("")
     const [namesubject, setNamesubject] = useState("")
 
+    const getCSRFToken = () => {
+        return document.cookie.split('; ').find(row => row.startsWith('csrftoken=')).split('=')[1];
+    };
     const toggleModal = () => {
         setModal(!modal)
     }
@@ -31,7 +35,6 @@ function Home_teacher() {
     
         checkSession();
     }, []);
-
     return (
         <div>
             <div className="main_home">
