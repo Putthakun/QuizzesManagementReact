@@ -30,12 +30,10 @@ function Login() {
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/blog/login/', { user_type: userType, id, password }, { withCredentials: true });
             alert(response.data.message);
-            console.log(response.data.user_type)
-            console.log(response.data.firstname)
-            console.log(response.data.lastname)
             navigate(userType === "student" ? '/home_student' : '/home_teacher', {
                 state: {
                     user_type: response.data.user_type,
+                    user_id: response.data.user_id,
                     firstname: response.data.firstname,
                     lastname: response.data.lastname
                 }

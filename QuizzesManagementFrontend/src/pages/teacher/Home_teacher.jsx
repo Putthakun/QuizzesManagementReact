@@ -12,7 +12,7 @@ import axios from 'axios';
 function Home_teacher() {
 
     const location = useLocation();
-    const { user_type, firstname, lastname } = location.state || {};
+    const { user_type, user_id, firstname, lastname } = location.state || {};
     axios.defaults.withCredentials = true;
     const [modal, setModal] = useState(false)
     const [sessionData, setSessionData] = useState(null);
@@ -30,7 +30,7 @@ function Home_teacher() {
                 <Navbar />
                 <div className="main_home_right">
                     <div className="main_home_right_top">
-                    <Navbar_top firstname={firstname} lastname={lastname} user_type={user_type} />
+                    <Navbar_top firstname={firstname} lastname={lastname} user_type={user_type}  />
                     </div>
                     <div className="main_right_home_teacher">
                         <div className="main_right_teacher_box_container">
