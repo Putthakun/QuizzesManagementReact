@@ -50,7 +50,7 @@ function Register() {
             navigate('/login');
         } catch (error) {
             if (error.response && error.response.data) {
-                setErrorMessage(error.response.data); // เก็บ error message จาก backend
+                setErrorMessage(error.response.data); 
             } else {
                 console.error('Error:', error.message);
                 alert('Registration failed. Please try again.');
