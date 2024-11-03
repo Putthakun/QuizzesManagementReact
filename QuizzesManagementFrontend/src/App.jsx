@@ -7,6 +7,7 @@ import Subject_student from './pages/student/Subject_student';
 import Subject_teacher from './pages/teacher/Subject_teacher';
 import Create_test_teacher from './pages/teacher/Create_test_teacher';
 import Take_test_student from './pages/student/Take_test_student';
+import Profile_student from './pages/student/Profile_student';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
         <Route path="/subject_teacher" element={<Subject_teacher />} />
         <Route path="/create_test_teacher" element={<Create_test_teacher />} />
         <Route path="/take_test_student" element={<Take_test_student />} />
+        <Route path="/profile_student" element={<Profile_student />} />
       </Routes>
     </Router>
   );

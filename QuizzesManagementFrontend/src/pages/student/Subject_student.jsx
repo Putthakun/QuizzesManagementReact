@@ -7,12 +7,12 @@ function Subject_student() {
     return (
         <div>
             <div className="main_home">
-                <Navbar_student/>
+                <Navbar_student />
                 <div className="main_home_right">
                     <div className="main_home_right_top">
-                        <Navbar_top_student/>
+                        <Navbar_top_student />
                     </div>
-                        
+
                     <div className="main_right_subject">
                         <div className="main_right_box_subject">
                             <div className="main_right_box_subject_head">
@@ -35,7 +35,7 @@ function Subject_student() {
                                             Teacher
                                         </div>
                                         <div className="main_right_box_subject_main_box_right_main">
-                                            
+
                                             <div className="main_right_box_subject_main_box_right_main_head">
                                                 <h3>Calculus 1  Pre Test - Drip yo yo</h3>
                                                 <p>ครบกำหนด 20 ต.ค.</p>
@@ -77,7 +77,7 @@ function Subject_student() {
                                             Teacher
                                         </div>
                                         <div className="main_right_box_subject_main_box_right_main">
-                                            
+
                                             <div className="main_right_box_subject_main_box_right_main_head">
                                                 <h3>Calculus 1  Pre Test - Drip yo yo</h3>
                                                 <p>ครบกำหนด 20 ต.ค.</p>
@@ -118,7 +118,7 @@ function Subject_student() {
                                             Teacher
                                         </div>
                                         <div className="main_right_box_subject_main_box_right_main">
-                                            
+
                                             <div className="main_right_box_subject_main_box_right_main_head">
                                                 <h3>Calculus 1  Pre Test - Drip yo yo</h3>
                                                 <p>ครบกำหนด 20 ต.ค.</p>
