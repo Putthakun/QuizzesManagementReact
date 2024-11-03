@@ -61,7 +61,7 @@ function Home_teacher() {
     return (
         <div>
             <div className="main_home">
-                <Navbar />
+
                 <Navbar_teacher/>
                 <div className="main_home_right">
                     <div className="main_home_right_top">
