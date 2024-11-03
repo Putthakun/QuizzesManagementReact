@@ -18,6 +18,11 @@
     
     
 }
+.mr-4 {
+    color: #25333F;
+    margin-left: 20px;
+    margin-top: 2px;
+}
 @media screen and (min-width: 1600px) {
     .main_right_home_teacher{
         height: 100%;

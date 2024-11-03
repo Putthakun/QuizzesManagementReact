@@ -2,13 +2,14 @@ import Navbar_teacher from '../../components/teacher/Navbar_teacher';
 import '../../styles/teacher/home_teacher.css';
 import Navbar_top_teacher from "../../components/teacher/Navbar_top_teacher";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {faPlus} from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Home_teacher() {
 
+    const navigate = useNavigate();
     const location = useLocation();
     const { user_type, user_id, firstname, lastname } = location.state || {};
     axios.defaults.withCredentials = true;
@@ -19,16 +20,34 @@ function Home_teacher() {
     const [namesubject, setNamesubject] = useState("")
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const [subjects, setSubjects] = useState([]);
 
     const toggleSuccessModal = () => {
         setShowSuccessModal(!showSuccessModal);
+    };
+
+    useEffect(() => {
+        const fetchSubjects = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8000/api/teachers/${user_id}/subjects/`);
+                setSubjects(response.data);
+            } catch (error) {
+                setError(error.response ? error.response.data : 'An error occurred');
+            }
+        };
+
+        fetchSubjects();
+    }, [user_id]);
+
+    const handleSubjectClick = (code) => {
+        console.log("Subject ID:", code);
+        navigate(`/subject_teacher/${code}`);
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrorMessage('');
         setSuccessMessage('');
-
 
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/subjects/', {
@@ -38,9 +57,10 @@ function Home_teacher() {
             });
             setSuccessMessage('Subject added successfully!');
             toggleModal();
-            setTimeout(() => {
-                toggleSuccessModal();  // ใช้ setTimeout เพื่อให้ modal แรกปิดก่อน
-            }, 300); // ปิด modal แรกก่อนประมาณ 300ms
+
+            const subjectsResponse = await axios.get(`http://localhost:8000/api/teachers/${user_id}/subjects/`);
+            setSubjects(subjectsResponse.data); 
+            toggleSuccessModal();  
             console.log(response.data);
         } catch (error) {
             if (error.response) {
@@ -51,43 +71,43 @@ function Home_teacher() {
         }
     };
     console.log(numsubject, namesubject, user_id)
-    const { subjects } = location.state || { subjects: [] }; // Get subjects from location state
+
     const toggleModal = () => {
         setModal(!modal)
     }
-    useEffect(() => {
-        // Log the subjects to the console
-        console.log("Subjects taught by the teacher:", subjects);
-    }, [subjects]); // Run this effect whenever subjects change
 
     return (
         <div>
             <div className="main_home">
-                <Navbar />
+                <Navbar_teacher />
                 <div className="main_home_right">
                     <div className="main_home_right_top">
-                        <Navbar_top firstname={firstname} lastname={lastname} user_type={user_type} />
+                        <Navbar_top_teacher firstname={firstname} lastname={lastname} user_type={user_type} />
+
+                    </div>
+                    <div className="main_right_teacher_box_container">
+                        {subjects.map(subject => (
+                            <div
+                                className="main_right_teacher_box"
+                                key={subject.id}
+                                onClick={() => handleSubjectClick(subject.code)}
+                                style={{ cursor: 'pointer' }} // เปลี่ยนรูปแบบเมาส์เมื่อชี้ไปที่กล่อง
+                            >
+                                <div className="main_right_teacher_box_head">
+                                    {/* สามารถเพิ่มเนื้อหาที่ต้องการที่นี่ */}
+                                </div>
+                                <div>
+                                    <p className="mr-4">{subject.code}</p>
+                                    <p className="mr-4">{subject.name}</p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                     <div className="main_right_home_teacher">
-                        <div className="main_right_teacher_box_container">
-                            {subjects.length > 0 ? (
-                                subjects.map((subject) => (
-                                    <div className="main_right_teacher_box" key={subject.code}>
-                                        <div className="main_right_teacher_box_head">
-                                            <h3>{subject.name}</h3> {/* Display subject name in the box head */}
-                                        </div>
-                                        <div className="main_right_teacher_box_tail">
-                                            <p>Code: {subject.code}</p> {/* Display subject code */}
-                                        </div>
-                                    </div>
-                                ))
-                            ) : (
-                                <div className="main_right_teacher_box">
-                                    <p>No subjects assigned.</p>
-                                </div>
-                            )}
-                        </div>
 
+                        <div className="main_right_teacher_box_container">
+
+                        </div>
                         <button className="box_add_subject">
                             <FontAwesomeIcon icon={faPlus} className="plus" onClick={toggleModal} />
                         </button>
