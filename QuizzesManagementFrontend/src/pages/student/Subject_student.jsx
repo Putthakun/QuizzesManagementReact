@@ -4,6 +4,7 @@ import '../../styles/student/subject.css';
 import { Link } from "react-router-dom";
 
 function Subject_student() {
+    
     return (
         <div>
             <div className="main_home">

@@ -2,15 +2,14 @@ import Navbar_teacher from '../../components/teacher/Navbar_teacher';
 import '../../styles/teacher/home_teacher.css';
 import Navbar_top_teacher from "../../components/teacher/Navbar_top_teacher";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faPlus
-} from '@fortawesome/free-solid-svg-icons'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from "react";
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Home_teacher() {
 
+    const navigate = useNavigate();
     const location = useLocation();
     const { user_type, user_id, firstname, lastname } = location.state || {};
     axios.defaults.withCredentials = true;
@@ -21,13 +20,28 @@ function Home_teacher() {
     const [namesubject, setNamesubject] = useState("")
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
-
-    const toggleModal = () => {
-        setModal(!modal)
-    }
+    const [subjects, setSubjects] = useState([]);
 
     const toggleSuccessModal = () => {
         setShowSuccessModal(!showSuccessModal);
+    };
+
+    useEffect(() => {
+        const fetchSubjects = async () => {
+            try {
+                const response = await axios.get(`http://localhost:8000/api/teachers/${user_id}/subjects/`);
+                setSubjects(response.data);
+            } catch (error) {
+                setError(error.response ? error.response.data : 'An error occurred');
+            }
+        };
+
+        fetchSubjects();
+    }, [user_id]);
+
+    const handleSubjectClick = (code) => {
+        console.log("Subject ID:", code);
+        navigate(`/subject_teacher/${code}`);
     };
 
     const handleSubmit = async (e) => {
@@ -35,17 +49,18 @@ function Home_teacher() {
         setErrorMessage('');
         setSuccessMessage('');
 
-
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/teacher/', {
-                teacher_id: user_id,
-
+            const response = await axios.post('http://127.0.0.1:8000/api/subjects/', {
+                code: numsubject,
+                name: namesubject,
+                teacher_id: user_id
             });
             setSuccessMessage('Subject added successfully!');
             toggleModal();
-            setTimeout(() => {
-                toggleSuccessModal();  // ใช้ setTimeout เพื่อให้ modal แรกปิดก่อน
-            }, 300); // ปิด modal แรกก่อนประมาณ 300ms
+
+            const subjectsResponse = await axios.get(`http://localhost:8000/api/teachers/${user_id}/subjects/`);
+            setSubjects(subjectsResponse.data); 
+            toggleSuccessModal();  
             console.log(response.data);
         } catch (error) {
             if (error.response) {
@@ -55,119 +70,50 @@ function Home_teacher() {
             }
         }
     };
-    console.log(user_id)
+    console.log(numsubject, namesubject, user_id)
+
+    const toggleModal = () => {
+        setModal(!modal)
+    }
 
     return (
         <div>
             <div className="main_home">
-                <Navbar_teacher/>
+                <Navbar_teacher />
                 <div className="main_home_right">
                     <div className="main_home_right_top">
                         <Navbar_top_teacher firstname={firstname} lastname={lastname} user_type={user_type} />
+
+                    </div>
+                    <div className="main_right_teacher_box_container">
+                        {subjects.map(subject => (
+                            <div
+                                className="main_right_teacher_box"
+                                key={subject.id}
+                                onClick={() => handleSubjectClick(subject.code)}
+                                style={{ cursor: 'pointer' }} // เปลี่ยนรูปแบบเมาส์เมื่อชี้ไปที่กล่อง
+                            >
+                                <div className="main_right_teacher_box_head">
+                                    {/* สามารถเพิ่มเนื้อหาที่ต้องการที่นี่ */}
+                                </div>
+                                <div>
+                                    <p className="mr-4">{subject.code}</p>
+                                    <p className="mr-4">{subject.name}</p>
+                                </div>
+                            </div>
+                        ))}
                     </div>
                     <div className="main_right_home_teacher">
+
                         <div className="main_right_teacher_box_container">
-                            <div className="main_right_teacher_box">
-                                <div className="main_right_teacher_box_head">
-
-                                </div>
-                                <div className="main_right_teacher_box_tail">
-
-                                </div>
-                            </div>
-
-                            <div className="main_right_teacher_box">
-                                <div className="main_right_teacher_box_head">
-
-                                </div>
-                                <div className="main_right_teacher_box_tail">
-
-                                </div>
-                            </div>
-
-                            <div className="main_right_teacher_box">
-                                <div className="main_right_teacher_box_head">
-
-                                </div>
-                                <div className="main_right_teacher_box_tail">
-
-                                </div>
-                            </div>
-
-                            <div className="main_right_teacher_box">
-                                <div className="main_right_teacher_box_head">
-
-                                </div>
-                                <div className="main_right_teacher_box_tail">
-
-                                </div>
-                            </div>
-
-                            <div className="main_right_teacher_box">
-                                <div className="main_right_teacher_box_head">
-
-                                </div>
-                                <div className="main_right_teacher_box_tail">
-
-                                </div>
-                            </div>
-                            <div className="main_right_teacher_box">
-                                <div className="main_right_teacher_box_head">
-
-                                </div>
-                                <div className="main_right_teacher_box_tail">
-
-                                </div>
-                            </div>
-                            <div className="main_right_teacher_box">
-                                <div className="main_right_teacher_box_head">
-
-                                </div>
-                                <div className="main_right_teacher_box_tail">
-
-                                </div>
-                            </div>
-                            <div className="main_right_teacher_box">
-                                <div className="main_right_teacher_box_head">
-
-                                </div>
-                                <div className="main_right_teacher_box_tail">
-
-                                </div>
-                            </div>
-                            <div className="main_right_teacher_box">
-                                <div className="main_right_teacher_box_head">
-
-                                </div>
-                                <div className="main_right_teacher_box_tail">
-
-                                </div>
-                            </div>
-                            <div className="main_right_teacher_box">
-                                <div className="main_right_teacher_box_head">
-
-                                </div>
-                                <div className="main_right_teacher_box_tail">
-
-                                </div>
-                            </div>
-                            <div className="main_right_teacher_box">
-                                <div className="main_right_teacher_box_head">
-
-                                </div>
-                                <div className="main_right_teacher_box_tail">
-
-                                </div>
-                            </div>
 
                         </div>
-
                         <button className="box_add_subject">
                             <FontAwesomeIcon icon={faPlus} className="plus" onClick={toggleModal} />
                         </button>
                     </div>
                 </div>
-            </div>
+            </div >
 
             {showSuccessModal && (
                 <div className="popup_container">
@@ -218,7 +164,8 @@ function Home_teacher() {
                         </div>
                     </div>
                 </div>
-            )}
+            )
+            }
 
             {/* {modal && (
                 <div className="popup_container">
@@ -252,7 +199,7 @@ function Home_teacher() {
                 </div>
             )} */}
 
-        </div>
+        </div >
 
     )
 }
