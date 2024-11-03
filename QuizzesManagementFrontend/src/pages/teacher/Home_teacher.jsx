@@ -5,11 +5,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faPlus, faCircleCheck
 } from '@fortawesome/free-solid-svg-icons'
-import { useState, useEffect } from "react";
+import { useState, useEffect, useNavigate } from "react";
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 function Home_teacher() {
+
+
+    const navigate = useNavigate();
+    
+    useEffect(() => {
+        const userType = sessionStorage.getItem('user_type');
+        
+        if (userType !== 'student') {
+            alert("คุณไม่ใช่ student/โปรดสมัครสมาชิก");
+            navigate('/login');
+        }
+    }, [navigate]);
 
 
     const location = useLocation();

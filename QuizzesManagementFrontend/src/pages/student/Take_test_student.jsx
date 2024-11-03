@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Navbar_student from "../../components/student/Navbar_student";
 import Navbar_top_student from "../../components/student/Navbar_top_student";
 import '../../styles/student/take_test.css';
@@ -54,7 +55,7 @@ function Take_test_student() {
                                 </div>
                                 <div className="main_right_box_take_test_main_tail">
                                     <div className="main_right_box_take_test_main_tail_box">
-                                        <a href="{% url 'multi_page' %}">Take Test</a>
+                                        <Link to="/ans_student">Take Test</Link>
                                     </div>
                                 </div>
                             </div>

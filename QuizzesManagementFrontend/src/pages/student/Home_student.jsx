@@ -7,6 +7,17 @@ import { Link, useNavigate } from "react-router-dom";
 
 export default function Home_student() {
 
+    // const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     const userType = sessionStorage.getItem('user_type');
+        
+    //     if (userType !== 'student') {
+    //         alert("คุณไม่ใช่ student/โปรดสมัครสมาชิก");
+    //         navigate('/login');
+    //     }
+    // }, [navigate]);
+
     return (
         <>
             <div className="main_home">
