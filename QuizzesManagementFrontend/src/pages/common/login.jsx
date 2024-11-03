@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
 import coverImage from '../../assets/images/cover.png';
@@ -14,11 +14,13 @@ function Login() {
     const [password, setPassword] = useState('');
     const [userType, setUserType] = useState('student'); 
     const [errorMessage, setErrorMessage] = useState('');
+    const [usertypess, setUsertypeSS] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
 
     const handleRoleChange = (event) => {
         setRole(event.target.value);
     };
-
     const handleLogin = async (event) => {
         event.preventDefault();
 
@@ -26,10 +28,16 @@ function Login() {
         const id = role === "student" ? studentId : teacherId;
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/blog/login/', { user_type: userType, id, password });
-            alert(response.data.message); 
-            setErrorMessage(''); 
-            navigate(userType === "student" ? '/home_student' : '/home_teacher');
+            const response = await axios.post('http://127.0.0.1:8000/api/blog/login/', { user_type: userType, id, password }, { withCredentials: true });
+            alert(response.data.message);
+            navigate(userType === "student" ? '/home_student' : '/home_teacher', {
+                state: {
+                    user_type: response.data.user_type,
+                    user_id: response.data.user_id,
+                    firstname: response.data.firstname,
+                    lastname: response.data.lastname
+                }
+            });
         } catch (error) {
             if (error.response) {
                 const errorData = error.response.data.error;
@@ -37,7 +45,6 @@ function Login() {
             }
         }
     };
-
     return (
         <div className="register_login">
             <div className="grid grid-cols-2 drop-shadow-[0_30px_60px_rgba(0,0,0,0.25)] bg-white rounded-3xl">
