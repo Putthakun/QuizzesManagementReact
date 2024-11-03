@@ -34,6 +34,17 @@ export default function Home_student() {
         navigate(`/subject_student/${code}`);
     };
 
+    // const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     const userType = sessionStorage.getItem('user_type');
+        
+    //     if (userType !== 'student') {
+    //         alert("คุณไม่ใช่ student/โปรดสมัครสมาชิก");
+    //         navigate('/login');
+    //     }
+    // }, [navigate]);
+
     return (
         <div className="main_home">
             <Navbar_student />

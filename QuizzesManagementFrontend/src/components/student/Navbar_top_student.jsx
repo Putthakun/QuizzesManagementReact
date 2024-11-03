@@ -3,22 +3,22 @@ import { faBell, faCircleUser } from '@fortawesome/free-solid-svg-icons';
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 function Navbar_top_student() {
-  const user_id = sessionStorage.getItem('user_id') || '';
+//   const user_id = sessionStorage.getItem('user_id') || '';
   const firstname = sessionStorage.getItem('firstname') || '';
   const lastname = sessionStorage.getItem('lastname') || '';
   const userType = sessionStorage.getItem('user_type') || '';
 
-  console.log(user_id, firstname, lastname); // ตรวจสอบค่าที่ดึงมา
-  const navigate = useNavigate();
+//   console.log(user_id, firstname, lastname); // ตรวจสอบค่าที่ดึงมา
+//   const navigate = useNavigate();
 
-  useEffect(() => {
-      const userType = sessionStorage.getItem('user_type');
+//   useEffect(() => {
+//       const userType = sessionStorage.getItem('user_type');
       
-      if (userType !== 'student') {
-          alert("คุณไม่ใช่ student/โปรดสมัครสมาชิก");
-          navigate('/login');
-      }
-  }, [navigate]);
+//       if (userType !== 'student') {
+//           alert("คุณไม่ใช่ student/โปรดสมัครสมาชิก");
+//           navigate('/login');
+//       }
+//   }, [navigate]);
   return (
       <div className="right_top">
           <div className="right_top_tail">

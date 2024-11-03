@@ -93,6 +93,17 @@
     font-size: 16px;
     color: #71808C;
 }
+.left_tail button{
+    width: 70%;
+    height: 50px;
+    /* background-color: blueviolet; */
+    margin-top: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    font-size: 16px;
+    color: #71808C;
+}
 .right{
     width: 85%;
     /* background-color: red; */

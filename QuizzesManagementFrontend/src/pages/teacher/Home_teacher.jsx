@@ -6,6 +6,7 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 function Home_teacher() {
 
@@ -23,7 +24,13 @@ function Home_teacher() {
     const [subjects, setSubjects] = useState([]);
 
     const toggleSuccessModal = () => {
-        setShowSuccessModal(!showSuccessModal);
+        Swal.fire({
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        // setShowSuccessModal(!showSuccessModal);
     };
 
     useEffect(() => {
