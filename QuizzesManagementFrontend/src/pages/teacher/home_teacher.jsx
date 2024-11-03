@@ -3,7 +3,7 @@ import '../../styles/teacher/home_teacher.css';
 import Navbar_top_teacher from "../../components/teacher/Navbar_top_teacher";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-    faPlus
+    faPlus, faCircleCheck
 } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom';
@@ -35,7 +35,7 @@ function Home_teacher() {
         setErrorMessage('');
         setSuccessMessage('');
 
-
+        
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/teacher/', {
                 teacher_id: user_id,
@@ -173,6 +173,7 @@ function Home_teacher() {
                 <div className="popup_container">
                     <div className="popup_container_box">
                         <div className="popup_box">
+                            <FontAwesomeIcon icon={faCircleCheck} />
                             <button type="button" className="popup_box_tail_cancel" onClick={toggleSuccessModal}>OK</button>
                         </div>
                     </div>
