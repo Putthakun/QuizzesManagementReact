@@ -28,7 +28,7 @@ function Login() {
         const id = role === "student" ? studentId : teacherId;
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/blog/login/', { user_type: userType, id, password }, { withCredentials: true });
+            const response = await axios.post('http://127.0.0.1:8000/login/', { user_type: userType, id, password }, { withCredentials: true });
             alert(response.data.message);
             navigate(userType === "student" ? '/home_student' : '/home_teacher', {
                 state: {
