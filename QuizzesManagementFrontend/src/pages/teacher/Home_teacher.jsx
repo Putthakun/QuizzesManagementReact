@@ -11,6 +11,7 @@ import axios from 'axios';
 
 function Home_teacher() {
 
+
     const location = useLocation();
     const { user_type, user_id, firstname, lastname } = location.state || {};
     axios.defaults.withCredentials = true;
@@ -60,6 +61,7 @@ function Home_teacher() {
     return (
         <div>
             <div className="main_home">
+                <Navbar />
                 <Navbar_teacher/>
                 <div className="main_home_right">
                     <div className="main_home_right_top">
