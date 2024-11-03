@@ -12,7 +12,7 @@ function Login() {
     const [studentId, setStudentId] = useState("");
     const [teacherId, setTeacherId] = useState("");
     const [password, setPassword] = useState('');
-    const [userType, setUserType] = useState('student'); 
+    const [userType, setUserType] = useState('student');
     const [errorMessage, setErrorMessage] = useState('');
     const [usertypess, setUsertypeSS] = useState('');
     const [firstname, setFirstname] = useState('');
@@ -30,21 +30,40 @@ function Login() {
         try {
             const response = await axios.post('http://127.0.0.1:8000/login/', { user_type: userType, id, password }, { withCredentials: true });
             alert(response.data.message);
-            navigate(userType === "student" ? '/home_student' : '/home_teacher', {
-                state: {
-                    user_type: response.data.user_type,
+            console.log(response.data);
+            if (response.status === 200) {
+                // จัดเก็บข้อมูลใน sessionStorage
+                sessionStorage.setItem('user_id', response.data.user_id);
+                sessionStorage.setItem('firstname', response.data.firstname);
+                sessionStorage.setItem('lastname', response.data.lastname);
+                sessionStorage.setItem('user_type', response.data.user_type); // เก็บ user_type
+                console.log("Session Storage Set:", {
                     user_id: response.data.user_id,
                     firstname: response.data.firstname,
-                    lastname: response.data.lastname
-                }
-            });
+                    lastname: response.data.lastname,
+                    user_type: response.data.user_type
+                });
+                
+                
+                navigate(userType === "student" ? '/home_student' : '/home_teacher', {
+                    state: {
+                        user_type: response.data.user_type,
+                        user_id: response.data.user_id,
+                        firstname: response.data.firstname,
+                        lastname: response.data.lastname
+                    }
+                });
+                
+            }
+
         } catch (error) {
             if (error.response) {
                 const errorData = error.response.data.error;
-                setErrorMessage(errorData); 
+                setErrorMessage(errorData);
             }
         }
     };
+
     return (
         <div className="register_login">
             <div className="grid grid-cols-2 drop-shadow-[0_30px_60px_rgba(0,0,0,0.25)] bg-white rounded-3xl">
