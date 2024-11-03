@@ -1,6 +1,6 @@
-import Navbar from "../student/navbar";
+import Navbar_teacher from "../../components/teacher/Navbar_teacher";
 import '../../styles/teacher/subject_teacher.css';
-import Navbar_top from "../student/Navbar_top";
+import Navbar_top_teacher from "../../components/teacher/Navbar_top_teacher";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faBook
 } from '@fortawesome/free-solid-svg-icons'
@@ -19,10 +19,10 @@ function Subject_teacher() {
     return (
         <div>
             <div className="main_home">
-                <Navbar/>
+                <Navbar_teacher/>
                 <div className="main_home_right">
                     <div className="main_home_right_top">
-                        <Navbar_top/>
+                        <Navbar_top_teacher/>
                     </div>
                     
                     <div className="main_right_subject_teacher">
