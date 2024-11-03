@@ -3,6 +3,10 @@ import Register  from './pages/common/register';
 import Login  from './pages/common/login';
 import Home_teacher from './pages/teacher/home_teacher';
 import Home_student from './pages/student/Home_student';
+import Subject_student from './pages/student/Subject_student';
+import Subject_teacher from './pages/teacher/Subject_teacher';
+import Create_test_teacher from './pages/teacher/Create_test_teacher';
+import Take_test_student from './pages/student/Take_test_student';
 
 function App() {
 

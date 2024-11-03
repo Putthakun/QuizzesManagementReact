@@ -1,46 +1,260 @@
-//import React from 'react';
-import { useState } from "react";
-//import '../../styles/common/home_teacher.css';
-
-
+import Navbar_teacher from '../../components/teacher/Navbar_teacher';
+import '../../styles/teacher/home_teacher.css';
+import Navbar_top_teacher from "../../components/teacher/Navbar_top_teacher";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {
+    faPlus
+} from '@fortawesome/free-solid-svg-icons'
+import { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
+import axios from 'axios';
 
 function Home_teacher() {
+
+    const location = useLocation();
+    const { user_type, user_id, firstname, lastname } = location.state || {};
+    axios.defaults.withCredentials = true;
+    const [modal, setModal] = useState(false)
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [sessionData, setSessionData] = useState(null);
+    const [numsubject, setNumsubject] = useState("")
+    const [namesubject, setNamesubject] = useState("")
+    const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
+
+    const toggleModal = () => {
+        setModal(!modal)
+    }
+
+    const toggleSuccessModal = () => {
+        setShowSuccessModal(!showSuccessModal);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setErrorMessage('');
+        setSuccessMessage('');
+
+
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/api/teacher/', {
+                teacher_id: user_id,
+
+            });
+            setSuccessMessage('Subject added successfully!');
+            toggleModal();
+            setTimeout(() => {
+                toggleSuccessModal();  // ใช้ setTimeout เพื่อให้ modal แรกปิดก่อน
+            }, 300); // ปิด modal แรกก่อนประมาณ 300ms
+            console.log(response.data);
+        } catch (error) {
+            if (error.response) {
+                setErrorMessage(error.response.data.error || 'An error occurred.');
+            } else {
+                setErrorMessage('An error occurred.');
+            }
+        }
+    };
+    console.log(user_id)
+
     return (
-        <div className="max-w-sm rounded overflow-hidden shadow-lg bg-C6DBFF">
-            <div className="p-4">
-                {/* ส่วนหัวของ card */}
-                <div className="flex items-center mb-5">
-                    <img
-                        src="https://via.placeholder.com/40"
-                        alt="hamburger"
-                        className="w-10 h-10 rounded-full mr-3"
-                    />
-                    <div className="flex flex-col">
-                        <h2 className="text-xl font-semibold">Hamburger Eiei</h2>
-                        <h4 className="text-xs font-semibold text-gray-500">Post : Sep 14 2028</h4>
+        <div>
+            <div className="main_home">
+                <Navbar_teacher/>
+                <div className="main_home_right">
+                    <div className="main_home_right_top">
+                        <Navbar_top_teacher firstname={firstname} lastname={lastname} user_type={user_type} />
+                    </div>
+                    <div className="main_right_home_teacher">
+                        <div className="main_right_teacher_box_container">
+                            <div className="main_right_teacher_box">
+                                <div className="main_right_teacher_box_head">
+
+                                </div>
+                                <div className="main_right_teacher_box_tail">
+
+                                </div>
+                            </div>
+
+                            <div className="main_right_teacher_box">
+                                <div className="main_right_teacher_box_head">
+
+                                </div>
+                                <div className="main_right_teacher_box_tail">
+
+                                </div>
+                            </div>
+
+                            <div className="main_right_teacher_box">
+                                <div className="main_right_teacher_box_head">
+
+                                </div>
+                                <div className="main_right_teacher_box_tail">
+
+                                </div>
+                            </div>
+
+                            <div className="main_right_teacher_box">
+                                <div className="main_right_teacher_box_head">
+
+                                </div>
+                                <div className="main_right_teacher_box_tail">
+
+                                </div>
+                            </div>
+
+                            <div className="main_right_teacher_box">
+                                <div className="main_right_teacher_box_head">
+
+                                </div>
+                                <div className="main_right_teacher_box_tail">
+
+                                </div>
+                            </div>
+                            <div className="main_right_teacher_box">
+                                <div className="main_right_teacher_box_head">
+
+                                </div>
+                                <div className="main_right_teacher_box_tail">
+
+                                </div>
+                            </div>
+                            <div className="main_right_teacher_box">
+                                <div className="main_right_teacher_box_head">
+
+                                </div>
+                                <div className="main_right_teacher_box_tail">
+
+                                </div>
+                            </div>
+                            <div className="main_right_teacher_box">
+                                <div className="main_right_teacher_box_head">
+
+                                </div>
+                                <div className="main_right_teacher_box_tail">
+
+                                </div>
+                            </div>
+                            <div className="main_right_teacher_box">
+                                <div className="main_right_teacher_box_head">
+
+                                </div>
+                                <div className="main_right_teacher_box_tail">
+
+                                </div>
+                            </div>
+                            <div className="main_right_teacher_box">
+                                <div className="main_right_teacher_box_head">
+
+                                </div>
+                                <div className="main_right_teacher_box_tail">
+
+                                </div>
+                            </div>
+                            <div className="main_right_teacher_box">
+                                <div className="main_right_teacher_box_head">
+
+                                </div>
+                                <div className="main_right_teacher_box_tail">
+
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <button className="box_add_subject">
+                            <FontAwesomeIcon icon={faPlus} className="plus" onClick={toggleModal} />
+                        </button>
                     </div>
                 </div>
-
-                {/* เนื้อหาของ card */}
-                <p className="text-gray-700 text-base mb-4">
-                    Lab 3 Wed Framework.
-                </p>
-
-                {/* ช่องคอมเมนต์ */}
-                <div className="mt-4">
-                    <textarea
-                        className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-1 focus:ring-E6F1FF"
-                        placeholder="Write a comment..."
-                        rows="3"
-                    ></textarea>
-                    <button className="mt-2 w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-400">
-                        Post Comment
-                    </button>
-                </div>
             </div>
+
+            {showSuccessModal && (
+                <div className="popup_container">
+                    <div className="popup_container_box">
+                        <div className="popup_box">
+                            <button type="button" className="popup_box_tail_cancel" onClick={toggleSuccessModal}>OK</button>
+                        </div>
+                    </div>
+                </div>
+            )}
+            {modal && (
+                <div className="popup_container">
+                    <div className="popup_container_box">
+                        <div className="popup_box">
+                            <form method="POST">
+                                {/* {% csrf_token %} */}
+                                <div className="popup_box_top">
+                                    <div className="popup_box_top_left">
+                                        <label className="popup_box_top_left_num">รหัสวิชา :</label>
+                                        <label className="popup_box_top_left_name">ชื่อวิชา :</label>
+                                    </div>
+                                    <div className="popup_box_top_right">
+                                        <div className="popup_box_top_right_input_num">
+                                            <input type="text" name="code"
+                                                value={numsubject}
+                                                onChange={(e) => setNumsubject(e.target.value)}
+                                            />
+                                            {/* {{ form.code }} */}
+                                        </div>
+                                        <div className="popup_box_top_right_input_name">
+                                            <input type="text" name="name"
+                                                value={namesubject}
+                                                onChange={(e) => setNamesubject(e.target.value)}
+                                            />
+                                            {/* {{ form.name }} */}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="popup_box_tail">
+                                    <button type="button" className="popup_box_tail_cancel" onClick={toggleModal}>Cancel</button>
+                                    <button
+                                        type="submit"
+                                        className="popup_box_tail_save"
+                                        onClick={handleSubmit}
+                                    >Save</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* {modal && (
+                <div className="popup_container">
+                    <div className="popup_container_box">
+                        <div className="popup_box">
+                            <form method="POST">  
+                                <div className="popup_box_top">
+                                    <div className="popup_box_top_left">
+                                        <label className="popup_box_top_left_num">รหัสวิชา :</label>
+                                        <label className="popup_box_top_left_name">ชื่อวิชา :</label>
+                                    </div>
+                                    <div className="popup_box_top_right">
+                                        <div className="popup_box_top_right_input">
+                                            <input type="text" name="code" />
+                                            { {{ form.code }} }
+                                        </div>
+                                        <div className="popup_box_top_right_input">
+                                            <input type="text" name="name" />
+                                            { {{ form.name }} }
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="popup_box_tail">
+                                    <button type="button" className="popup_box_tail_cancel" onClick={toggleModal}>Cancel</button>
+                                    <button type="submit" className="popup_box_tail_save">Save</button>  
+                                </div>
+                            </form>  
+                        </div>
+                        
+                    </div>
+                </div>
+            )} */}
+
         </div>
 
-    );
+    )
 }
 
-export default Home_teacher;
+export default Home_teacher
