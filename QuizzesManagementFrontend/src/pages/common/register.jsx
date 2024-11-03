@@ -36,8 +36,8 @@ function Register() {
 
         try {
             const url = userType === "student" 
-                ? 'http://127.0.0.1:8000/api/blog/register/students/' 
-                : 'http://127.0.0.1:8000/api/blog/register/teacher/';
+                ? 'http://127.0.0.1:8000/register/students/' 
+                : 'http://127.0.0.1:8000/register/teacher/';
 
             const response = await axios.post(url, formData, {
                 headers: {
