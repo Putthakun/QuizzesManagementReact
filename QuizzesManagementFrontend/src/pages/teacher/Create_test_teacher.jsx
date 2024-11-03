@@ -8,6 +8,16 @@ import { useState } from "react"
 
 function Create_test_teacher() {
 
+    const [modal, setModal] = useState(false)
+    const [subject, setSubject] = useState('')
+    const [nametest, setNametest] = useState('')
+
+    const toggleModal = () => {
+        setModal(!modal)
+    }
+    console.log(subject, nametest)
+
+
     const [data, setData] = useState([{multi:"", fill:""}])
     const [choice, setChoice] = useState([{ choices: [""] }])
 
@@ -61,7 +71,7 @@ function Create_test_teacher() {
 
                         <div className="main_right_test_teacher_container">
                             <div className="main_right_test_teacher_top">
-                                <button className="btn_create_test" onClick={handleSubmit}>
+                                <button className="btn_create_test" onClick={toggleModal}>
                                     Create Test
                                 </button>
                                 <button className="btn_create_test" onClick={addQuestion}>
@@ -188,6 +198,45 @@ function Create_test_teacher() {
                     </div>
                 </div>
             </div>
+
+            {modal && (
+                <div className="popup_container">
+                <div className="popup_container_box">
+                    <div className="popup_box">
+                        <form method="POST">  
+                            {/* {% csrf_token %} */}
+                                <div className="popup_box_top">
+                                    <div className="popup_box_top_left">
+                                        <label className="popup_box_top_left_num">วิชา :</label>
+                                        <label className="popup_box_top_left_name">ชื่อข้อสอบ :</label>
+                                    </div>
+                                    <div className="popup_box_top_right">
+                                        <div className="popup_box_top_right_input_num">
+                                            <input type="text" name="code" 
+                                                value={subject}
+                                                onChange={(e) => setSubject(e.target.value)}
+                                            />
+                                            {/* {{ form.code }} */}
+                                        </div>
+                                        <div className="popup_box_top_right_input_name">
+                                            <input type="text" name="name"
+                                                value={nametest}
+                                                onChange={(e) => setNametest(e.target.value)}
+                                            />
+                                            {/* {{ form.name }} */}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="popup_box_tail">
+                                    <button type="button" className="popup_box_tail_cancel" onClick={toggleModal}>Cancel</button>
+                                    <button type="submit" className="popup_box_tail_save" onClick={handleSubmit}>Save</button>  
+                                </div>
+                        </form>  
+                    </div>
+                </div>
+            </div>
+            )}
+
         </div>
     )
 }
