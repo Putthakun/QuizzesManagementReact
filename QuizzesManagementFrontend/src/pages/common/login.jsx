@@ -17,6 +17,7 @@ function Login() {
     const [usertypess, setUsertypeSS] = useState('');
     const [firstname, setFirstname] = useState('');
     const [lastname, setLastname] = useState('');
+    const [subjects, setSubjects] = useState([]); // Add state for subjects
 
     const handleRoleChange = (event) => {
         setRole(event.target.value);
@@ -28,14 +29,21 @@ function Login() {
         const id = role === "student" ? studentId : teacherId;
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/api/blog/login/', { user_type: userType, id, password }, { withCredentials: true });
+            const response = await axios.post('http://127.0.0.1:8000/api/blog/login/', { user_type: userType, id, password });
             alert(response.data.message);
+
+            if (userType === "teacher") {
+                setSubjects(response.data.subjects);  // Store subjects in state
+                console.log("Subjects:", response.data.subjects); // Log subjects
+            }
+            
             navigate(userType === "student" ? '/home_student' : '/home_teacher', {
                 state: {
                     user_type: response.data.user_type,
                     user_id: response.data.user_id,
                     firstname: response.data.firstname,
-                    lastname: response.data.lastname
+                    lastname: response.data.lastname,
+                    subjects: response.data.subjects
                 }
             });
         } catch (error) {
