@@ -31,32 +31,32 @@ function Home_teacher() {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();  
-        setErrorMessage('');  
+        e.preventDefault();
+        setErrorMessage('');
         setSuccessMessage('');
-        
+
 
         try {
             const response = await axios.post('http://127.0.0.1:8000/api/subjects/', {
-                code: numsubject,         
-                name: namesubject,        
-                teacher_id: user_id       
+                code: numsubject,
+                name: namesubject,
+                teacher_id: user_id
             });
             setSuccessMessage('Subject added successfully!');
-            toggleModal(); 
+            toggleModal();
             setTimeout(() => {
                 toggleSuccessModal();  // ใช้ setTimeout เพื่อให้ modal แรกปิดก่อน
             }, 300); // ปิด modal แรกก่อนประมาณ 300ms
-            console.log(response.data); 
+            console.log(response.data);
         } catch (error) {
             if (error.response) {
-                setErrorMessage(error.response.data.error || 'An error occurred.'); 
+                setErrorMessage(error.response.data.error || 'An error occurred.');
             } else {
-                setErrorMessage('An error occurred.'); 
+                setErrorMessage('An error occurred.');
             }
         }
     };
-    console.log(numsubject, namesubject,user_id)
+    console.log(numsubject, namesubject, user_id)
 
     return (
         <div>
@@ -64,7 +64,7 @@ function Home_teacher() {
                 <Navbar />
                 <div className="main_home_right">
                     <div className="main_home_right_top">
-                    <Navbar_top firstname={firstname} lastname={lastname} user_type={user_type}  />
+                        <Navbar_top firstname={firstname} lastname={lastname} user_type={user_type} />
                     </div>
                     <div className="main_right_home_teacher">
                         <div className="main_right_teacher_box_container">
@@ -171,13 +171,13 @@ function Home_teacher() {
             </div>
 
             {showSuccessModal && (
-            <div className="popup_container">
-            <div className="popup_container_box">
-                <div className="popup_box">
-                <button type="button" className="popup_box_tail_cancel" onClick={toggleSuccessModal}>OK</button>
+                <div className="popup_container">
+                    <div className="popup_container_box">
+                        <div className="popup_box">
+                            <button type="button" className="popup_box_tail_cancel" onClick={toggleSuccessModal}>OK</button>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
             )}
             {modal && (
                 <div className="popup_container">
@@ -209,10 +209,10 @@ function Home_teacher() {
                                 </div>
                                 <div className="popup_box_tail">
                                     <button type="button" className="popup_box_tail_cancel" onClick={toggleModal}>Cancel</button>
-                                    <button 
-                                    type="submit" 
-                                    className="popup_box_tail_save"
-                                    onClick={handleSubmit}
+                                    <button
+                                        type="submit"
+                                        className="popup_box_tail_save"
+                                        onClick={handleSubmit}
                                     >Save</button>
                                 </div>
                             </form>
