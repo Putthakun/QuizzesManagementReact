@@ -1,6 +1,7 @@
 import Navbar_student from "../../components/student/Navbar_student";
 import Navbar_top_student from "../../components/student/Navbar_top_student";
 import '../../styles/student/subject.css';
+import { Link } from "react-router-dom";
 
 function Subject_student() {
     return (
@@ -55,7 +56,7 @@ function Subject_student() {
                                                     <i className="fa-regular fa-pen-to-square"></i><p>Multiple Choice</p>
                                                 </div>
                                                 <div className="main_right_box_subject_main_box_right_tail_right_box">
-                                                    <a href="{% url 'take_test_page' %}">Take Test</a>
+                                                    <Link to="/take_test_student">Take Test</Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -97,7 +98,7 @@ function Subject_student() {
                                                     <i className="fa-regular fa-pen-to-square"></i><p>Multiple Choice</p>
                                                 </div>
                                                 <div className="main_right_box_subject_main_box_right_tail_right_box">
-                                                    <a href="{% url 'take_test_page' %}">Take Test</a>
+                                                    <Link to="/take_test_student">Take Test</Link>
                                                 </div>
                                             </div>
                                         </div>
@@ -138,7 +139,7 @@ function Subject_student() {
                                                     <i className="fa-regular fa-pen-to-square"></i><p>Multiple Choice</p>
                                                 </div>
                                                 <div className="main_right_box_subject_main_box_right_tail_right_box">
-                                                    <a href="{% url 'take_test_page' %}">Take Test</a>
+                                                    <Link to="/take_test_student">Take Test</Link>
                                                 </div>
                                             </div>
                                         </div>
