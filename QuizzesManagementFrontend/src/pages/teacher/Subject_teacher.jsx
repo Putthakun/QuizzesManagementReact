@@ -21,7 +21,7 @@ function Subject_teacher() {
 
     useEffect(() => {
         const fetchSubjectDetails = async () => {
-            console.log("Component rendered with ID:", id);
+            console.log("วิชา ID:", id);
             try {
                 const response = await axios.get(`http://localhost:8000/api/subjects/code/${id}/`); // ใช้ `code` ของ subject แทน `id`
                 setSubject(response.data);

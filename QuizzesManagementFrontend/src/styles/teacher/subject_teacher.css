@@ -84,8 +84,8 @@
     font-size: 30px;
 }
 .icon_book{
-    position: fixed;
-    left: 38%;
+    position: relative;
+    right: 5%;
     font-size: 80px;
     color: black;
     /* border: 1px solid #E4E8EB; */
