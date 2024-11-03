@@ -45,6 +45,7 @@
 .quiz{
     color: #447BF7;
     font-weight: bold;
+    font-size: 20px;
 }
 .left_top_main{
     display: flex;
@@ -101,8 +102,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 80px;
-    border-bottom: 1px solid #CAD1D8;
+    height: 87px;
+    /* border-bottom: 1px solid #CAD1D8; */
 }
 .right_top_free{
     background-color: white;
@@ -137,4 +138,9 @@
     justify-content: center;
     align-items: center;
     cursor: pointer;
+}
+.right_top_free{
+    width: 10px;
+    height: 10px;
+    background-color: red !important;
 }

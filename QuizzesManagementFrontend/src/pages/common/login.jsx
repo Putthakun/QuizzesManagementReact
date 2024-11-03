@@ -1,15 +1,58 @@
-import { useState } from "react";
-import '../../styles/common/register.css';
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios';
 import coverImage from '../../assets/images/cover.png';
-import { Link } from "react-router-dom";
+import '../../styles/common/register.css';
+
 
 function Login() {
+
     const [role, setRole] = useState("student");
+    const navigate = useNavigate();
+    const [studentId, setStudentId] = useState("");
+    const [teacherId, setTeacherId] = useState("");
+    const [password, setPassword] = useState('');
+    const [userType, setUserType] = useState('student'); 
+    const [errorMessage, setErrorMessage] = useState('');
+    const [usertypess, setUsertypeSS] = useState('');
+    const [firstname, setFirstname] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [subjects, setSubjects] = useState([]); // Add state for subjects
 
     const handleRoleChange = (event) => {
         setRole(event.target.value);
     };
+    const handleLogin = async (event) => {
+        event.preventDefault();
 
+        const userType = role;
+        const id = role === "student" ? studentId : teacherId;
+
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/login/', { user_type: userType, id, password }, { withCredentials: true });
+            alert(response.data.message);
+
+            if (userType === "teacher") {
+                setSubjects(response.data.subjects);  // Store subjects in state
+                console.log("Subjects:", response.data.subjects); // Log subjects
+            }
+            
+            navigate(userType === "student" ? '/home_student' : '/home_teacher', {
+                state: {
+                    user_type: response.data.user_type,
+                    user_id: response.data.user_id,
+                    firstname: response.data.firstname,
+                    lastname: response.data.lastname,
+                    subjects: response.data.subjects
+                }
+            });
+        } catch (error) {
+            if (error.response) {
+                const errorData = error.response.data.error;
+                setErrorMessage(errorData); 
+            }
+        }
+    };
     return (
         <div className="register_login">
             <div className="grid grid-cols-2 drop-shadow-[0_30px_60px_rgba(0,0,0,0.25)] bg-white rounded-3xl">
@@ -27,9 +70,9 @@ function Login() {
                                     value="student"
                                     checked={role === "student"}
                                     onChange={handleRoleChange}
-                                    className="hidden peer" 
+                                    className="hidden peer "
                                 />
-                                <span className={`inline-block cursor-pointer rounded-full border-2 p-2 text-center ${role === "student" ? "bg-blue-500 text-white border-blue-500" : "bg-white border-gray-300"} transition-colors duration-300`}>
+                                <span className={`inline-block cursor-pointer rounded-full border-2 p-2 text-center  ${role === "student" ? "bg-blue-500 text-white border-blue-500" : "bg-white border-gray-300"} transition duration-150 ease-in-out`}>
                                     Student
                                 </span>
                             </label>
@@ -39,9 +82,9 @@ function Login() {
                                     value="teacher"
                                     checked={role === "teacher"}
                                     onChange={handleRoleChange}
-                                    className="hidden peer" 
+                                    className="hidden peer transition duration-150 ease-in-out"
                                 />
-                                <span className={`inline-block cursor-pointer rounded-full border-2 p-2 text-center ${role === "teacher" ? "bg-blue-500 text-white border-blue-500" : "bg-white border-gray-300"} transition-colors duration-300`}>
+                                <span className={`inline-block cursor-pointer rounded-full border-2 p-2 text-center  ${role === "teacher" ? "bg-blue-500 text-white border-blue-500" : "bg-white border-gray-300"}  transition duration-150 ease-in-out`}>
                                     Teacher
                                 </span>
                             </label>
@@ -49,31 +92,72 @@ function Login() {
                         {role === "student" && (
                             <div className="mt-6">
                                 <label className="block">*Student ID:</label>
-                                <input type="text" className="border border-gray-300 rounded-md p-1 w-80 mt-1" />
+                                <input
+                                    type="text"
+                                    className="border border-gray-300 rounded-md p-1 w-80 mt-1"
+                                    value={studentId}
+                                    onChange={(e) => setStudentId(e.target.value)}
+                                />
                                 <label className="block mt-4">*Password:</label>
-                                <input type="password" className="border border-gray-300 rounded-md p-1 w-80 mt-1" />
+                                <input
+                                    type="password"
+                                    className="border border-gray-300 rounded-md p-1 w-80 mt-1"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
                                 <div className="flex mt-1">
-                                    <div>No account ??</div>
+                                    <div>No account ?</div>
                                     <Link to="/register" className="ml-1 text-blue-500">Crate account</Link>
                                 </div>
+                                {errorMessage && (
+                                    <p className="text-red-500 mt-1">
+                                        {errorMessage.teacher_id && errorMessage.teacher_id[0]}
+                                        {errorMessage.student_id && errorMessage.student_id[0]}
+                                        {errorMessage.password && errorMessage.password[0]}
+                                        {errorMessage.user_type && errorMessage.user_type[0]}
+                                    </p>
+                                )}
+
                             </div>
                         )}
 
                         {role === "teacher" && (
                             <div className="mt-6">
                                 <label className="block">*Teacher ID:</label>
-                                <input type="text" className="border border-gray-300 rounded-md p-1 w-80 mt-1" />
+                                <input
+                                    type="text"
+                                    className="border border-gray-300 rounded-md p-1 w-80 mt-1"
+                                    value={teacherId}
+                                    onChange={(e) => setTeacherId(e.target.value)}
+                                />
                                 <label className="block mt-4">*Password:</label>
-                                <input type="password" className="border border-gray-300 rounded-md p-1 w-80 mt-1" />
+                                <input
+                                    type="password"
+                                    className="border border-gray-300 rounded-md p-1 w-80 mt-1"
+                                    onChange={(e) => setPassword(e.target.value)}
+                                />
                                 <div className="flex mt-1">
-                                    <div>No account ??</div>
+                                    <div>No account ?</div>
                                     <Link to="/register" className="ml-1 text-blue-500">Crate account</Link>
                                 </div>
+                                {errorMessage && (
+                                    <p className="text-red-500 mt-1">
+                                        {errorMessage.teacher_id && errorMessage.teacher_id[0]}
+                                        {errorMessage.student_id && errorMessage.student_id[0]}
+                                        {errorMessage.password && errorMessage.password[0]}
+                                        {errorMessage.user_type && errorMessage.user_type[0]}
+                                    </p>
+                                )}
+
                             </div>
                         )}
 
                         <div className="mt-8">
-                            <button className="bg-blue-500 p-3 w-64 rounded-2xl text-white font-medium text-md">Register Now!</button>
+                            <button
+                                className="bg-blue-500 p-2 w-64 rounded-full text-white font-medium text-md transition ease-in-out delay-150 bg-blue-500 hover:-translate-y-1 hover:scale-110 hover:bg-indigo-500 duration-300"
+                                onClick={handleLogin}
+                            >Login Now!
+                            </button>
                         </div>
                     </div>
                 </div>
