@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faPlus, faBook
 } from '@fortawesome/free-solid-svg-icons'
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from 'axios';
 // import Swal from "sweetalert2";
@@ -136,23 +136,62 @@ function Subject_teacher() {
                                 </div>
                             </div>
 
-                            <div className="main_right_box_subject_test_container">
-
-                                <div className="main_right_box_subject_test_box">
-                                    <FontAwesomeIcon icon={faBook} className="icon_book" />
-                                    <h3>รายวิชาของคุณยังไม่มีข้อสอบ</h3>
-                                </div>
+                            <div className="main_right_box_subject_test_container">                  
+                                
                                 {exams.length > 0 ? (
                                     exams.map((exam) => (
-                                        <li key={exam.id}>
-                                            <h4>{exam.title}</h4>
-                                            <p>{exam.description}</p>
-                                            <p>วันครบกำหนด: {exam.due_date}</p>
-                                            <p>คะแนน: {exam.score}</p>
-                                        </li>
+                                            <Link to="/create_test_teacher" className="main_right_subject_result_container" key={exam.id}>
+                                                <div className="main_right_box_subject_teacher">
+                                                    <div className="main_right_box_subject_main">
+                                                        <div className="main_right_box_subject_main_box">
+                                                            <div className="main_right_box_subject_main_box_left">
+                                                                <div className="main_right_box_subject_main_box_left_head">
+                                                                    <div className="main_right_box_subject_main_box_left_head_circle"></div>
+                                                                </div>
+                                                                <i className="fa-regular fa-face-smile"></i>
+                                                            </div>
+                                                            <div className="main_right_box_subject_main_box_right">
+                                                                <div className="main_right_box_subject_main_box_right_head">
+                                                                    Teacher
+                                                                </div>
+                                                                <div className="main_right_box_subject_main_box_right_main">
+                                                                    
+                                                                    <div className="main_right_box_subject_main_box_right_main_head_teacher">
+                                                                        <h3>{exam.title}</h3>
+                                                                        <p>วันครบกำหนด: {exam.due_date}</p>
+                                                                    </div>
+                                                                    <div className="main_right_box_subject_main_box_right_main_main">
+                                                                        <p>{exam.description}</p>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="main_right_box_subject_main_box_right_tail_teacher">
+                                                                    <div className="main_right_box_subject_main_box_right_tail_left_teacher">
+                                                                        <p>Add your reaction</p>
+                                                                    </div>
+                                                                    <div className="main_right_box_subject_main_box_right_tail_right_teacher">
+                                                                        <p>คะแนน: {exam.score}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </Link>
+                                            // <h4>{exam.title}</h4>
+                                            // <p>{exam.description}</p>
+                                            // <p>วันครบกำหนด: {exam.due_date}</p>
+                                            // <p>คะแนน: {exam.score}</p>
+                                        
                                     ))
                                 ) : (
-                                    <p>ไม่พบข้อสอบสำหรับวิชานี้</p> // ถ้าไม่มีข้อมูลข้อสอบ
+                                    <div className="main_right_subject_result_container_no">
+                                        <div className="main_right_box_subject_test_box">
+                                            <FontAwesomeIcon icon={faBook} className="icon_book" />
+                                            <h3>รายวิชาของคุณยังไม่มีข้อสอบ</h3>
+                                        </div>
+                                    </div>
+                                    
+                                    // <p>ไม่พบข้อสอบสำหรับวิชานี้</p> // ถ้าไม่มีข้อมูลข้อสอบ
                                 )}
                             </div>
                         </div>
