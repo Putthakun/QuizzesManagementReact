@@ -8,6 +8,7 @@ import {
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from 'axios';
+import Swal from 'sweetalert2';
 // import Swal from "sweetalert2";
 
 // import { useState } from "react";
@@ -65,7 +66,7 @@ function Subject_teacher() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         const examData = {
             subject_code: id,  // code ของ Subject
             title: title,
@@ -73,29 +74,48 @@ function Subject_teacher() {
             due_date: due_date,
             score: parseInt(score, 10)  // แปลงคะแนนเป็นตัวเลข
         };
-
+    
         console.log(id);
-
+    
         try {
-
-            const response = await axios.post('http://localhost:8000/api/exams/', examData, {
-                headers: {
-                    'Content-Type': 'application/json',
-                },
+            // แสดงการแจ้งเตือนเพื่อยืนยันการส่งข้อมูล
+            const result = await Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to submit this exam?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, submit it!',
+                cancelButtonText: 'No, cancel!',
             });
-            toggleModal();
-            toggleSuccessModal();
-            console.log('Exam created successfully:', response.data);
-            setErrors({}); // Clear errors if successful
-            // ทำสิ่งที่คุณต้องการหลังจากสร้างข้อสอบ เช่น รีเซ็ตฟอร์ม หรือแจ้งเตือนผู้ใช้
-            const examResponse = await axios.get(`http://localhost:8000/api/listexams/${id}/`);
-            if (examResponse.status === 200) {
-                setExams(examResponse.data);
-                console.log("Fetched exams:", examResponse.data);
-            } else {
-                throw new Error('Failed to fetch exams');
+    
+            if (result.isConfirmed) {
+                const response = await axios.post('http://localhost:8000/api/exams/', examData, {
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                });
+                toggleModal(); // ปิด modal
+                console.log('Exam created successfully:', response.data);
+                setErrors({}); // Clear errors if successful
+    
+                // แสดงแจ้งเตือนว่าการสร้าง exam สำเร็จแล้ว
+                await Swal.fire({
+                    icon: 'success',
+                    title: 'Success!',
+                    text: 'คุณสร้างรายการข้อสอบสำเร็จแล้ว!',
+                    confirmButtonText: 'OK'
+                });
+    
+                // รีเฟรชข้อมูลข้อสอบ
+                const examResponse = await axios.get(`http://localhost:8000/api/listexams/${id}/`);
+                if (examResponse.status === 200) {
+                    setExams(examResponse.data);
+                    console.log("Fetched exams:", examResponse.data);
+                } else {
+                    throw new Error('Failed to fetch exams');
+                }
+                navigate('/create_test_teacher'); // นำทางไปยังหน้าสร้างข้อสอบ
             }
-            navigate('/create_test_teacher')
         } catch (error) {
             if (error.response && error.response.status === 400) {
                 // Set errors from API response
@@ -104,7 +124,6 @@ function Subject_teacher() {
                 console.error("There was an error creating the exam!", error);
             }
         }
-
     };
 
     return (
@@ -196,7 +215,6 @@ function Subject_teacher() {
                                             <h3>รายวิชาของคุณยังไม่มีข้อสอบ</h3>
                                         </div>
                                     </div>
-
                                     // <p>ไม่พบข้อสอบสำหรับวิชานี้</p> // ถ้าไม่มีข้อมูลข้อสอบ
                                 )}
                             </div>
@@ -242,9 +260,9 @@ function Subject_teacher() {
                                                 onChange={(e) => setDescription(e.target.value)}
                                             />
                                             {errors.description && (
-                                                <span style={{ color: 'red !important' }}>
+                                                <p style={{ color: 'red !important' }}>
                                                     {errors.description.join(', ')}
-                                                </span>
+                                                </p>
                                             )}
                                             {/* {{ form.name }} */}
                                         </div>
