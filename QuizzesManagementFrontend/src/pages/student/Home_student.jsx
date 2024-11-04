@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBook } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 export default function Home_student() {
     const navigate = useNavigate();
@@ -45,7 +45,14 @@ export default function Home_student() {
                 <div className="main_home_right_top">
                     <Navbar_top_student />
                 </div>
+                
                 <div className="main_right_student_box_container">
+
+                    <div className="add_subject_student_container">
+                        <button className="add_subject_student_box">
+                            <FontAwesomeIcon icon={faPlus} />
+                        </button>
+                    </div>
                     
                     {subjects.length > 0 ? (
                         subjects.map(subject => (
