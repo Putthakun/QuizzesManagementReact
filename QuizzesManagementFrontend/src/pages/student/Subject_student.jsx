@@ -52,6 +52,10 @@ function Subject_student() {
         setModal(!modal)
     }
 
+    const handleTakeTestClick = () => {
+        
+    }
+
     return (
         <div>
             <div className="main_home">
@@ -110,9 +114,9 @@ function Subject_student() {
                                                                     </div>
                                                                     <div className="main_right_box_subject_main_box_right_tail_right_student">
                                                                         <p>คะแนน: {exam.score}</p>
-                                                                        <Link to="/take_test_student">
+                                                                        <button onClick={toggleModal}>
                                                                             Take Test
-                                                                        </Link>
+                                                                        </button>
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -141,43 +145,56 @@ function Subject_student() {
                     </div>
                 </div>
             </div>
+
             {modal && (
-                <div className="popup_container">
-                    <div className="popup_container_box">
-                        <div className="popup_box">
-                            <form method="POST">
-                                {/* {% csrf_token %} */}
-                                <div className="popup_box_top">
-                                    <div className="popup_box_top_left">
-                                        <label className="popup_box_top_left_num">ชื่อข้อสอบ :</label>
-                                        <label className="popup_box_top_left_name">รายละเอียด :</label>
-                                        <label className="popup_box_top_left_name">วันครบกำหนด :</label>
-                                        <label className="popup_box_top_left_name">คะแนน :</label>
+                <div className="popup_container_subject_student">
+                    <div className="popup_container_box_subject_student">
+                        <div className="popup_box_subject_student">
+                            <div className="main_right_text_take_test">
+                                <h2>Test Rules</h2>
+                            </div>
+                            <div className="main_right_box_take_test">
+                                <div className="main_right_box_take_test_main">
+                                    <div className="main_right_box_take_test_main_head">
+                                        <div className="main_right_box_take_test_main_head_left">
+
+                                        </div>
+                                        <div className="main_right_box_take_test_main_head_right">
+                                            <div className="main_right_box_take_test_main_head_right_top">
+                                                <p>Maths</p>
+                                            </div>
+                                            <div className="main_right_box_take_test_main_head_right_bottom">
+                                                <p>Calculus 2  Pre Test - Yay</p><p>100 scores</p>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="popup_box_top_right">
-                                        <div className="popup_box_top_right_input_num">
-                                            <input type="text" name="code" />
-                                            {/* {{ form.code }} */}
-                                        </div>
-                                        <div className="popup_box_top_right_input_name">
-                                            <input type="text" name="name" />
-                                            {/* {{ form.name }} */}
-                                        </div>
-                                        <div className="popup_box_top_right_input_name">
-                                            <input type="date" name="name" />
-                                            {/* {{ form.name }} */}
-                                        </div>
-                                        <div className="popup_box_top_right_input_name">
-                                            <input type="text" name="name" />
-                                            {/* {{ form.name }} */}
+                                    <div className="main_right_box_take_test_main_box">
+                                        <p>กฎการทำข้อสอบ</p>
+                                        
+                                        <p>1.ห้าม....</p>
+                                        <p>2.ไม่อนุญาต</p>
+                                        <p>3.ถ้าหาก</p>
+                                        <p>4.ไม่ควร</p>
+                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
+                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
+                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
+                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
+                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
+                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
+                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
+                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
+                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
+                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
+                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
+
+                                    </div>
+                                    <div className="main_right_box_take_test_main_tail">
+                                        <div className="main_right_box_take_test_main_tail_box">
+                                            <button onClick={handleTakeTestClick}>Take Test</button>
                                         </div>
                                     </div>
                                 </div>
-                                <div className="popup_box_tail">
-                                    <button type="button" className="popup_box_tail_cancel" onClick={toggleModal}>Cancel</button>
-                                    <button type="submit" className="popup_box_tail_save">Save</button>
-                                </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>

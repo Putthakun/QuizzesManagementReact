@@ -192,7 +192,7 @@
     font-weight: bold;
     margin-right: 15px;
 }
-.main_right_box_subject_main_box_right_tail_right_student a{
+.main_right_box_subject_main_box_right_tail_right_student button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -201,4 +201,35 @@
     background-color: #447BF7;
     color: white;
     border-radius: 10px;
+}
+.popup_container_subject_student{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(171, 171, 171);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.popup_container_box_subject_student{
+    width: 1000px;
+    height: 650px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.popup_box_subject_student{
+    width: 80%;
+    height: 100%;
+    /* background-color: rgb(133, 126, 202); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
