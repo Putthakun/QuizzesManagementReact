@@ -6,13 +6,15 @@ import { faPlus } from '@fortawesome/free-solid-svg-icons'
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 function Home_teacher() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const { user_type, user_id, firstname, lastname } = location.state || {};
+    // const { user_type, user_id, firstname, lastname } = location.state || {};
     axios.defaults.withCredentials = true;
+    const user_id = sessionStorage.getItem('user_id'); // ดึง user_id จาก sessionStorage
     const [modal, setModal] = useState(false)
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [sessionData, setSessionData] = useState(null);
@@ -23,7 +25,13 @@ function Home_teacher() {
     const [subjects, setSubjects] = useState([]);
 
     const toggleSuccessModal = () => {
-        setShowSuccessModal(!showSuccessModal);
+        Swal.fire({
+            icon: "success",
+            title: "Your work has been saved",
+            showConfirmButton: false,
+            timer: 2500
+          });
+        // setShowSuccessModal(!showSuccessModal);
     };
 
     useEffect(() => {
@@ -35,7 +43,7 @@ function Home_teacher() {
                 setError(error.response ? error.response.data : 'An error occurred');
             }
         };
-
+ 
         fetchSubjects();
     }, [user_id]);
 
@@ -80,9 +88,9 @@ function Home_teacher() {
         <div>
             <div className="main_home">
                 <Navbar_teacher />
-                <div className="main_home_right">
+                <div className="main_home_right_teacher_">
                     <div className="main_home_right_top">
-                        <Navbar_top_teacher firstname={firstname} lastname={lastname} user_type={user_type} />
+                        <Navbar_top_teacher />
 
                     </div>
                     <div className="main_right_teacher_box_container">

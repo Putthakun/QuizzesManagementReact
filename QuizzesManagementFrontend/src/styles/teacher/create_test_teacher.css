@@ -1,9 +1,14 @@
+.main_home_right_test{
+    width: 85%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    /* background-color: antiquewhite; */
+}
 .main_right_test_teacher{
-    height: auto;
     /* background-color: aqua; */
     display: flex;
-    align-items: center;
-    flex-direction: column;
+    justify-content: center;
     overflow: auto;
 }
 .main_right_test_teacher_container{
@@ -24,7 +29,17 @@
     font-weight: bold;
     margin-right: 15px;
 }
+.btn_create_test_delete{
+    width: 250px;
+    height: 50px;
+    background-color: rgb(255, 76, 76);
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    margin-right: 15px;
+}
 .main_right_test_teacher_box{
+    width: 96%;
     border: 1px solid gray;
     /* background-color: #C6DBFF; */
     padding: 20px 30px;
@@ -34,7 +49,7 @@
 .main_right_test_teacher_box_top{
     /* background-color: red; */
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
 }
@@ -50,10 +65,16 @@
     margin-right: 10px;
     font-size: 20px;
 }
+.main_right_test_teacher_box_top_right .btn-delete{
+    width: 80px;
+    border-radius: 10px;
+    background-color: rgb(255, 76, 76);
+    color: white;
+}
 .main_right_test_teacher_box_top_right{
     width: 400px;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     font-size: 18px;
     /* background-color: rgb(164, 245, 58); */
 }
@@ -63,7 +84,7 @@
     justify-content: center;
     align-items: center;
 }
-.main_right_test_teacher_box_top_right_multi input{
+.main_right_test_teacher_box_top_right_multi{
     margin-right: 10px;
     font-size: 20px;
     width: 20px;
@@ -86,6 +107,12 @@
     justify-content: flex-start;
     align-items: center;
     /* background-color: blueviolet; */
+}
+.main_right_test_teacher_box_question textarea{
+    border: 1px solid gray;
+    padding: 10px;
+    width: 570px;
+    border-radius: 10px;
 }
 .main_right_test_teacher_box_question_left{
     display: flex;
@@ -119,6 +146,35 @@
 }
 .choice_star{
    color: red;
+}
+.main_right_test_teacher_box_choice_main{
+    /* background-color: gray; */
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.main_right_test_teacher_box_choice_main .input_radio{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.main_right_test_teacher_box_choice_main .input_text{
+    width: 527px;
+    height: 80%;
+    border-radius: 10px;
+    margin-right: 10px;
+    /* border: 1px solid gray; */
+    padding: 10px 20px;
+    background-color: #E4E8EB;
+}
+.main_right_test_teacher_box_choice_main .trash{
+    width: 20px;
+    height: 20px;
+    color: rgb(254, 69, 69);
+    cursor: pointer;
 }
 .main_right_test_teacher_box_choice_main_choice{
     /* background-color: aquamarine; */

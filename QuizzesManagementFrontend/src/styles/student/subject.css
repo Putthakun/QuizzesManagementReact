@@ -42,18 +42,19 @@
 .main_right_box_subject_main{
     /* margin-top: 20px; */
     /* background-color:chartreuse; */
-    height: 65%;
+    height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .main_right_box_subject_main_box{
     /* background-color: violet; */
-    border: 1px solid black;
+    border: 1px solid #CAD1D8;
     border-radius: 12.5px;
-    width: 90%;
+    width: 70%;
     height: 80%;
     display: flex;
+    margin-bottom: 20px;
 }
 .main_right_box_subject_main_box_left{
     margin: 15px;
@@ -101,15 +102,17 @@
 }
 .main_right_box_subject_main_box_right_main{
     height: 60%;
+    margin-top: 20px;
     /* background-color:beige; */
+    border-bottom: 1px solid #71808C;
 }
 .main_right_box_subject_main_box_right_tail{
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    /* background-color: aquamarine; */
-    border-top: 1px solid #71808C;
+    background-color: aquamarine;
 }
 .main_right_box_subject_main_box_right_tail_left{
     width: 25%;
@@ -179,4 +182,54 @@
     color: white;
     cursor: pointer;
     text-decoration: none;
+}
+.main_right_box_subject_main_box_right_tail_right_student{
+    display: flex;
+    align-items: center;
+    /* background-color: #71808C; */
+}
+.main_right_box_subject_main_box_right_tail_right_student p{
+    font-weight: bold;
+    margin-right: 15px;
+}
+.main_right_box_subject_main_box_right_tail_right_student button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    background-color: #447BF7;
+    color: white;
+    border-radius: 10px;
+}
+.popup_container_subject_student{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgb(171, 171, 171);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.popup_container_box_subject_student{
+    width: 1000px;
+    height: 650px;
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.popup_box_subject_student{
+    width: 80%;
+    height: 100%;
+    /* background-color: rgb(133, 126, 202); */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
