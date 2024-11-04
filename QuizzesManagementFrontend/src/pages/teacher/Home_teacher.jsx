@@ -28,7 +28,7 @@ function Home_teacher() {
             icon: "success",
             title: "Your work has been saved",
             showConfirmButton: false,
-            timer: 1500
+            timer: 2500
           });
         // setShowSuccessModal(!showSuccessModal);
     };
@@ -87,7 +87,7 @@ function Home_teacher() {
         <div>
             <div className="main_home">
                 <Navbar_teacher />
-                <div className="main_home_right">
+                <div className="main_home_right_teacher_">
                     <div className="main_home_right_top">
                         <Navbar_top_teacher firstname={firstname} lastname={lastname} user_type={user_type} />
 

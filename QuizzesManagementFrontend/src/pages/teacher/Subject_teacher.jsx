@@ -8,6 +8,7 @@ import {
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from 'axios';
+// import Swal from "sweetalert2";
 
 // import { useState } from "react";
 
@@ -38,6 +39,16 @@ function Subject_teacher() {
     const toggleModal = () => {
         setModal(!modal)
     }
+
+    // const toggleSuccessModal = () => {
+    //     Swal.fire({
+    //         icon: "success",
+    //         title: "Your work has been saved",
+    //         showConfirmButton: false,
+    //         timer: 2500
+    //       });
+    //     // setShowSuccessModal(!showSuccessModal);
+    // };
 
     return (
         <div>
