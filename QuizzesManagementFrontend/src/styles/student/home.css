@@ -89,3 +89,27 @@
     border-radius: 25px;
     background-color:#C6DBFF;
 }
+.main_right_student_box_container{
+    height: 100%;
+    /* background-color: chartreuse; */
+    display: flex;
+    padding: 50px;
+}
+.main_right_student_box{
+    width: 225px;
+    height: 225px;
+    margin: 25px 25px;
+    /* background-color: orange; */
+    border: 1px solid #CAD1D8;
+    /* margin-right: 50px; */
+    /* margin-bottom: 100px; */
+    border-radius: 20px;
+    overflow: hidden;
+}
+.main_right_student_box_head{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #E6F1FF;
+    height: 75%;
+}

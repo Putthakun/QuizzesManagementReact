@@ -45,17 +45,17 @@ export default function Home_student() {
                 <div className="main_home_right_top">
                     <Navbar_top_student />
                 </div>
-                <div className="main_right_teacher_box_container">
+                <div className="main_right_student_box_container">
                     
                     {subjects.length > 0 ? (
                         subjects.map(subject => (
                             <div
-                                className="main_right_teacher_box"
+                                className="main_right_student_box"
                                 key={subject.id || `${subject.code}-${subject.name}`}
                                 onClick={() => handleSubjectClick(subject.code)}
                                 style={{ cursor: 'pointer' }}
                             >
-                                <div className="main_right_teacher_box_head">
+                                <div className="main_right_student_box_head">
                                     {subject.name}
                                 </div>
                                 <div>
