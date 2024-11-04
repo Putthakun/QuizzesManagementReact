@@ -42,7 +42,7 @@ function Home_teacher() {
                 setError(error.response ? error.response.data : 'An error occurred');
             }
         };
-
+ 
         fetchSubjects();
     }, [user_id]);
 
@@ -89,7 +89,7 @@ function Home_teacher() {
                 <Navbar_teacher />
                 <div className="main_home_right_teacher_">
                     <div className="main_home_right_top">
-                        <Navbar_top_teacher firstname={firstname} lastname={lastname} user_type={user_type} />
+                        <Navbar_top_teacher />
 
                     </div>
                     <div className="main_right_teacher_box_container">

@@ -16,9 +16,9 @@ function App() {
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/home_teacher" element={<Home_teacher />} />
-        <Route path="/home_student" element={<Home_student />} />
-        <Route path="/subject_student" element={<Subject_student />} />
+        <Route path="/Home_teacher" element={<Home_teacher />} />
+        <Route path="/Home_student" element={<Home_student />} />
+        <Route path="/subject_student/:id" element={<Subject_student />} />
         <Route path="/home_teacher" element={<Home_teacher />} />
         <Route path="/subject_teacher/:id" element={<Subject_teacher />} />
         <Route path="/create_test_teacher" element={<Create_test_teacher />} />
