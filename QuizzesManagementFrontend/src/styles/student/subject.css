@@ -183,3 +183,22 @@
     cursor: pointer;
     text-decoration: none;
 }
+.main_right_box_subject_main_box_right_tail_right_student{
+    display: flex;
+    align-items: center;
+    /* background-color: #71808C; */
+}
+.main_right_box_subject_main_box_right_tail_right_student p{
+    font-weight: bold;
+    margin-right: 15px;
+}
+.main_right_box_subject_main_box_right_tail_right_student a{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 30px;
+    background-color: #447BF7;
+    color: white;
+    border-radius: 10px;
+}
