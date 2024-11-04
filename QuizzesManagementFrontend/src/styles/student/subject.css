@@ -49,9 +49,9 @@
 }
 .main_right_box_subject_main_box{
     /* background-color: violet; */
-    border: 1px solid black;
+    border: 1px solid #CAD1D8;
     border-radius: 12.5px;
-    width: 75%;
+    width: 70%;
     height: 80%;
     display: flex;
     margin-bottom: 20px;

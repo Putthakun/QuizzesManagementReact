@@ -124,6 +124,9 @@ function Create_test_teacher() {
                                 <button className="btn_create_test" onClick={addQuestion}>
                                     Add Question
                                 </button>
+                                <button className="btn_create_test_delete" onClick={addQuestion}>
+                                    Delete All
+                                </button>
                             </div>
 
                             {data.map((val, i) => (
@@ -150,6 +153,7 @@ function Create_test_teacher() {
                                     {val.choices.map((choice, j) => (
                                         <div key={j} className="main_right_test_teacher_box_choice_main">
                                             <input
+                                                className="input_radio"
                                                 type="radio"
                                                 name={`correct-${i}`}
                                                 checked={choice.is_correct}
@@ -162,6 +166,7 @@ function Create_test_teacher() {
                                                 }}
                                             />
                                             <input
+                                                className="input_text"
                                                 type="text"
                                                 placeholder="Enter choice text"
                                                 value={choice.choice_text}

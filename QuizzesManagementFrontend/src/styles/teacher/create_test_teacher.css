@@ -29,7 +29,17 @@
     font-weight: bold;
     margin-right: 15px;
 }
+.btn_create_test_delete{
+    width: 250px;
+    height: 50px;
+    background-color: rgb(255, 76, 76);
+    border-radius: 10px;
+    color: white;
+    font-weight: bold;
+    margin-right: 15px;
+}
 .main_right_test_teacher_box{
+    width: 96%;
     border: 1px solid gray;
     /* background-color: #C6DBFF; */
     padding: 20px 30px;
@@ -58,7 +68,7 @@
 .main_right_test_teacher_box_top_right .btn-delete{
     width: 80px;
     border-radius: 10px;
-    background-color: red;
+    background-color: rgb(255, 76, 76);
     color: white;
 }
 .main_right_test_teacher_box_top_right{
@@ -98,6 +108,12 @@
     align-items: center;
     /* background-color: blueviolet; */
 }
+.main_right_test_teacher_box_question textarea{
+    border: 1px solid gray;
+    padding: 10px;
+    width: 570px;
+    border-radius: 10px;
+}
 .main_right_test_teacher_box_question_left{
     display: flex;
     justify-content: flex-start;
@@ -130,6 +146,35 @@
 }
 .choice_star{
    color: red;
+}
+.main_right_test_teacher_box_choice_main{
+    /* background-color: gray; */
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.main_right_test_teacher_box_choice_main .input_radio{
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.main_right_test_teacher_box_choice_main .input_text{
+    width: 527px;
+    height: 80%;
+    border-radius: 10px;
+    margin-right: 10px;
+    /* border: 1px solid gray; */
+    padding: 10px 20px;
+    background-color: #E4E8EB;
+}
+.main_right_test_teacher_box_choice_main .trash{
+    width: 20px;
+    height: 20px;
+    color: rgb(254, 69, 69);
+    cursor: pointer;
 }
 .main_right_test_teacher_box_choice_main_choice{
     /* background-color: aquamarine; */

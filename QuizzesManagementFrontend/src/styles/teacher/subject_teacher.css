@@ -133,3 +133,6 @@
     display: flex;
     justify-content: center;
 }
+.popup_box_top_right_input_name span{
+    color: red;
+}
