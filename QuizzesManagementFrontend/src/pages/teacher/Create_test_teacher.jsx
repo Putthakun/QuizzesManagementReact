@@ -89,17 +89,7 @@ function Create_test_teacher() {
                                                 <p>Question {i+1}*</p>
                                             </div>
                                             <div className="main_right_test_teacher_box_top_right">
-                                                <div className="main_right_test_teacher_box_top_right_multi">
-                                                    <input type="radio" value={val.multi} name="multiorfill" onChange={ (e) => handelChange(e, i)}/>
-                                                    <label htmlFor="multi">Multiple choice</label>
-                                                </div>
-                                                <div className="main_right_test_teacher_box_top_right_fill">
-                                                    <input type="radio" value={val.fill} name="multiorfill" onChange={ (e) => handelChange(e, i)}/>
-                                                    <label htmlFor="fill">Fill in the blank</label>
-                                                </div>
-                                                <div className="main_right_test_teacher_box_top_right_fill">
-                                                    <button onClick={()=>handelDelete(i)}>Delete</button>
-                                                </div>
+                                                    <button className="btn-delete" onClick={()=>handelDelete(i)}>Delete</button>
                                             </div>
                                         </div>
                                         <div className="main_right_test_teacher_box_question">

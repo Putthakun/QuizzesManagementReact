@@ -39,7 +39,7 @@
 .main_right_test_teacher_box_top{
     /* background-color: red; */
     display: flex;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
 }
@@ -55,10 +55,16 @@
     margin-right: 10px;
     font-size: 20px;
 }
+.main_right_test_teacher_box_top_right .btn-delete{
+    width: 80px;
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+}
 .main_right_test_teacher_box_top_right{
     width: 400px;
     display: flex;
-    justify-content: space-around;
+    justify-content: flex-end;
     font-size: 18px;
     /* background-color: rgb(164, 245, 58); */
 }
@@ -68,7 +74,7 @@
     justify-content: center;
     align-items: center;
 }
-.main_right_test_teacher_box_top_right_multi input{
+.main_right_test_teacher_box_top_right_multi{
     margin-right: 10px;
     font-size: 20px;
     width: 20px;
