@@ -12,8 +12,9 @@ function Home_teacher() {
 
     const navigate = useNavigate();
     const location = useLocation();
-    const { user_type, user_id, firstname, lastname } = location.state || {};
+    // const { user_type, user_id, firstname, lastname } = location.state || {};
     axios.defaults.withCredentials = true;
+    const user_id = sessionStorage.getItem('user_id'); // ดึง user_id จาก sessionStorage
     const [modal, setModal] = useState(false)
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [sessionData, setSessionData] = useState(null);
