@@ -2,42 +2,58 @@ import Navbar_top_teacher from "../../components/teacher/Navbar_top_teacher"
 import Navbar_teacher from "../../components/teacher/Navbar_teacher"
 import "../../styles/teacher/create_test_teacher.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faCircleQuestion, faTrashCan
-} from '@fortawesome/free-solid-svg-icons'
+import { faCircleQuestion, faTrashCan } from '@fortawesome/free-solid-svg-icons'
 import { useState } from "react"
 import Swal from 'sweetalert2';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
 
 function Create_test_teacher() {
-
-    const [modal, setModal] = useState(false);
-    const [data, setData] = useState([{ multi: "", fill: "", choices: [""] }]);
+    const { examId } = useParams();
+    const [data, setData] = useState([{ question_text: "", points: 1, order: 1, choices: [{ choice_text: "", is_correct: false }] }]);
     const [subject, setSubject] = useState('');
     const [nametest, setNametest] = useState('');
 
-    const toggleModal = () => setModal(!modal);
-
+    // เพิ่มคำถามใหม่
     const addQuestion = () => {
-        setData([...data, { multi: "", fill: "", choices: [""] }]);
+        setData([...data, { question_text: "", points: 1, order: data.length + 1, choices: [{ choice_text: "", is_correct: false }] }]);
     };
 
+    // เพิ่มตัวเลือกใหม่ให้กับคำถามที่ระบุ
     const addChoice = (i) => {
         const updatedData = [...data];
-        updatedData[i].choices.push(""); // เพิ่ม choice ใหม่ให้กับคำถามที่ i
+        updatedData[i].choices.push({ choice_text: "", is_correct: false });
         setData(updatedData);
     };
 
+    // ลบตัวเลือกของคำถามที่ระบุ
     const handelDeleteChoice = (questionIndex, choiceIndex) => {
         const updatedData = [...data];
         updatedData[questionIndex].choices.splice(choiceIndex, 1);
         setData(updatedData);
     };
 
+    // ลบคำถามที่ระบุ
     const handelDelete = (index) => {
-        const updatedData = data.filter((_, i) => i !== index); // ลบคำถามที่มีดัชนีตรงกับ index
+        const updatedData = data.filter((_, i) => i !== index);
         setData(updatedData);
     };
 
+    // อัปเดตข้อมูลคำถามเมื่อมีการเปลี่ยนแปลง
+    const handleQuestionChange = (index, field, value) => {
+        const newData = [...data];
+        newData[index][field] = value;
+        setData(newData);
+    };
+
+    // อัปเดตข้อมูลตัวเลือกเมื่อมีการเปลี่ยนแปลง
+    const handleChoiceChange = (questionIndex, choiceIndex, field, value) => {
+        const newData = [...data];
+        newData[questionIndex].choices[choiceIndex][field] = value;
+        setData(newData);
+    };
+
+    // ส่งข้อมูลไปยัง backend
     const handleSubmit = (e) => {
         e.preventDefault();
     
@@ -49,45 +65,43 @@ function Create_test_teacher() {
             confirmButtonText: 'Yes, submit it!',
             cancelButtonText: 'No, cancel!',
         }).then((result) => {
+            console.log("Exam ID being sent: ", examId);
             if (result.isConfirmed) {
-                // ดำเนินการส่งข้อมูลที่นี่
-                const quizData = {
-                    questions: data,
-                    subject: subject,
-                    name: nametest,
-                };
-                console.log("Submitting Data: ", quizData);
-                // ส่ง `quizData` ไปยัง backend หรือ API ตามที่ต้องการ
+                // สร้าง quizData ตามรูปแบบที่ API คาดหวัง
+                const quizData = data.map((question, index) => ({
+                    exam_id: examId, // ตรวจสอบให้แน่ใจว่า examId ถูกต้อง
+                    question_text: question.question_text, // ต้องมี field นี้ใน data
+                    points: question.points,
+                    order: index + 1, // หรือคุณอาจใช้ค่าที่ผู้ใช้กรอกมา
+                    choices: question.choices.map((choice) => ({
+                        choice_text: choice.choice_text, // ตรวจสอบให้แน่ใจว่ามี field นี้ใน data
+                        is_correct: choice.is_correct // ตรวจสอบให้แน่ใจว่ามี field นี้ใน data
+                    }))
+                }));
     
-                // สมมติว่าคุณใช้ axios สำหรับส่งข้อมูล
-                axios.post('http://localhost:8000/api/quizzes/', quizData) // เปลี่ยน URL ตามที่คุณใช้
+                console.log("Submitting Data: ", quizData);
+    
+                // ส่งข้อมูลไปยัง backend
+                axios.post('http://localhost:8000/api/questionCreateView/', quizData)
                     .then(response => {
-                        // แสดงแจ้งเตือนว่าการสร้างข้อสอบสำเร็จแล้ว
                         Swal.fire({
                             icon: 'success',
                             title: 'Success!',
                             text: 'คุณสร้างข้อสอบสำเร็จแล้ว!',
                             confirmButtonText: 'OK'
                         });
-                        // ทำสิ่งที่คุณต้องการหลังจากสร้างข้อสอบเสร็จ เช่น รีเซ็ตฟอร์มหรืออะไรก็ได้ที่คุณต้องการ
                     })
                     .catch(error => {
-                        console.error("There was an error creating the exam!", error);
-                        // แสดงแจ้งเตือนข้อผิดพลาด
+                        console.error("There was an error creating the exam!", error.response.data);
                         Swal.fire({
                             icon: 'error',
                             title: 'Error!',
-                            text: 'เกิดข้อผิดพลาดในการสร้างข้อสอบ!',
+                            text: `เกิดข้อผิดพลาดในการสร้างข้อสอบ! ${error.response.data}`,
                             confirmButtonText: 'OK'
                         });
                     });
             } else {
-                // หากผู้ใช้เลือกที่จะยกเลิก
-                Swal.fire(
-                    'Cancelled',
-                    'Your data is safe :)',
-                    'error'
-                );
+                Swal.fire('Cancelled', 'Your data is safe :)', 'error');
             }
         });
     };
@@ -124,53 +138,53 @@ function Create_test_teacher() {
                                         </div>
                                     </div>
                                     <div className="main_right_test_teacher_box_question">
-                                        <div className="main_right_test_teacher_box_question_left">
-                                            <textarea name="" id=""></textarea>
-                                        </div>
-                                        <div className="main_right_test_teacher_box_question_right">
-                                            <input type="file" id="myFile" name="filename" />
-                                        </div>
+                                        <textarea
+                                            placeholder="Enter question text"
+                                            value={val.question_text}
+                                            onChange={(e) => handleQuestionChange(i, 'question_text', e.target.value)}
+                                        />
                                     </div>
                                     <div className="main_right_test_teacher_box_choice_head">
-                                        <p>Choice</p><p className="choice_star">*</p>
+                                        <p>Choices</p><p className="choice_star">*</p>
                                     </div>
-                                    {val.choices.map((choiceVal, j) => (
-                                        <div className="main_right_test_teacher_box_choice_main" key={j}>
-                                            <div className="main_right_test_teacher_box_choice_main_choice">
-                                                <input type="radio" value={choiceVal} name={`choices-${i}`} />
-                                                <input
-                                                    type="text"
-                                                    className="label"
-                                                    value={choiceVal}
-                                                    onChange={(e) => {
-                                                        const updatedData = [...data];
-                                                        updatedData[i].choices[j] = e.target.value; // อัปเดตค่าของ choice
-                                                        setData(updatedData);
-                                                    }}
-                                                />
-                                                <FontAwesomeIcon
-                                                    icon={faTrashCan}
-                                                    className="trash"
-                                                    onClick={() => handelDeleteChoice(i, j)}
-                                                />
-                                            </div>
+                                    {val.choices.map((choice, j) => (
+                                        <div key={j} className="main_right_test_teacher_box_choice_main">
+                                            <input
+                                                type="radio"
+                                                name={`correct-${i}`}
+                                                checked={choice.is_correct}
+                                                onChange={() => {
+                                                    const updatedData = [...data];
+                                                    updatedData[i].choices.forEach((c, idx) => {
+                                                        updatedData[i].choices[idx].is_correct = (idx === j);
+                                                    });
+                                                    setData(updatedData);
+                                                }}
+                                            />
+                                            <input
+                                                type="text"
+                                                placeholder="Enter choice text"
+                                                value={choice.choice_text}
+                                                onChange={(e) => handleChoiceChange(i, j, 'choice_text', e.target.value)}
+                                            />
+                                            <FontAwesomeIcon
+                                                icon={faTrashCan}
+                                                className="trash"
+                                                onClick={() => handelDeleteChoice(i, j)}
+                                            />
                                         </div>
                                     ))}
-                                    <div className="main_right_test_teacher_box_choice_add_choice">
-                                        <button className="btn_add_choice" onClick={() => addChoice(i)}>
-                                            <p>+ Add choice</p>
-                                        </button>
-                                    </div>
+                                    <button className="btn_add_choice" onClick={() => addChoice(i)}>
+                                        + Add choice
+                                    </button>
                                 </div>
                             ))}
                         </div>
                     </div>
                 </div>
             </div>
-
-    
         </div>
-    )
+    );
 }
 
 export default Create_test_teacher;
