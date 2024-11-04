@@ -2,7 +2,7 @@ import Navbar_student from "../../components/student/Navbar_student";
 import '../../styles/student/home.css';
 import Navbar_top_student from "../../components/student/Navbar_top_student";
 import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, Link } from "react-router-dom";
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBook } from '@fortawesome/free-solid-svg-icons';
@@ -10,9 +10,9 @@ import { faBook } from '@fortawesome/free-solid-svg-icons';
 export default function Home_student() {
     const navigate = useNavigate();
     const location = useLocation();
-    const { user_type, user_id, firstname, lastname } = location.state || {};
+    // const { user_type, user_id,firstname, lastname } = location.state || {};
     axios.defaults.withCredentials = true;
-
+    const user_id = sessionStorage.getItem('user_id'); // ดึง user_id จาก sessionStorage
     const [subjects, setSubjects] = useState('');
     const [error, setError] = useState('');
 
@@ -20,9 +20,11 @@ export default function Home_student() {
         const fetchSubjects = async () => {
             try {
                 const response = await axios.get(`http://localhost:8000/api/student/${user_id}/subjects/`);
+                
                 setSubjects(response.data);
                 console.log(response.data);
             } catch (error) {
+                
                 setError(error.response ? error.response.data : 'An error occurred');
             }
         };
@@ -34,16 +36,7 @@ export default function Home_student() {
         navigate(`/subject_student/${code}`);
     };
 
-    // const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     const userType = sessionStorage.getItem('user_type');
-        
-    //     if (userType !== 'student') {
-    //         alert("คุณไม่ใช่ student/โปรดสมัครสมาชิก");
-    //         navigate('/login');
-    //     }
-    // }, [navigate]);
 
     return (
         <div className="main_home">
@@ -53,6 +46,7 @@ export default function Home_student() {
                     <Navbar_top_student />
                 </div>
                 <div className="main_right_teacher_box_container">
+                    
                     {subjects.length > 0 ? (
                         subjects.map(subject => (
                             <div
