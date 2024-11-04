@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faPlus, faBook
 } from '@fortawesome/free-solid-svg-icons'
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from 'axios';
 // import Swal from "sweetalert2";
@@ -24,6 +24,7 @@ function Subject_teacher() {
     const [error, setError] = useState('');
     const [showSuccessModal, setShowSuccessModal] = useState(false);
     const [exams, setExams] = useState([]);
+    const [errors, setErrors] = useState({});
     const { id } = useParams();
 
     const toggleSuccessModal = () => {
@@ -76,7 +77,7 @@ function Subject_teacher() {
         console.log(id);
 
         try {
-            
+
             const response = await axios.post('http://localhost:8000/api/exams/', examData, {
                 headers: {
                     'Content-Type': 'application/json',
@@ -85,6 +86,7 @@ function Subject_teacher() {
             toggleModal();
             toggleSuccessModal();
             console.log('Exam created successfully:', response.data);
+            setErrors({}); // Clear errors if successful
             // ทำสิ่งที่คุณต้องการหลังจากสร้างข้อสอบ เช่น รีเซ็ตฟอร์ม หรือแจ้งเตือนผู้ใช้
             const examResponse = await axios.get(`http://localhost:8000/api/listexams/${id}/`);
             if (examResponse.status === 200) {
@@ -95,8 +97,12 @@ function Subject_teacher() {
             }
             navigate('/create_test_teacher')
         } catch (error) {
-            console.error('There was an error creating the exam!', error.response.data);
-            // แสดงข้อผิดพลาดให้ผู้ใช้ทราบ
+            if (error.response && error.response.status === 400) {
+                // Set errors from API response
+                setErrors(error.response.data);
+            } else {
+                console.error("There was an error creating the exam!", error);
+            }
         }
 
     };
@@ -138,21 +144,60 @@ function Subject_teacher() {
 
                             <div className="main_right_box_subject_test_container">
 
-                                <div className="main_right_box_subject_test_box">
-                                    <FontAwesomeIcon icon={faBook} className="icon_book" />
-                                    <h3>รายวิชาของคุณยังไม่มีข้อสอบ</h3>
-                                </div>
                                 {exams.length > 0 ? (
                                     exams.map((exam) => (
-                                        <li key={exam.id}>
-                                            <h4>{exam.title}</h4>
-                                            <p>{exam.description}</p>
-                                            <p>วันครบกำหนด: {exam.due_date}</p>
-                                            <p>คะแนน: {exam.score}</p>
-                                        </li>
+                                        <Link to="/create_test_teacher" className="main_right_subject_result_container" key={exam.id}>
+                                            <div className="main_right_box_subject_teacher">
+                                                <div className="main_right_box_subject_main">
+                                                    <div className="main_right_box_subject_main_box">
+                                                        <div className="main_right_box_subject_main_box_left">
+                                                            <div className="main_right_box_subject_main_box_left_head">
+                                                                <div className="main_right_box_subject_main_box_left_head_circle"></div>
+                                                            </div>
+                                                            <i className="fa-regular fa-face-smile"></i>
+                                                        </div>
+                                                        <div className="main_right_box_subject_main_box_right">
+                                                            <div className="main_right_box_subject_main_box_right_head">
+                                                                Teacher
+                                                            </div>
+                                                            <div className="main_right_box_subject_main_box_right_main">
+
+                                                                <div className="main_right_box_subject_main_box_right_main_head_teacher">
+                                                                    <h3>{exam.title}</h3>
+                                                                    <p>วันครบกำหนด: {exam.due_date}</p>
+                                                                </div>
+                                                                <div className="main_right_box_subject_main_box_right_main_main">
+                                                                    <p>{exam.description}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div className="main_right_box_subject_main_box_right_tail_teacher">
+                                                                <div className="main_right_box_subject_main_box_right_tail_left_teacher">
+                                                                    <p>Add your reaction</p>
+                                                                </div>
+                                                                <div className="main_right_box_subject_main_box_right_tail_right_teacher">
+                                                                    <p>คะแนน: {exam.score}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                        // <h4>{exam.title}</h4>
+                                        // <p>{exam.description}</p>
+                                        // <p>วันครบกำหนด: {exam.due_date}</p>
+                                        // <p>คะแนน: {exam.score}</p>
+
                                     ))
                                 ) : (
-                                    <p>ไม่พบข้อสอบสำหรับวิชานี้</p> // ถ้าไม่มีข้อมูลข้อสอบ
+                                    <div className="main_right_subject_result_container_no">
+                                        <div className="main_right_box_subject_test_box">
+                                            <FontAwesomeIcon icon={faBook} className="icon_book" />
+                                            <h3>รายวิชาของคุณยังไม่มีข้อสอบ</h3>
+                                        </div>
+                                    </div>
+
+                                    // <p>ไม่พบข้อสอบสำหรับวิชานี้</p> // ถ้าไม่มีข้อมูลข้อสอบ
                                 )}
                             </div>
                         </div>
@@ -196,6 +241,11 @@ function Subject_teacher() {
                                                 name="name"
                                                 onChange={(e) => setDescription(e.target.value)}
                                             />
+                                            {errors.description && (
+                                                <span style={{ color: 'red !important' }}>
+                                                    {errors.description.join(', ')}
+                                                </span>
+                                            )}
                                             {/* {{ form.name }} */}
                                         </div>
                                         <div className="popup_box_top_right_input_name">
@@ -204,6 +254,7 @@ function Subject_teacher() {
                                                 name="name"
                                                 onChange={(e) => setDue_date(e.target.value)}
                                             />
+                                            {errors.due_date && <span>{errors.due_date.join(', ')}</span>}
                                             {/* {{ form.name }} */}
                                         </div>
                                         <div className="popup_box_top_right_input_name">
@@ -212,6 +263,7 @@ function Subject_teacher() {
                                                 name="name"
                                                 onChange={(e) => setScore(e.target.value)}
                                             />
+                                            {errors.score && <span>{errors.score.join(', ')}</span>}
                                             {/* {{ form.name }} */}
                                         </div>
                                     </div>
