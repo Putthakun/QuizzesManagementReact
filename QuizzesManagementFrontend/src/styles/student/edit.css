@@ -31,14 +31,40 @@
     border-radius: 10px;
 }
 
-label {
+.input-text label {
     display: block;
     margin-bottom: 8px;
     font-weight: bold;
     color: #555;
 }
 
-input[type="text"] {
+.student-id-text{
+    display: block;
+    margin-bottom: 22px;
+    font-weight: bold;
+    color: #555;
+}
+.student-id-number label{
+    display: block;
+    margin-bottom: 10px;
+    font-weight: inherit;
+    color: #ff0000;
+}
+
+.line{
+    margin-bottom: 22px;
+}
+
+.input-text input[type="text"] {
+    width: 500px;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input-text input[type="text"] {
     width: 500px;
     padding: 10px;
     margin-bottom: 20px;

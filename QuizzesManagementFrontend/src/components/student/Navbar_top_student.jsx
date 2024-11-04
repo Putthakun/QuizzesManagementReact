@@ -7,8 +7,9 @@ function Navbar_top_student() {
   const firstname = sessionStorage.getItem('firstname') || '';
   const lastname = sessionStorage.getItem('lastname') || '';
   const userType = sessionStorage.getItem('user_type') || '';
+  
 
-  console.log(user_id, firstname, lastname); // ตรวจสอบค่าที่ดึงมา
+  //console.log(user_id, firstname, lastname); // ตรวจสอบค่าที่ดึงมา
   const navigate = useNavigate();
 
   useEffect(() => {

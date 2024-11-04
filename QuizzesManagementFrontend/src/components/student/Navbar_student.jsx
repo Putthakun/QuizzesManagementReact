@@ -30,7 +30,7 @@ export default function Navbar_student() {
             </div>
             <div className="left_tail">
                 <div className="left_main_tail">
-                    <Link to='/profil_student' className='mune'><FontAwesomeIcon icon={faFaceSmile} className='icon_menu' />Profile</Link>
+                    <Link to='/profile_student/' className='mune'><FontAwesomeIcon icon={faFaceSmile} className='icon_menu' />Profile</Link>
                     <button onClick={handleLogout} className='mune'><FontAwesomeIcon icon={faArrowRightFromBracket} className='icon_menu' />Logout</button>
                 </div>
             </div>
