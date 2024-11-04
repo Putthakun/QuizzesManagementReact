@@ -1,13 +1,14 @@
 .main_home_right_test{
     width: 85%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
     /* background-color: antiquewhite; */
 }
 .main_right_test_teacher{
-    height: auto;
     /* background-color: aqua; */
     display: flex;
     justify-content: center;
-    align-items: center;
     overflow: auto;
 }
 .main_right_test_teacher_container{
