@@ -62,7 +62,7 @@ function Create_test_teacher() {
         <div>
             <div className="main_home">
                 <Navbar_teacher/>
-                <div className="main_home_right">
+                <div className="main_home_right_test">
                     <div className="main_home_right_top">
                         <Navbar_top_teacher/>
                     </div>

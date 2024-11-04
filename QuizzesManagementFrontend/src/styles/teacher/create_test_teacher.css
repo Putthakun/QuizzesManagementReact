@@ -1,9 +1,13 @@
+.main_home_right_test{
+    width: 100%;
+    /* background-color: antiquewhite; */
+}
 .main_right_test_teacher{
     height: auto;
     /* background-color: aqua; */
     display: flex;
+    justify-content: center;
     align-items: center;
-    flex-direction: column;
     overflow: auto;
 }
 .main_right_test_teacher_container{
