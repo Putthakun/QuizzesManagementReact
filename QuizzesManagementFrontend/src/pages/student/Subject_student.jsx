@@ -1,7 +1,7 @@
 import Navbar_student from "../../components/student/Navbar_student";
 import Navbar_top_student from "../../components/student/Navbar_top_student";
 import '../../styles/student/subject.css';
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 function Subject_student() {
     
