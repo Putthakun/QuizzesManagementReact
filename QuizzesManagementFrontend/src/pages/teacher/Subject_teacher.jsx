@@ -34,15 +34,6 @@ function Subject_teacher() {
         setModal(!modal)
     }
 
-    // const toggleSuccessModal = () => {
-    //     Swal.fire({
-    //         icon: "success",
-    //         title: "Your work has been saved",
-    //         showConfirmButton: false,
-    //         timer: 2500
-    //       });
-    //     // setShowSuccessModal(!showSuccessModal);
-    // };
     useEffect(() => {
         const fetchSubjectDetails = async () => {
             console.log("วิชา ID:", id);
@@ -82,7 +73,10 @@ function Subject_teacher() {
             score: parseInt(score, 10)  // แปลงคะแนนเป็นตัวเลข
         };
 
+        console.log(id);
+
         try {
+            
             const response = await axios.post('http://localhost:8000/api/exams/', examData, {
                 headers: {
                     'Content-Type': 'application/json',
