@@ -76,6 +76,8 @@ function Subject_teacher() {
         };
     
         console.log(id);
+        console.log(examData);
+
     
         try {
             // แสดงการแจ้งเตือนเพื่อยืนยันการส่งข้อมูล
@@ -94,10 +96,13 @@ function Subject_teacher() {
                         'Content-Type': 'application/json',
                     },
                 });
+
                 toggleModal(); // ปิด modal
                 console.log('Exam created successfully:', response.data);
                 setErrors({}); // Clear errors if successful
-    
+
+                const createdExamId = response.data.id;  // id ที่ส่งกลับมาจาก Django
+                console.log('Exam created with ID:', createdExamId);        
                 // แสดงแจ้งเตือนว่าการสร้าง exam สำเร็จแล้ว
                 await Swal.fire({
                     icon: 'success',
@@ -114,11 +119,13 @@ function Subject_teacher() {
                 } else {
                     throw new Error('Failed to fetch exams');
                 }
-                navigate('/create_test_teacher'); // นำทางไปยังหน้าสร้างข้อสอบ
+                navigate(`/create_test_teacher/${createdExamId}`); // นำทางไปยังหน้าสร้างข้อสอบ
             }
         } catch (error) {
-            if (error.response && error.response.status === 400) {
-                // Set errors from API response
+            if (error.response) {
+                console.error("Error response data:", error.response.data);
+                console.error("Error response status:", error.response.status);
+                console.error("Error response headers:", error.response.headers);
                 setErrors(error.response.data);
             } else {
                 console.error("There was an error creating the exam!", error);
@@ -202,11 +209,6 @@ function Subject_teacher() {
                                                 </div>
                                             </div>
                                         </Link>
-                                        // <h4>{exam.title}</h4>
-                                        // <p>{exam.description}</p>
-                                        // <p>วันครบกำหนด: {exam.due_date}</p>
-                                        // <p>คะแนน: {exam.score}</p>
-
                                     ))
                                 ) : (
                                     <div className="main_right_subject_result_container_no">
