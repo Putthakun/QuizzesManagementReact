@@ -21,6 +21,7 @@ function Subject_student() {
     const { id } = useParams();
     const [exams, setExams] = useState([]);
     const [modal_result, setModal_result] = useState(false);
+    const [selectedExam, setSelectedExam] = useState(null); // State to store selected exam
 
     useEffect(() => {
         const fetchSubjectDetails = async () => {
@@ -57,10 +58,11 @@ function Subject_student() {
         
     }
 
-    const toggleModal_result = () => {
-        console.log("Toggling modal result");
-        setModal_result(!modal_result)
-    }
+    const toggleModal_result = (exam) => {
+        setSelectedExam(exam); // Set the selected exam
+        console.log(selectedExam)
+        setModal_result(!modal_result);
+    };
 
     return (
         <div>
@@ -103,7 +105,7 @@ function Subject_student() {
                                                             <div className="main_right_box_subject_main_box_right">
                                                                 <div className="main_right_box_subject_main_box_right_head">
                                                                     <p>Teacher</p>
-                                                                    <button className="btn-result" onClick={toggleModal_result}>Result</button>
+                                                                    <button className="btn-result" onClick={() => toggleModal_result(exam)}>Result</button>
                                                                 </div>
                                                                 <div className="main_right_box_subject_main_box_right_main">
                                                                     
@@ -197,6 +199,9 @@ function Subject_student() {
                                     </div>
                                     <div className="main_right_box_take_test_main_tail">
                                         <div className="main_right_box_take_test_main_tail_box">
+                                            <button onClick={toggleModal} className="cancle">Cancle</button>
+                                        </div>
+                                        <div className="main_right_box_take_test_main_tail_box">
                                             <button onClick={handleTakeTestClick}>Take Test</button>
                                         </div>
                                     </div>
@@ -207,26 +212,27 @@ function Subject_student() {
                 </div>
             )}
 
-            { modal_result && (
+            { modal_result && selectedExam && (
                 <div className="popup_container_subject_student_result">
                 <div className="popup_container_box_subject_student_result">
                     <div className="popup_box_subject_student_result">
                         <div className="popup_box_left">
                             <div className="popup_box_left_circle"></div>
                         </div>
-                        <div className="popup_box_right_result">
+                        
+                        <div className="popup_box_right_result" >
                             <div className="popup_box_right_head_result">
                                 <div className="popup_box_right_head_top_result">
                                     <div className="popup_box_right_head_top_top_result">
-                                        <p>Math</p>
+                                        <p>{selectedExam.title}</p>
                                     </div>
                                     <div className="popup_box_right_head_top_tail_result">
-                                        <p>Calculus 2 Pre Test - Yay</p>
+                                        <p>{selectedExam.description}</p>
                                     </div>
                                 </div>
                                 <div className="popup_box_right_head_tail_result">
                                     <div className="popup_box_right_head_tail_left_result">
-                                        <p>Finished  Oct 17, 2024    •   9:51 PM</p>
+                                        <p>วันครบกำหนด: {selectedExam.due_date}</p>
                                     </div>
                                     <div className="popup_box_right_head_tail_right_result">
                                         <div className="popup_box_right_head_tail_right_correct_result">
@@ -311,6 +317,7 @@ function Subject_student() {
                                 </button>
                             </div>
                         </div>
+
                     </div>
                 </div>
         

@@ -181,13 +181,18 @@
     justify-content: center;
     align-items: center;
 }
-.main_right_box_take_test_main_tail_box a{
-    padding: 10px 25px 10px 25px;
+.main_right_box_take_test_main_tail_box .cancle{
+    background-color: #71808C;
+    margin-right: 15px;
+}   
+.main_right_box_take_test_main_tail_box button{
+    padding: 5px 15px 5px 15px;
     background-color: #447BF7;
     border-radius: 15px;
     color: white;
     cursor: pointer;
     text-decoration: none;
+    
 }
 .main_right_box_subject_main_box_right_tail_right_student{
     display: flex;
@@ -308,7 +313,7 @@
 .popup_box_right_head_top_top_result{
     display: flex;
     justify-content: flex-start;
-    align-items: baseline;
+    align-items: last baseline;
     height: 50%;
     /* background-color: rgb(70, 76, 203); */
 }
