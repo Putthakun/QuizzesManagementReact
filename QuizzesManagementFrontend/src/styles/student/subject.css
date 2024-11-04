@@ -51,9 +51,10 @@
     /* background-color: violet; */
     border: 1px solid black;
     border-radius: 12.5px;
-    width: 90%;
+    width: 75%;
     height: 80%;
     display: flex;
+    margin-bottom: 20px;
 }
 .main_right_box_subject_main_box_left{
     margin: 15px;
@@ -101,15 +102,17 @@
 }
 .main_right_box_subject_main_box_right_main{
     height: 60%;
+    margin-top: 20px;
     /* background-color:beige; */
+    border-bottom: 1px solid #71808C;
 }
 .main_right_box_subject_main_box_right_tail{
+    margin-top: 20px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    /* background-color: aquamarine; */
-    border-top: 1px solid #71808C;
+    background-color: aquamarine;
 }
 .main_right_box_subject_main_box_right_tail_left{
     width: 25%;
