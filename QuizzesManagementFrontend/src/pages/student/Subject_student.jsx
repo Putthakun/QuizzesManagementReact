@@ -1,39 +1,37 @@
 import Navbar_student from "../../components/student/Navbar_student";
 import '../../styles/student/subject.css';
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Navbar_top_student from "../../components/student/Navbar_top_student";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleCheck, faBook, faCircleXmark
-} from '@fortawesome/free-solid-svg-icons'
-import { useParams } from 'react-router-dom';
+} from '@fortawesome/free-solid-svg-icons';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
-// import { useState } from "react";
-
 function Subject_student() {
 
-
+    const navigate = useNavigate();
     const [modal, setModal] = useState(false);
     const [subjects, setSubject] = useState([]);
     const [error, setError] = useState('');
     const { id } = useParams();
     const [exams, setExams] = useState([]);
     const [modal_result, setModal_result] = useState(false);
-    const [selectedExam, setSelectedExam] = useState(null); // State to store selected exam
+    const [selectedExam, setSelectedExam] = useState(null);
+    const [examResults, setExamResults] = useState(null); // State to store fetched results
 
     useEffect(() => {
         const fetchSubjectDetails = async () => {
-            console.log("วิชา ID:", id);
+            console.log("Subject ID:", id);
             try {
-                const response = await axios.get(`http://localhost:8000/api/subjects/code/${id}/`); // ใช้ `code` ของ subject แทน `id`
+                const response = await axios.get(`http://localhost:8000/api/subjects/code/${id}/`);
                 setSubject(response.data);
                 console.log(response.data);
-                setError(''); // ล้างข้อผิดพลาดเมื่อดึงข้อมูลสำเร็จ
+                setError('');
 
-                // ดึงข้อมูลข้อสอบโดยใช้รหัสวิชา
-                console.log('subject code', id);
+                // Fetch exams for the subject
                 const examResponse = await axios.get(`http://localhost:8000/api/listexams/${id}/`);
                 if (examResponse.status === 200) {
                     setExams(examResponse.data);
@@ -43,25 +41,34 @@ function Subject_student() {
                 }
 
             } catch (error) {
-                setError('An error occurred while fetching subject details.'); // ตั้งค่า error
+                setError('An error occurred while fetching subject details.');
             }
         };
 
-        fetchSubjectDetails(); // เรียกใช้งานฟังก์ชัน
+        fetchSubjectDetails();
     }, [id]);
 
     const toggleModal = () => {
-        setModal(!modal)
+        setModal(!modal);
     }
 
-    const handleTakeTestClick = () => {
-        
+    const handleTakeTestClick = (examId) => {
+        navigate(`/subject_student/${id}/ans_student/${examId}`);
     }
 
-    const toggleModal_result = (exam) => {
-        setSelectedExam(exam); // Set the selected exam
-        console.log(selectedExam)
+    const toggleModal_result = async (exam) => {
+        setSelectedExam(exam);
         setModal_result(!modal_result);
+
+        // Fetch exam results
+        try {
+            const response = await axios.get(`http://127.0.0.1:8000/api/exams/${exam.id}/results/`);
+            setExamResults(response.data.results); // Set the fetched results
+            console.log("Fetched results:", response.data);
+        } catch (error) {
+            console.error("Error fetching exam results:", error);
+            setExamResults([]); // Reset if error occurs
+        }
     };
 
     return (
@@ -78,76 +85,64 @@ function Subject_student() {
                             <div className="main_right_teacher_subject_top">
                                 <div className="main_right_teacher_subject_top_circle"></div>
                                 <div className="main_right_teacher_subject_top_name">
-
                                     {subjects.map(subject => (
-                                        <div key={subject.code}> {/* ใช้ `subject.code` เป็น key หรืออาจจะใช้ `subject.id` ถ้ามี */}
-                                            <h3>{subject.code} {subject.name}</h3> {/* แสดงชื่อวิชา */}
-                                            <p>{subject.teacher ? subject.teacher.split(' - ')[0] : "Unknown Teacher"}</p> {/* แสดงชื่ออาจารย์ */}
+                                        <div key={subject.code}>
+                                            <h3>{subject.code} {subject.name}</h3>
+                                            <p>{subject.teacher ? subject.teacher.split(' - ')[0] : "Unknown Teacher"}</p>
                                         </div>
                                     ))}
                                 </div>
                             </div>
 
-                            <div className="main_right_box_subject_test_container">                  
-                                
+                            <div className="main_right_box_subject_test_container">
                                 {exams.length > 0 ? (
                                     exams.map((exam) => (
-                                            <div className="main_right_subject_result_container" key={exam.id}>
-                                                <div className="main_right_box_subject_teacher">
-                                                    <div className="main_right_box_subject_main">
-                                                        <div className="main_right_box_subject_main_box">
-                                                            <div className="main_right_box_subject_main_box_left">
-                                                                <div className="main_right_box_subject_main_box_left_head">
-                                                                    <div className="main_right_box_subject_main_box_left_head_circle"></div>
-                                                                </div>
-                                                                <i className="fa-regular fa-face-smile"></i>
+                                        <div className="main_right_subject_result_container" key={exam.id}>
+                                            <div className="main_right_box_subject_teacher">
+                                                <div className="main_right_box_subject_main">
+                                                    <div className="main_right_box_subject_main_box">
+                                                        <div className="main_right_box_subject_main_box_left">
+                                                            <div className="main_right_box_subject_main_box_left_head">
+                                                                <div className="main_right_box_subject_main_box_left_head_circle"></div>
                                                             </div>
-                                                            <div className="main_right_box_subject_main_box_right">
-                                                                <div className="main_right_box_subject_main_box_right_head">
-                                                                    <p>Teacher</p>
-                                                                    <button className="btn-result" onClick={() => toggleModal_result(exam)}>Result</button>
+                                                            <i className="fa-regular fa-face-smile"></i>
+                                                        </div>
+                                                        <div className="main_right_box_subject_main_box_right">
+                                                            <div className="main_right_box_subject_main_box_right_head">
+                                                                <p>Teacher</p>
+                                                                <button className="btn-result" onClick={() => toggleModal_result(exam)}>Result</button>
+                                                            </div>
+                                                            <div className="main_right_box_subject_main_box_right_main">
+                                                                <div className="main_right_box_subject_main_box_right_main_head_teacher">
+                                                                    <h3>{exam.title}</h3>
+                                                                    <p>Due Date: {exam.due_date}</p>
                                                                 </div>
-                                                                <div className="main_right_box_subject_main_box_right_main">
-                                                                    
-                                                                    <div className="main_right_box_subject_main_box_right_main_head_teacher">
-                                                                        <h3>{exam.title}</h3>
-                                                                        <p>วันครบกำหนด: {exam.due_date}</p>
-                                                                    </div>
-                                                                    <div className="main_right_box_subject_main_box_right_main_main">
-                                                                        <p>{exam.description}</p>
-                                                                    </div>
+                                                                <div className="main_right_box_subject_main_box_right_main_main">
+                                                                    <p>{exam.description}</p>
                                                                 </div>
-                                                                <div className="main_right_box_subject_main_box_right_tail_teacher">
-                                                                    <div className="main_right_box_subject_main_box_right_tail_left_teacher">
-                                                                        <p>Add your reaction</p>
-                                                                    </div>
-                                                                    <div className="main_right_box_subject_main_box_right_tail_right_student">
-                                                                        <p>คะแนน: {exam.score}</p>
-                                                                        <button onClick={toggleModal}>
-                                                                            Take Test
-                                                                        </button>
-                                                                    </div>
+                                                            </div>
+                                                            <div className="main_right_box_subject_main_box_right_tail_teacher">
+                                                                <div className="main_right_box_subject_main_box_right_tail_left_teacher">
+                                                                    <p>Add your reaction</p>
+                                                                </div>
+                                                                <div className="main_right_box_subject_main_box_right_tail_right_student">
+                                                                    <p>Score: {exam.score}</p>
+                                                                    <button onClick={() => handleTakeTestClick(exam.id)}>Take Test</button>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                            // <h4>{exam.title}</h4>
-                                            // <p>{exam.description}</p>
-                                            // <p>วันครบกำหนด: {exam.due_date}</p>
-                                            // <p>คะแนน: {exam.score}</p>
-                                        
+                                        </div>
                                     ))
                                 ) : (
                                     <div className="main_right_subject_result_container_no">
                                         <div className="main_right_box_subject_test_box">
                                             <FontAwesomeIcon icon={faBook} className="icon_book" />
-                                            <h3>รายวิชาของคุณยังไม่มีข้อสอบ</h3>
+                                            <h3>No exams available for this subject.</h3>
                                         </div>
                                     </div>
-                                    
-                                    // <p>ไม่พบข้อสอบสำหรับวิชานี้</p> // ถ้าไม่มีข้อมูลข้อสอบ
                                 )}
                             </div>
                         </div>
@@ -165,45 +160,28 @@ function Subject_student() {
                             <div className="main_right_box_take_test">
                                 <div className="main_right_box_take_test_main">
                                     <div className="main_right_box_take_test_main_head">
-                                        <div className="main_right_box_take_test_main_head_left">
-
-                                        </div>
+                                        <div className="main_right_box_take_test_main_head_left"></div>
                                         <div className="main_right_box_take_test_main_head_right">
                                             <div className="main_right_box_take_test_main_head_right_top">
                                                 <p>Maths</p>
                                             </div>
                                             <div className="main_right_box_take_test_main_head_right_bottom">
-                                                <p>Calculus 2  Pre Test - Yay</p><p>100 scores</p>
+                                                <p>Calculus 2 Pre Test - Yay</p><p>100 scores</p>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="main_right_box_take_test_main_box">
-                                        <p>กฎการทำข้อสอบ</p>
-                                        
-                                        <p>1.ห้าม....</p>
-                                        <p>2.ไม่อนุญาต</p>
-                                        <p>3.ถ้าหาก</p>
-                                        <p>4.ไม่ควร</p>
-                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
-                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
-                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
-                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
-                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
-                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
-                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
-                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
-                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
-                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
-                                        <p>ทั้งนี้ห้ามทุกอย่าง หยอก</p>
-
+                                        <p>Test rules</p>
+                                        <p>1. No cheating.</p>
+                                        <p>2. No electronic devices allowed.</p>
+                                        <p>3. If caught, you'll be disqualified.</p>
+                                        <p>4. Please finish within the time limit.</p>
                                     </div>
                                     <div className="main_right_box_take_test_main_tail">
                                         <div className="main_right_box_take_test_main_tail_box">
-                                            <button onClick={toggleModal} className="cancle">Cancle</button>
+                                            <button onClick={toggleModal} className="cancle">Cancel</button>
                                         </div>
-                                        <div className="main_right_box_take_test_main_tail_box">
-                                            <button onClick={handleTakeTestClick}>Take Test</button>
-                                        </div>
+                                        <div className="main_right_box_take_test_main_tail_box"></div>
                                     </div>
                                 </div>
                             </div>
@@ -212,7 +190,7 @@ function Subject_student() {
                 </div>
             )}
 
-            { modal_result && selectedExam && (
+{ modal_result && selectedExam && (
                 <div className="popup_container_subject_student_result">
                 <div className="popup_container_box_subject_student_result">
                     <div className="popup_box_subject_student_result">
@@ -254,6 +232,17 @@ function Subject_student() {
                                     </div>
                                 </div>
                             </div>
+                            {Array.isArray(examResults) && examResults.length > 0 ? (
+                            examResults.map((result, index) => (
+                                <div key={index} className="result_item">
+                                    <p>Question: {result.question}</p>
+                                    <p>Selected choice: {result.selected_choice}</p>
+                                    <p>Is correct: {result.is_correct ? 'Yes' : 'No'}</p>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No results available.</p>
+                        )}
                             <div className="popup_box_right_main_result">
                                 <div className="popup_box_right_main_box_result">
                                     <div className="popup_box_right_main_box_top_result">
@@ -262,7 +251,7 @@ function Subject_student() {
                                         </div>
                                     </div>
                                     <div className="popup_box_right_main_box_tail_result">
-                                        <p>1 + 1 = ?</p>
+                                        <p>{result.question}</p>
                                     </div>
                                 </div>
         
@@ -323,9 +312,8 @@ function Subject_student() {
         
             </div>
             )}
-
         </div>
-    )
+    );
 }
 
-export default Subject_student
+export default Subject_student;
