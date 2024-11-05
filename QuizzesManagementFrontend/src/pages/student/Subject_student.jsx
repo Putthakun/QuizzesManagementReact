@@ -212,24 +212,6 @@ function Subject_student() {
                                         <div className="popup_box_right_head_tail_left_result">
                                             <p>วันครบกำหนด: {selectedExam.due_date}</p>
                                         </div>
-                                        <div className="popup_box_right_head_tail_right_result">
-                                            <div className="popup_box_right_head_tail_right_correct_result">
-                                                <p>จำนวนข้อที่ถูก</p>
-                                                <p className="cor">Correct</p>
-                                                <p className="score">10/20</p>
-                                            </div>
-                                            <div className="popup_box_right_head_tail_right_correct_result">
-                                                <p>จำนวนข้อที่ถูก</p>
-                                                <p className="incor">Incorrect</p>
-                                                <p className="score">10/20</p>
-                                            </div>
-                                            <div className="popup_box_right_head_tail_right_correct_result">
-                                                <p>จำนวนข้อที่ถูก</p>
-                                                <p className="ans">Answered</p>
-                                                <p className="score">10/20</p>
-                                            </div>
-
-                                        </div>
                                     </div>
                                 </div>
                                 <div className="popup_box_right_main_result">

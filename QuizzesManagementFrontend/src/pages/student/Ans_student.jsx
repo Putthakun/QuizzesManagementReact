@@ -87,22 +87,6 @@ function Ans_student() {
                     </div>
                     <div className="main_right_ans2">
                         <div className="main_right_box_ans">
-                            <div className="main_right_multi_head">
-                                <div className="main_right_multi_head_box_left">
-                                    <div className="main_right_multi_head_left"></div>
-                                    <div className="main_right_multi_head_right">
-                                        <div className="main_right_multi_head_right_top">
-                                            <p>Maths</p>
-                                        </div>
-                                        <div className="main_right_multi_head_right_bottom">
-                                            <p>Calculus 2  Pre Test - Yay</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="main_right_multi_head_box_right">
-                                    <p>เวลาที่เหลือ</p><p>04:23/180:00</p>
-                                </div>
-                            </div>
 
                             {/* Map questions dynamically */}
                             {questions.map((question, index) => (
