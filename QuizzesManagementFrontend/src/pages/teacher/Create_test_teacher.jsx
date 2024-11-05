@@ -1,18 +1,22 @@
-import Navbar_top_teacher from "../../components/teacher/Navbar_top_teacher"
-import Navbar_teacher from "../../components/teacher/Navbar_teacher"
-import "../../styles/teacher/create_test_teacher.css"
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircleQuestion, faTrashCan } from '@fortawesome/free-solid-svg-icons'
-import { useState } from "react"
+import Navbar_top_teacher from "../../components/teacher/Navbar_top_teacher";
+import Navbar_teacher from "../../components/teacher/Navbar_teacher";
+import "../../styles/teacher/create_test_teacher.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCircleQuestion, faTrashCan } from '@fortawesome/free-solid-svg-icons';
+import { useState, useEffect } from "react";
 import Swal from 'sweetalert2';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 function Create_test_teacher() {
-    const { examId } = useParams();
+
+    const navigate = useNavigate();
+    const { id, examId } = useParams();
     const [data, setData] = useState([{ question_text: "", points: 1, order: 1, choices: [{ choice_text: "", is_correct: false }] }]);
     const [subject, setSubject] = useState('');
     const [nametest, setNametest] = useState('');
+
+    console.log('exam in create test', examId);
 
     // เพิ่มคำถามใหม่
     const addQuestion = () => {
@@ -39,6 +43,10 @@ function Create_test_teacher() {
         setData(updatedData);
     };
 
+    const handelDeleteAll = () => {
+        setData([]);
+    };
+
     // อัปเดตข้อมูลคำถามเมื่อมีการเปลี่ยนแปลง
     const handleQuestionChange = (index, field, value) => {
         const newData = [...data];
@@ -56,7 +64,7 @@ function Create_test_teacher() {
     // ส่งข้อมูลไปยัง backend
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         Swal.fire({
             title: 'Are you sure?',
             text: "Do you want to submit this form?",
@@ -69,18 +77,18 @@ function Create_test_teacher() {
             if (result.isConfirmed) {
                 // สร้าง quizData ตามรูปแบบที่ API คาดหวัง
                 const quizData = data.map((question, index) => ({
-                    exam_id: examId, // ตรวจสอบให้แน่ใจว่า examId ถูกต้อง
-                    question_text: question.question_text, // ต้องมี field นี้ใน data
+                    exam_id: examId,
+                    question_text: question.question_text,
                     points: question.points,
-                    order: index + 1, // หรือคุณอาจใช้ค่าที่ผู้ใช้กรอกมา
+                    order: index + 1,
                     choices: question.choices.map((choice) => ({
-                        choice_text: choice.choice_text, // ตรวจสอบให้แน่ใจว่ามี field นี้ใน data
-                        is_correct: choice.is_correct // ตรวจสอบให้แน่ใจว่ามี field นี้ใน data
+                        choice_text: choice.choice_text,
+                        is_correct: choice.is_correct
                     }))
                 }));
-    
+
                 console.log("Submitting Data: ", quizData);
-    
+
                 // ส่งข้อมูลไปยัง backend
                 axios.post('http://localhost:8000/api/questionCreateView/', quizData)
                     .then(response => {
@@ -89,6 +97,8 @@ function Create_test_teacher() {
                             title: 'Success!',
                             text: 'คุณสร้างข้อสอบสำเร็จแล้ว!',
                             confirmButtonText: 'OK'
+                        }).then(() => {
+                            navigate(`/subject_teacher/${id}`);
                         });
                     })
                     .catch(error => {
@@ -124,7 +134,7 @@ function Create_test_teacher() {
                                 <button className="btn_create_test" onClick={addQuestion}>
                                     Add Question
                                 </button>
-                                <button className="btn_create_test_delete" onClick={addQuestion}>
+                                <button className="btn_create_test_delete" onClick={handelDeleteAll}>
                                     Delete All
                                 </button>
                             </div>
