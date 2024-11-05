@@ -10,6 +10,9 @@ import Update_test_teacher from './pages/teacher/update_test_teacher';
 import Take_test_student from './pages/student/Take_test_student';
 import Profile_student from './pages/student/Profile_student';
 import Ans_student from './pages/student/Ans_student';
+import Dashboard from './pages/teacher/Dashboard';
+import Profile_teacher from './pages/teacher/Profile_teacher';
+
 
 function App() {
 
@@ -28,6 +31,8 @@ function App() {
         <Route path="/take_test_student" element={<Take_test_student />} />
         <Route path="/profile_student/" element={<Profile_student />} />
         <Route path="/subject_student/:subjectCode/ans_student/:examId" element={<Ans_student />} />
+        <Route path="/profile_teacher/" element={<Profile_teacher />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );

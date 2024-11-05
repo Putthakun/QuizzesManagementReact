@@ -90,7 +90,7 @@ export default function Home_student() {
                                 onClick={() => handleSubjectClick(subject.code)}
                                 style={{ cursor: 'pointer' }}
                             >
-                                <div>
+                                <div className="main_right_student_box_head">
                                     <p className="mr-4">{subject.code}</p>
                                     <p className="mr-4">{subject.name}</p>
                                 </div>

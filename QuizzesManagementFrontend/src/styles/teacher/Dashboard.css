@@ -1,0 +1,22 @@
+.main_right_dashboard{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: auto;
+}
+
+.main_right_text_dashboard{
+    width: 80%;
+    color: #447BF7;
+    margin: 40px 0px 0px 30px;
+    /* background-color: aquamarine; */
+}
+
+.main_right_text_dashboard h2{
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+

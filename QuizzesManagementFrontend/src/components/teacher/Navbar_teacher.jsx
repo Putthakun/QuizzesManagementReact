@@ -29,11 +29,12 @@ export default function Navbar() {
                     <Link to='/home_teacher' className='mune'><FontAwesomeIcon icon={faHouse} className='icon_menu'/>Home</Link>
                     <Link to='/create_test_teacher' className='mune'><FontAwesomeIcon icon={faFile} className='icon_menu'/>Create Test Set</Link>
                     <Link to='/#' className='mune'><FontAwesomeIcon icon={faFilePen} className='icon_menu'/>Practice</Link>
+                    <Link to='/dashboard' className='mune'><FontAwesomeIcon icon={faSquarePollVertical} className='icon_menu'/>Dashboard</Link>
                 </div>
             </div>
             <div className="left_tail">
                 <div className="left_main_tail">
-                    <Link to='/#' className='mune'><FontAwesomeIcon icon={faFaceSmile} className='icon_menu'/>Profile</Link>
+                    <Link to='/profile_teacher' className='mune'><FontAwesomeIcon icon={faFaceSmile} className='icon_menu'/>Profile</Link>
                     <button onClick={handleLogout} className='mune'><FontAwesomeIcon icon={faArrowRightFromBracket} className='icon_menu' />Logout</button>
                 </div>
             </div>
