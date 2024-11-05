@@ -190,127 +190,140 @@ function Subject_student() {
                 </div>
             )}
 
-{ modal_result && selectedExam && (
+            {modal_result && selectedExam && (
                 <div className="popup_container_subject_student_result">
-                <div className="popup_container_box_subject_student_result">
-                    <div className="popup_box_subject_student_result">
-                        <div className="popup_box_left">
-                            <div className="popup_box_left_circle"></div>
-                        </div>
-                        
-                        <div className="popup_box_right_result" >
-                            <div className="popup_box_right_head_result">
-                                <div className="popup_box_right_head_top_result">
-                                    <div className="popup_box_right_head_top_top_result">
-                                        <p>{selectedExam.title}</p>
-                                    </div>
-                                    <div className="popup_box_right_head_top_tail_result">
-                                        <p>{selectedExam.description}</p>
-                                    </div>
-                                </div>
-                                <div className="popup_box_right_head_tail_result">
-                                    <div className="popup_box_right_head_tail_left_result">
-                                        <p>วันครบกำหนด: {selectedExam.due_date}</p>
-                                    </div>
-                                    <div className="popup_box_right_head_tail_right_result">
-                                        <div className="popup_box_right_head_tail_right_correct_result">
-                                            <p>จำนวนข้อที่ถูก</p>
-                                            <p className="cor">Correct</p>
-                                            <p className="score">10/20</p>
-                                        </div>
-                                        <div className="popup_box_right_head_tail_right_correct_result">
-                                            <p>จำนวนข้อที่ถูก</p>
-                                            <p className="incor">Incorrect</p>
-                                            <p className="score">10/20</p>
-                                        </div>
-                                        <div className="popup_box_right_head_tail_right_correct_result">
-                                            <p>จำนวนข้อที่ถูก</p>
-                                            <p className="ans">Answered</p>
-                                            <p className="score">10/20</p>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
+                    <div className="popup_container_box_subject_student_result">
+                        <div className="popup_box_subject_student_result">
+                            <div className="popup_box_left">
+                                <div className="popup_box_left_circle"></div>
                             </div>
-                            {Array.isArray(examResults) && examResults.length > 0 ? (
-                            examResults.map((result, index) => (
-                                <div key={index} className="result_item">
-                                    <p>Question: {result.question}</p>
-                                    <p>Selected choice: {result.selected_choice}</p>
-                                    <p>Is correct: {result.is_correct ? 'Yes' : 'No'}</p>
-                                </div>
-                            ))
-                        ) : (
-                            <p>No results available.</p>
-                        )}
-                            <div className="popup_box_right_main_result">
-                                <div className="popup_box_right_main_box_result">
-                                    <div className="popup_box_right_main_box_top_result">
-                                        <div className="popup_box_right_main_box_top_left_result">
-                                            <p>Question 3 •</p><p><FontAwesomeIcon icon={faCircleCheck} className="true" /></p>
-                                        </div>
-                                    </div>
-                                    <div className="popup_box_right_main_box_tail_result">
-                                        <p>{result.question}</p>
-                                    </div>
-                                </div>
-        
-                                <div className="popup_box_right_main_box_result">
-                                    <div className="popup_box_right_main_box_top_result">
-                                        <div className="popup_box_right_main_box_top_left_result">
-                                            <p>Question 4 •</p><p><FontAwesomeIcon icon={faCircleCheck} className="true" /></p>
-                                        </div>
-                                    </div>
-                                    <div className="popup_box_right_main_box_tail_result">
-                                        <p>1 + 1 = ?</p>
-                                    </div>
-                                </div>
-        
-                                <div className="popup_box_right_main_box_result">
-                                    <div className="popup_box_right_main_box_top_result">
-                                        <div className="popup_box_right_main_box_top_left_result">
-                                            <p>Question 5 •</p><p><FontAwesomeIcon icon={faCircleXmark} className="false" /></p>
-                                        </div>
-                                    </div>
-                                    <div className="popup_box_right_main_box_tail_result">
-                                        <p>1 + 1 = ?</p>
-                                    </div>
-                                </div>
-        
-        
-                                <div className="popup_box_right_main_box_result">
-                                    <div className="popup_box_right_main_box_top_result">
-                                        <div className="popup_box_right_main_box_top_left_result">
-                                            <p>Question 6 •</p><p><FontAwesomeIcon icon={faCircleCheck} className="true" /></p>
-                                        </div>
-                                    </div>
-                                    <div className="popup_box_right_main_box_tail_result">
-                                        <p>1 + 1 = ?</p>
-                                    </div>
-                                </div>
-        
-                                <div className="popup_box_right_main_box_result">
-                                    <div className="popup_box_right_main_box_top_result">
-                                        <div className="popup_box_right_main_box_top_left_result">
-                                            <p>Question 7 •</p><p><FontAwesomeIcon icon={faCircleXmark} className="false" /></p>
-                                        </div>
-                                    </div>
-                                    <div className="popup_box_right_main_box_tail_result">
-                                        <p>1 + 1 = ?</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="popup_box_right_tail_result">
-                                <button className="popup_box_right_tail_btn" onClick={toggleModal_result}>
-                                    Done
-                                </button>
-                            </div>
-                        </div>
 
+                            <div className="popup_box_right_result" >
+                                <div className="popup_box_right_head_result">
+                                    <div className="popup_box_right_head_top_result">
+                                        <div className="popup_box_right_head_top_top_result">
+                                            <p>{selectedExam.title}</p>
+                                        </div>
+                                        <div className="popup_box_right_head_top_tail_result">
+                                            <p>{selectedExam.description}</p>
+                                        </div>
+                                    </div>
+                                    <div className="popup_box_right_head_tail_result">
+                                        <div className="popup_box_right_head_tail_left_result">
+                                            <p>วันครบกำหนด: {selectedExam.due_date}</p>
+                                        </div>
+                                        <div className="popup_box_right_head_tail_right_result">
+                                            <div className="popup_box_right_head_tail_right_correct_result">
+                                                <p>จำนวนข้อที่ถูก</p>
+                                                <p className="cor">Correct</p>
+                                                <p className="score">10/20</p>
+                                            </div>
+                                            <div className="popup_box_right_head_tail_right_correct_result">
+                                                <p>จำนวนข้อที่ถูก</p>
+                                                <p className="incor">Incorrect</p>
+                                                <p className="score">10/20</p>
+                                            </div>
+                                            <div className="popup_box_right_head_tail_right_correct_result">
+                                                <p>จำนวนข้อที่ถูก</p>
+                                                <p className="ans">Answered</p>
+                                                <p className="score">10/20</p>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="popup_box_right_main_result">
+                                    {Array.isArray(examResults) && examResults.length > 0 ? (
+                                        examResults.map((result, index) => (
+                                            <div key={index} className="result_item">
+                                                <div className="popup_box_right_main_box_result">
+                                                    <div className="popup_box_right_main_box_top_result">
+                                                        <div className="popup_box_right_main_box_top_left_result">
+                                                            <p>Question {index+1} •</p><p>{result.question}</p>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <div className="popup_box_right_main_box_tail_result">
+                                                        <p>Selected choice: {result.selected_choice}</p>
+                                                        <p>Is correct: {result.is_correct ? 'Yes' : 'No'}</p>
+                                                    </div>
+                                                </div>
+                                                {/* <p>Question: {result.question}</p> */}
+                                                
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <p>No results available.</p>
+                                    )}
+                                </div>
+                                {/* <div className="popup_box_right_main_result">
+                                    <div className="popup_box_right_main_box_result">
+                                        <div className="popup_box_right_main_box_top_result">
+                                            <div className="popup_box_right_main_box_top_left_result">
+                                                <p>Question 3 •</p><p><FontAwesomeIcon icon={faCircleCheck} className="true" /></p>
+                                            </div>
+                                        </div>
+                                        <div className="popup_box_right_main_box_tail_result">
+                                            <p>{result.question}</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="popup_box_right_main_box_result">
+                                        <div className="popup_box_right_main_box_top_result">
+                                            <div className="popup_box_right_main_box_top_left_result">
+                                                <p>Question 4 •</p><p><FontAwesomeIcon icon={faCircleCheck} className="true" /></p>
+                                            </div>
+                                        </div>
+                                        <div className="popup_box_right_main_box_tail_result">
+                                            <p>1 + 1 = ?</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="popup_box_right_main_box_result">
+                                        <div className="popup_box_right_main_box_top_result">
+                                            <div className="popup_box_right_main_box_top_left_result">
+                                                <p>Question 5 •</p><p><FontAwesomeIcon icon={faCircleXmark} className="false" /></p>
+                                            </div>
+                                        </div>
+                                        <div className="popup_box_right_main_box_tail_result">
+                                            <p>1 + 1 = ?</p>
+                                        </div>
+                                    </div>
+
+
+                                    <div className="popup_box_right_main_box_result">
+                                        <div className="popup_box_right_main_box_top_result">
+                                            <div className="popup_box_right_main_box_top_left_result">
+                                                <p>Question 6 •</p><p><FontAwesomeIcon icon={faCircleCheck} className="true" /></p>
+                                            </div>
+                                        </div>
+                                        <div className="popup_box_right_main_box_tail_result">
+                                            <p>1 + 1 = ?</p>
+                                        </div>
+                                    </div>
+
+                                    <div className="popup_box_right_main_box_result">
+                                        <div className="popup_box_right_main_box_top_result">
+                                            <div className="popup_box_right_main_box_top_left_result">
+                                                <p>Question 7 •</p><p><FontAwesomeIcon icon={faCircleXmark} className="false" /></p>
+                                            </div>
+                                        </div>
+                                        <div className="popup_box_right_main_box_tail_result">
+                                            <p>1 + 1 = ?</p>
+                                        </div>
+                                    </div>
+                                </div> */}
+                                <div className="popup_box_right_tail_result">
+                                    <button className="popup_box_right_tail_btn" onClick={toggleModal_result}>
+                                        Done
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
+
                 </div>
-        
-            </div>
             )}
         </div>
     );

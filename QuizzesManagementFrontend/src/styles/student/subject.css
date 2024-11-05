@@ -401,7 +401,7 @@
     justify-content: space-between;
 }
 .popup_box_right_main_box_top_left_result{
-    width: 33%;
+    width: 100%;
     display: flex;
     padding: 10px;
     /* background-color: #59B975; */

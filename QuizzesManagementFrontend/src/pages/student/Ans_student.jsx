@@ -10,11 +10,12 @@ import { useNavigate} from "react-router-dom";
 function Ans_student() {
 
     const navigate = useNavigate(); // สร้างฟังก์ชันนำทาง
-    const { examId } = useParams();
+    // const { examId } = useParams();
     const [questions, setQuestions] = useState([]);
     const [loading, setLoading] = useState(true);
     const [answers, setAnswers] = useState({}); // State สำหรับเก็บคำตอบที่นักเรียนเลือก
     const user_id = sessionStorage.getItem('user_id');
+    const { id, examId } = useParams();
 
     useEffect(() => {
         const fetchQuestions = async () => {
@@ -63,7 +64,7 @@ function Ans_student() {
                 text: "Your answers have been submitted!",
                 icon: "success",
             });
-            navigate(`/subject_student/${code}`)
+            navigate(`/subject_student/${id}`)
         } catch (error) {
             console.error("Error submitting answers:", error);
             Swal.fire({
