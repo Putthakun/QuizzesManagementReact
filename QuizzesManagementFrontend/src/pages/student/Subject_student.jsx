@@ -21,6 +21,15 @@ function Subject_student() {
     const [modal_result, setModal_result] = useState(false);
     const [selectedExam, setSelectedExam] = useState(null);
     const [examResults, setExamResults] = useState(null); // State to store fetched results
+    const correctAnswersCount = examResults && Array.isArray(examResults) 
+    ? examResults.filter(result => result.is_correct).length 
+    : 0;
+const incorrectAnswersCount = examResults && Array.isArray(examResults) 
+    ? examResults.filter(result => !result.is_correct).length 
+    : 0;
+const totalQuestions = examResults && Array.isArray(examResults) 
+    ? examResults.length 
+    : 0;
 
     useEffect(() => {
         const fetchSubjectDetails = async () => {
@@ -212,6 +221,24 @@ function Subject_student() {
                                         <div className="popup_box_right_head_tail_left_result">
                                             <p>วันครบกำหนด: {selectedExam.due_date}</p>
                                         </div>
+                                        <div className="popup_box_right_head_tail_right_result">
+                                            <div className="popup_box_right_head_tail_right_correct_result">
+                                                <p>จำนวนข้อที่ถูก</p>
+                                                <p className="cor">Correct</p>
+                                                <p className="score">{correctAnswersCount}</p>
+                                            </div>
+                                            <div className="popup_box_right_head_tail_right_correct_result">
+                                                <p>จำนวนข้อที่ถูก</p>
+                                                <p className="incor">Incorrect</p>
+                                                <p className="score">{incorrectAnswersCount}</p>
+                                            </div>
+                                            <div className="popup_box_right_head_tail_right_correct_result">
+                                                <p>จำนวนข้อที่ถูก</p>
+                                                <p className="ans">Answered</p>
+                                                <p className="score">{correctAnswersCount}/{totalQuestions}</p>
+                                            </div>
+
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="popup_box_right_main_result">
@@ -221,17 +248,23 @@ function Subject_student() {
                                                 <div className="popup_box_right_main_box_result">
                                                     <div className="popup_box_right_main_box_top_result">
                                                         <div className="popup_box_right_main_box_top_left_result">
-                                                            <p>Question {index+1} •</p><p>{result.question}</p>
+                                                            <p>Question {index + 1} •</p><p>{result.question}</p>
                                                         </div>
-                                                        
+
                                                     </div>
                                                     <div className="popup_box_right_main_box_tail_result">
                                                         <p>Selected choice: {result.selected_choice}</p>
-                                                        <p>Is correct: {result.is_correct ? 'Yes' : 'No'}</p>
+                                                        <p>
+                                                            Is correct: {result.is_correct ? (
+                                                                <FontAwesomeIcon icon={faCircleCheck} style={{ color: 'green' }} />
+                                                            ) : (
+                                                                <FontAwesomeIcon icon={faCircleXmark} style={{ color: 'red' }} />
+                                                            )}
+                                                        </p>
                                                     </div>
                                                 </div>
                                                 {/* <p>Question: {result.question}</p> */}
-                                                
+
                                             </div>
                                         ))
                                     ) : (
