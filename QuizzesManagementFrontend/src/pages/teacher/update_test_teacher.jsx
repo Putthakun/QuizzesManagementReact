@@ -133,42 +133,38 @@ function Update_test_teacher() {
             confirmButtonText: 'Yes, submit it!',
             cancelButtonText: 'No, cancel!',
         }).then((result) => {
-            console.log("Exam ID being sent: ", examId);
             if (result.isConfirmed) {
-                // สร้าง quizData ตามรูปแบบที่ API คาดหวัง
-                const quizData = {
-                    questions: data.map((question) => ({
-                        id: question.id, // เพิ่ม id ของคำถาม
-                        exam_id: examId,
-                        question_text: question.question_text,
-                        points: question.points,
-                        order: question.order, // อัปเดต order ถ้าต้องการ
-                        choices: question.choices.map((choice) => ({
-                            id: choice.id, // เพิ่ม id ของตัวเลือก
-                            choice_text: choice.choice_text,
-                            is_correct: choice.is_correct
-                        }))
+                // สร้าง quizData เป็น list ของคำถาม
+                const quizData = data.map((question) => ({
+                    exam_id: examId,
+                    question_text: question.question_text,
+                    points: question.points,
+                    order: question.order, // อัปเดต order ถ้าต้องการ
+                    choices: question.choices.map((choice) => ({
+                        choice_text: choice.choice_text,
+                        is_correct: choice.is_correct
                     }))
-                };
+                }));
     
                 console.log("Submitting Data: ", quizData);
     
-                // ส่งข้อมูลไปยัง backend
-                axios.put('http://127.0.0.1:8000/api/update-questions/', quizData)
+                // ส่งคำขอสร้างคำถามใหม่
+                axios.post('http://localhost:8000/api/questionCreateView/', quizData)
                     .then(response => {
                         Swal.fire({
                             icon: 'success',
                             title: 'Success!',
-                            text: 'คุณแก้ไขข้อสอบสำเร็จแล้ว!',
+                            text: 'คุณสร้างข้อสอบสำเร็จแล้ว!',
                             confirmButtonText: 'OK'
-                        })
-                    })
-                    .catch(error => {
+                        }).then(() => {
+                            // ถ้าต้องการเรียกอัปเดตคำถามต่อไปก็ทำได้ที่นี่
+                        });
+                    }).catch(error => {
                         console.error("There was an error creating the exam!", error.response.data);
                         Swal.fire({
                             icon: 'error',
                             title: 'Error!',
-                            text: `เกิดข้อผิดพลาดในการแก้ไขข้อสอบ! ${error.response.data}`,
+                            text: `เกิดข้อผิดพลาดในการสร้างข้อสอบ! ${error.response.data}`,
                             confirmButtonText: 'OK'
                         });
                     });
@@ -177,6 +173,7 @@ function Update_test_teacher() {
             }
         });
     };
+    
 
     return (
         <div>
