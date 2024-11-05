@@ -64,9 +64,54 @@ function Subject_teacher() {
         fetchSubjectDetails(); // เรียกใช้ฟังก์ชัน
     }, [id]); // ทำงานเมื่อ id เปลี่ยนแปลง
 
+    const handleDeleteExam = async (examId) => {
+        // แสดงการยืนยันการลบข้อสอบ
+        const result = await Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to delete this exam?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+        });
+
+        if (result.isConfirmed) {
+            try {
+                // ทำการลบข้อสอบโดยเรียก API DELETE
+                const response = await axios.delete(`http://localhost:8000/api/exams/${examId}/delete/`);
+                console.log('Exam deleted successfully:', response.data);
+
+                // รีเฟรชข้อมูลข้อสอบหลังจากลบ
+                const examResponse = await axios.get(`http://localhost:8000/api/listexams/${id}/`);
+                if (examResponse.status === 200) {
+                    setExams(examResponse.data);
+                    console.log("Fetched exams after deletion:", examResponse.data);
+                } else {
+                    throw new Error('Failed to fetch exams');
+                }
+
+                // แสดงข้อความแจ้งเตือนว่าลบสำเร็จ
+                await Swal.fire({
+                    icon: 'success',
+                    title: 'Deleted!',
+                    text: 'ข้อสอบถูกลบเรียบร้อยแล้ว!',
+                    confirmButtonText: 'OK'
+                });
+            } catch (error) {
+                console.error("There was an error deleting the exam!", error);
+                await Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: `เกิดข้อผิดพลาดในการลบข้อสอบ: ${error.message}`,
+                    confirmButtonText: 'OK'
+                });
+            }
+        }
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-    
+
         const examData = {
             subject_code: id,  // code ของ Subject
             title: title,
@@ -74,11 +119,11 @@ function Subject_teacher() {
             due_date: due_date,
             score: parseInt(score, 10)  // แปลงคะแนนเป็นตัวเลข
         };
-    
+
         console.log(id);
         console.log(examData);
 
-    
+
         try {
             // แสดงการแจ้งเตือนเพื่อยืนยันการส่งข้อมูล
             const result = await Swal.fire({
@@ -89,7 +134,7 @@ function Subject_teacher() {
                 confirmButtonText: 'Yes, submit it!',
                 cancelButtonText: 'No, cancel!',
             });
-    
+
             if (result.isConfirmed) {
                 const response = await axios.post('http://localhost:8000/api/exams/', examData, {
                     headers: {
@@ -102,7 +147,7 @@ function Subject_teacher() {
                 setErrors({}); // Clear errors if successful
 
                 const createdExamId = response.data.id;  // id ที่ส่งกลับมาจาก Django
-                console.log('Exam created with ID:', createdExamId);        
+                console.log('Exam created with ID:', createdExamId);
                 // แสดงแจ้งเตือนว่าการสร้าง exam สำเร็จแล้ว
                 await Swal.fire({
                     icon: 'success',
@@ -110,7 +155,7 @@ function Subject_teacher() {
                     text: 'คุณสร้างรายการข้อสอบสำเร็จแล้ว!',
                     confirmButtonText: 'OK'
                 });
-    
+
                 // รีเฟรชข้อมูลข้อสอบ
                 const examResponse = await axios.get(`http://localhost:8000/api/listexams/${id}/`);
                 if (examResponse.status === 200) {
@@ -119,7 +164,7 @@ function Subject_teacher() {
                 } else {
                     throw new Error('Failed to fetch exams');
                 }
-                navigate(`/create_test_teacher/${createdExamId}`); // นำทางไปยังหน้าสร้างข้อสอบ
+                navigate(`/create_test_teacher/${id}/${createdExamId}`); // นำทางไปยังหน้าสร้างข้อสอบ
             }
         } catch (error) {
             if (error.response) {
@@ -172,7 +217,7 @@ function Subject_teacher() {
 
                                 {exams.length > 0 ? (
                                     exams.map((exam) => (
-                                        <Link to="/create_test_teacher" className="main_right_subject_result_container" key={exam.id}>
+                                        <div className="main_right_subject_result_container" key={exam.id}>
                                             <div className="main_right_box_subject_teacher">
                                                 <div className="main_right_box_subject_main">
                                                     <div className="main_right_box_subject_main_box">
@@ -184,10 +229,24 @@ function Subject_teacher() {
                                                         </div>
                                                         <div className="main_right_box_subject_main_box_right">
                                                             <div className="main_right_box_subject_main_box_right_head">
-                                                                Teacher
+                                                                <p>Teacher</p>
+                                                                <div className="main_right_box_subject_main_box_right_head_right_new">
+                                                                    <Link to={`/update_test_teacher/${id}/${exam.id}`} 
+                                                                    className="btn-update-box-subject"
+                                                                    >
+                                                                        Update</Link>
+                                                                    <button
+                                                                        className="btn-delete-box-subject"
+                                                                        onClick={(e) => {
+                                                                            e.stopPropagation(); // Prevent the click event from bubbling up to the Link
+                                                                            handleDeleteExam(exam.id);
+                                                                        }}
+                                                                    >
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                             <div className="main_right_box_subject_main_box_right_main">
-
                                                                 <div className="main_right_box_subject_main_box_right_main_head_teacher">
                                                                     <h3>{exam.title}</h3>
                                                                     <p>วันครบกำหนด: {exam.due_date}</p>
@@ -208,7 +267,8 @@ function Subject_teacher() {
                                                     </div>
                                                 </div>
                                             </div>
-                                        </Link>
+
+                                        </div>
                                     ))
                                 ) : (
                                     <div className="main_right_subject_result_container_no">
@@ -217,8 +277,8 @@ function Subject_teacher() {
                                             <h3>รายวิชาของคุณยังไม่มีข้อสอบ</h3>
                                         </div>
                                     </div>
-                                    // <p>ไม่พบข้อสอบสำหรับวิชานี้</p> // ถ้าไม่มีข้อมูลข้อสอบ
                                 )}
+
                             </div>
                         </div>
                     </div>

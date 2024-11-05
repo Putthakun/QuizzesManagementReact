@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 
-function Create_test_teacher() {
+function Update_test_teacher() {
 
     const navigate = useNavigate();
     const { id, examId } = useParams();
@@ -17,6 +17,30 @@ function Create_test_teacher() {
     const [nametest, setNametest] = useState('');
 
     console.log('exam in create test', examId);
+
+    // ดึงข้อมูลคำถามจาก API
+    useEffect(() => {
+        if (examId) {
+            axios.get(`http://localhost:8000/api/exams/${examId}/questions`)
+                .then(response => {
+                    // response.data ควรมี id ของคำถามและตัวเลือกแล้ว
+                    const questionsWithIds = response.data.map(question => ({
+                        ...question,
+                        choices: question.choices.map(choice => ({
+                            ...choice, // ให้แน่ใจว่าตัวเลือกมี id
+                        }))
+                    }));
+                    setData(questionsWithIds); // ปรับให้ตรงตามรูปแบบที่ได้รับจาก API
+                    setSubject(response.data.subject); // ให้แน่ใจว่า response.data มี subject
+                    setNametest(response.data.nametest); // ให้แน่ใจว่า response.data มี nametest
+                    console.log(questionsWithIds)
+                })
+                .catch(error => {
+                    console.error("Error fetching exam data:", error);
+                });
+        }
+    }, [examId]);
+    
 
     // เพิ่มคำถามใหม่
     const addQuestion = () => {
@@ -44,8 +68,44 @@ function Create_test_teacher() {
     };
 
     const handelDeleteAll = () => {
-        setData([]);
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Do you want to delete all questions?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // ส่งคำขอลบไปยัง backend
+                axios.delete('http://127.0.0.1:8000/api/delete-all-questions/', {
+                    data: { exam_id: examId } // ส่ง exam_id ถ้าต้องการ
+                })
+                .then(response => {
+                    // ลบข้อมูลทั้งหมดใน state
+                    setData([]);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Deleted!',
+                        text: 'All questions have been deleted from the database.',
+                        confirmButtonText: 'OK'
+                    });
+                })
+                .catch(error => {
+                    console.error("There was an error deleting the questions!", error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: `Failed to delete questions! ${error.response.data}`,
+                        confirmButtonText: 'OK'
+                    });
+                });
+            } else {
+                Swal.fire('Cancelled', 'Your data is safe :)', 'error');
+            }
+        });
     };
+    
 
     // อัปเดตข้อมูลคำถามเมื่อมีการเปลี่ยนแปลง
     const handleQuestionChange = (index, field, value) => {
@@ -64,7 +124,7 @@ function Create_test_teacher() {
     // ส่งข้อมูลไปยัง backend
     const handleSubmit = (e) => {
         e.preventDefault();
-
+    
         Swal.fire({
             title: 'Are you sure?',
             text: "Do you want to submit this form?",
@@ -73,23 +133,22 @@ function Create_test_teacher() {
             confirmButtonText: 'Yes, submit it!',
             cancelButtonText: 'No, cancel!',
         }).then((result) => {
-            console.log("Exam ID being sent: ", examId);
             if (result.isConfirmed) {
-                // สร้าง quizData ตามรูปแบบที่ API คาดหวัง
-                const quizData = data.map((question, index) => ({
+                // สร้าง quizData เป็น list ของคำถาม
+                const quizData = data.map((question) => ({
                     exam_id: examId,
                     question_text: question.question_text,
                     points: question.points,
-                    order: index + 1,
+                    order: question.order, // อัปเดต order ถ้าต้องการ
                     choices: question.choices.map((choice) => ({
                         choice_text: choice.choice_text,
                         is_correct: choice.is_correct
                     }))
                 }));
-
+    
                 console.log("Submitting Data: ", quizData);
-
-                // ส่งข้อมูลไปยัง backend
+    
+                // ส่งคำขอสร้างคำถามใหม่
                 axios.post('http://localhost:8000/api/questionCreateView/', quizData)
                     .then(response => {
                         Swal.fire({
@@ -98,10 +157,9 @@ function Create_test_teacher() {
                             text: 'คุณสร้างข้อสอบสำเร็จแล้ว!',
                             confirmButtonText: 'OK'
                         }).then(() => {
-                            navigate(`/subject_teacher/${id}`);
+                            // ถ้าต้องการเรียกอัปเดตคำถามต่อไปก็ทำได้ที่นี่
                         });
-                    })
-                    .catch(error => {
+                    }).catch(error => {
                         console.error("There was an error creating the exam!", error.response.data);
                         Swal.fire({
                             icon: 'error',
@@ -115,6 +173,7 @@ function Create_test_teacher() {
             }
         });
     };
+    
 
     return (
         <div>
@@ -129,7 +188,7 @@ function Create_test_teacher() {
                         <div className="main_right_test_teacher_container">
                             <div className="main_right_test_teacher_top">
                                 <button className="btn_create_test" onClick={handleSubmit}>
-                                    Create Test
+                                    Update
                                 </button>
                                 <button className="btn_create_test" onClick={addQuestion}>
                                     Add Question
@@ -202,4 +261,4 @@ function Create_test_teacher() {
     );
 }
 
-export default Create_test_teacher;
+export default Update_test_teacher;

@@ -4,7 +4,7 @@ import { Link} from "react-router-dom";
 import Navbar_top_student from "../../components/student/Navbar_top_student";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-    faPlus, faBook
+    faCircleCheck, faBook, faCircleXmark
 } from '@fortawesome/free-solid-svg-icons'
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from "react";
@@ -20,6 +20,8 @@ function Subject_student() {
     const [error, setError] = useState('');
     const { id } = useParams();
     const [exams, setExams] = useState([]);
+    const [modal_result, setModal_result] = useState(false);
+    const [selectedExam, setSelectedExam] = useState(null); // State to store selected exam
 
     useEffect(() => {
         const fetchSubjectDetails = async () => {
@@ -55,6 +57,12 @@ function Subject_student() {
     const handleTakeTestClick = () => {
         
     }
+
+    const toggleModal_result = (exam) => {
+        setSelectedExam(exam); // Set the selected exam
+        console.log(selectedExam)
+        setModal_result(!modal_result);
+    };
 
     return (
         <div>
@@ -96,7 +104,8 @@ function Subject_student() {
                                                             </div>
                                                             <div className="main_right_box_subject_main_box_right">
                                                                 <div className="main_right_box_subject_main_box_right_head">
-                                                                    Teacher
+                                                                    <p>Teacher</p>
+                                                                    <button className="btn-result" onClick={() => toggleModal_result(exam)}>Result</button>
                                                                 </div>
                                                                 <div className="main_right_box_subject_main_box_right_main">
                                                                     
@@ -190,6 +199,9 @@ function Subject_student() {
                                     </div>
                                     <div className="main_right_box_take_test_main_tail">
                                         <div className="main_right_box_take_test_main_tail_box">
+                                            <button onClick={toggleModal} className="cancle">Cancle</button>
+                                        </div>
+                                        <div className="main_right_box_take_test_main_tail_box">
                                             <button onClick={handleTakeTestClick}>Take Test</button>
                                         </div>
                                     </div>
@@ -199,6 +211,119 @@ function Subject_student() {
                     </div>
                 </div>
             )}
+
+            { modal_result && selectedExam && (
+                <div className="popup_container_subject_student_result">
+                <div className="popup_container_box_subject_student_result">
+                    <div className="popup_box_subject_student_result">
+                        <div className="popup_box_left">
+                            <div className="popup_box_left_circle"></div>
+                        </div>
+                        
+                        <div className="popup_box_right_result" >
+                            <div className="popup_box_right_head_result">
+                                <div className="popup_box_right_head_top_result">
+                                    <div className="popup_box_right_head_top_top_result">
+                                        <p>{selectedExam.title}</p>
+                                    </div>
+                                    <div className="popup_box_right_head_top_tail_result">
+                                        <p>{selectedExam.description}</p>
+                                    </div>
+                                </div>
+                                <div className="popup_box_right_head_tail_result">
+                                    <div className="popup_box_right_head_tail_left_result">
+                                        <p>วันครบกำหนด: {selectedExam.due_date}</p>
+                                    </div>
+                                    <div className="popup_box_right_head_tail_right_result">
+                                        <div className="popup_box_right_head_tail_right_correct_result">
+                                            <p>จำนวนข้อที่ถูก</p>
+                                            <p className="cor">Correct</p>
+                                            <p className="score">10/20</p>
+                                        </div>
+                                        <div className="popup_box_right_head_tail_right_correct_result">
+                                            <p>จำนวนข้อที่ถูก</p>
+                                            <p className="incor">Incorrect</p>
+                                            <p className="score">10/20</p>
+                                        </div>
+                                        <div className="popup_box_right_head_tail_right_correct_result">
+                                            <p>จำนวนข้อที่ถูก</p>
+                                            <p className="ans">Answered</p>
+                                            <p className="score">10/20</p>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="popup_box_right_main_result">
+                                <div className="popup_box_right_main_box_result">
+                                    <div className="popup_box_right_main_box_top_result">
+                                        <div className="popup_box_right_main_box_top_left_result">
+                                            <p>Question 3 •</p><p><FontAwesomeIcon icon={faCircleCheck} className="true" /></p>
+                                        </div>
+                                    </div>
+                                    <div className="popup_box_right_main_box_tail_result">
+                                        <p>1 + 1 = ?</p>
+                                    </div>
+                                </div>
+        
+                                <div className="popup_box_right_main_box_result">
+                                    <div className="popup_box_right_main_box_top_result">
+                                        <div className="popup_box_right_main_box_top_left_result">
+                                            <p>Question 4 •</p><p><FontAwesomeIcon icon={faCircleCheck} className="true" /></p>
+                                        </div>
+                                    </div>
+                                    <div className="popup_box_right_main_box_tail_result">
+                                        <p>1 + 1 = ?</p>
+                                    </div>
+                                </div>
+        
+                                <div className="popup_box_right_main_box_result">
+                                    <div className="popup_box_right_main_box_top_result">
+                                        <div className="popup_box_right_main_box_top_left_result">
+                                            <p>Question 5 •</p><p><FontAwesomeIcon icon={faCircleXmark} className="false" /></p>
+                                        </div>
+                                    </div>
+                                    <div className="popup_box_right_main_box_tail_result">
+                                        <p>1 + 1 = ?</p>
+                                    </div>
+                                </div>
+        
+        
+                                <div className="popup_box_right_main_box_result">
+                                    <div className="popup_box_right_main_box_top_result">
+                                        <div className="popup_box_right_main_box_top_left_result">
+                                            <p>Question 6 •</p><p><FontAwesomeIcon icon={faCircleCheck} className="true" /></p>
+                                        </div>
+                                    </div>
+                                    <div className="popup_box_right_main_box_tail_result">
+                                        <p>1 + 1 = ?</p>
+                                    </div>
+                                </div>
+        
+                                <div className="popup_box_right_main_box_result">
+                                    <div className="popup_box_right_main_box_top_result">
+                                        <div className="popup_box_right_main_box_top_left_result">
+                                            <p>Question 7 •</p><p><FontAwesomeIcon icon={faCircleXmark} className="false" /></p>
+                                        </div>
+                                    </div>
+                                    <div className="popup_box_right_main_box_tail_result">
+                                        <p>1 + 1 = ?</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="popup_box_right_tail_result">
+                                <button className="popup_box_right_tail_btn" onClick={toggleModal_result}>
+                                    Done
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+        
+            </div>
+            )}
+
         </div>
     )
 }
