@@ -119,7 +119,7 @@ function Subject_teacher() {
                 } else {
                     throw new Error('Failed to fetch exams');
                 }
-                navigate(`/create_test_teacher/${createdExamId}`); // นำทางไปยังหน้าสร้างข้อสอบ
+                navigate(`/create_test_teacher/${id}/${createdExamId}`); // นำทางไปยังหน้าสร้างข้อสอบ
             }
         } catch (error) {
             if (error.response) {
@@ -172,7 +172,7 @@ function Subject_teacher() {
 
                                 {exams.length > 0 ? (
                                     exams.map((exam) => (
-                                        <Link to="/create_test_teacher" className="main_right_subject_result_container" key={exam.id}>
+                                        <Link to={`/update_test_teacher/${id}/${exam.id}`} className="main_right_subject_result_container" key={exam.id}>
                                             <div className="main_right_box_subject_teacher">
                                                 <div className="main_right_box_subject_main">
                                                     <div className="main_right_box_subject_main_box">
