@@ -184,7 +184,8 @@ function Subject_teacher() {
                                                         </div>
                                                         <div className="main_right_box_subject_main_box_right">
                                                             <div className="main_right_box_subject_main_box_right_head">
-                                                                Teacher
+                                                                <p>Teacher</p>
+                                                                <button className="btn-delete-box-subject">Delete</button>
                                                             </div>
                                                             <div className="main_right_box_subject_main_box_right_main">
 
