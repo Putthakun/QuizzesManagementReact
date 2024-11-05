@@ -27,7 +27,7 @@ function App() {
         <Route path="/update_test_teacher/:id/:examId" element={<Update_test_teacher />} />
         <Route path="/take_test_student" element={<Take_test_student />} />
         <Route path="/profile_student/" element={<Profile_student />} />
-        <Route path="/ans_student" element={<Ans_student />} />
+        <Route path="/subject_student/:subjectCode/ans_student/:examId" element={<Ans_student />} />
       </Routes>
     </Router>
   );
