@@ -9,6 +9,9 @@ import Create_test_teacher from './pages/teacher/Create_test_teacher';
 import Take_test_student from './pages/student/Take_test_student';
 import Profile_student from './pages/student/Profile_student';
 import Ans_student from './pages/student/Ans_student';
+import Dashboard from './pages/teacher/Dashboard';
+import Profile_teacher from './pages/teacher/Profile_teacher';
+
 
 function App() {
 
@@ -25,7 +28,9 @@ function App() {
         <Route path="/create_test_teacher/:examId" element={<Create_test_teacher />} />
         <Route path="/take_test_student" element={<Take_test_student />} />
         <Route path="/profile_student/" element={<Profile_student />} />
+        <Route path="/profile_teacher/" element={<Profile_teacher />} />
         <Route path="/ans_student" element={<Ans_student />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );
