@@ -218,7 +218,7 @@ function Subject_teacher() {
                                 {exams.length > 0 ? (
                                     exams.map((exam) => (
                                         <div className="main_right_subject_result_container" key={exam.id}>
-                                            <Link to={`/update_test_teacher/${id}/${exam.id}`} className="main_right_box_subject_teacher">
+                                            <div className="main_right_box_subject_teacher">
                                                 <div className="main_right_box_subject_main">
                                                     <div className="main_right_box_subject_main_box">
                                                         <div className="main_right_box_subject_main_box_left">
@@ -230,6 +230,21 @@ function Subject_teacher() {
                                                         <div className="main_right_box_subject_main_box_right">
                                                             <div className="main_right_box_subject_main_box_right_head">
                                                                 <p>Teacher</p>
+                                                                <div className="main_right_box_subject_main_box_right_head_right_new">
+                                                                    <Link to={`/update_test_teacher/${id}/${exam.id}`} 
+                                                                    className="btn-update-box-subject"
+                                                                    >
+                                                                        Update</Link>
+                                                                    <button
+                                                                        className="btn-delete-box-subject"
+                                                                        onClick={(e) => {
+                                                                            e.stopPropagation(); // Prevent the click event from bubbling up to the Link
+                                                                            handleDeleteExam(exam.id);
+                                                                        }}
+                                                                    >
+                                                                        Delete
+                                                                    </button>
+                                                                </div>
                                                             </div>
                                                             <div className="main_right_box_subject_main_box_right_main">
                                                                 <div className="main_right_box_subject_main_box_right_main_head_teacher">
@@ -251,16 +266,8 @@ function Subject_teacher() {
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </Link>
-                                            <button
-                                                className="btn-delete-box-subject"
-                                                onClick={(e) => {
-                                                    e.stopPropagation(); // Prevent the click event from bubbling up to the Link
-                                                    handleDeleteExam(exam.id);
-                                                }}
-                                            >
-                                                Delete
-                                            </button>
+                                            </div>
+
                                         </div>
                                     ))
                                 ) : (

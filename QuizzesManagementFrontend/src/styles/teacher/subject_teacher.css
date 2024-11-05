@@ -136,8 +136,21 @@
 .popup_box_top_right_input_name span{
     color: red;
 }
+.main_right_box_subject_main_box_right_head_right_new{
+    /* background-color: #71808C; */
+    width: 175px;
+    display: flex;
+    justify-content: space-between;
+}
 .btn-delete-box-subject{
     background-color: red;
+    width: 75px;
+    color: white;
+    border-radius: 10px;
+    padding: 3px 10px;
+}
+.btn-update-box-subject{
+    background-color:  #447BF7;
     width: 75px;
     color: white;
     border-radius: 10px;
